@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Link de Afiliado - ConectPlay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #linkResultado {
+            background-color: #eaeaea;
+            padding: 10px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Gerador de Link de Afiliado - ConectPlay</h2>
+        <label for="nome">Digite seu nome:</label>
+        <input type="text" id="nome" placeholder="Ex: João Silva">
+        <button onclick="gerarLink()">Gerar Link</button>
+        <label for="linkResultado">Seu link personalizado:</label>
+        <div id="linkResultado">Seu link aparecerá aqui...</div>
+        <button onclick="copiarLink()">Copiar Link</button>
+    </div>
+
+    <script>
+        function gerarLink() {
+            const nome = document.getElementById('nome').value.trim();
+            if (!nome) {
+                alert("Digite seu nome para gerar o link.");
+                return;
+            }
+            const nomeEncoded = encodeURIComponent(nome.toUpperCase());
+            const msg = `Olá! Sou afiliado ${nomeEncoded} e indico o serviço da ConectPlay. Gostaria de saber mais!`;
+            const link = `https://wa.me/557791986049?text=${encodeURIComponent(msg)}`;
+            document.getElementById('linkResultado').textContent = link;
+        }
+
+        function copiarLink() {
+            const link = document.getElementById('linkResultado').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                alert("Link copiado para a área de transferência!");
+            });
+        }
+    </script>
+</body>
+</html>
