@@ -3,130 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ConectPlay - Links de Afiliados</title>
+  <title>Gerador de Link Afiliado - ConectPlay</title>
   <style>
-    /* Fundo com gradiente parecido com a logo ConectPlay */
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+      margin: 0; 
+      font-family: Arial, sans-serif; 
       background: linear-gradient(135deg, #4b0082, #1e90ff);
       color: white;
-      display: flex;
-      flex-direction: column;
+      display: flex; 
+      flex-direction: column; 
       align-items: center;
-      min-height: 100vh;
+      min-height: 100vh; 
       padding: 20px;
-    }
-    header {
-      margin-bottom: 30px;
       text-align: center;
     }
     header img {
       max-width: 250px;
       height: auto;
+      margin-bottom: 20px;
     }
-    h1 {
-      margin: 10px 0 0 0;
-      font-weight: normal;
-    }
-    main {
-      width: 100%;
-      max-width: 400px;
-    }
-    .affiliate {
-      background: rgba(255,255,255,0.15);
-      margin-bottom: 15px;
-      border-radius: 10px;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 18px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    }
-    .affiliate-info {
-      flex-grow: 1;
-    }
-    .affiliate-name {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .affiliate-sales {
-      font-size: 16px;
-    }
-    .btn-link {
-      background: #6a5acd;
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      font-size: 16px;
+    input[type="text"] {
+      padding: 10px;
       border-radius: 8px;
+      border: none;
+      width: 250px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #6a5acd;
+      color: white;
+      font-size: 16px;
       cursor: pointer;
-      text-decoration: none;
       transition: background-color 0.3s ease;
-      margin-left: 15px;
-      white-space: nowrap;
     }
-    .btn-link:hover {
-      background: #483d8b;
+    button:hover {
+      background-color: #483d8b;
     }
-    footer {
-      margin-top: auto;
-      font-size: 14px;
-      opacity: 0.7;
+    #generated-link {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-word;
+    }
+    #whatsapp-contact {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    #whatsapp-contact:hover {
+      background: #1ebe57;
+    }
+    .plans {
+      margin-top: 30px;
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.25);
+      max-width: 400px;
+      width: 100%;
+      text-align: left;
+      color: #fff;
+    }
+    .plans h2 {
+      margin-top: 0;
       text-align: center;
     }
-    @media (max-width: 450px) {
-      main {
-        max-width: 100%;
-      }
-      .affiliate {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .btn-link {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
-        text-align: center;
-      }
+    .plan-item {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .highlight {
+      color: #00ff00;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- Coloque sua logo dentro da pasta images com o nome logo-conectplay.png -->
     <img src="images/logo-conectplay.png" alt="Logo ConectPlay" />
-    <h1>Links de Afiliados ConectPlay</h1>
+    <h1>Gerador de Link de Afiliado</h1>
+    <p>Digite seu nome ou apelido para gerar seu link personalizado.</p>
+    <input type="text" id="affiliate-name" placeholder="Seu nome ou apelido" />
+    <br />
+    <button onclick="gerarLink()">Gerar Link</button>
+    <div id="generated-link"></div>
   </header>
-  <main>
-    <!-- Exemplo de afiliados, altere nomes, links e número de vendas no HTML -->
-    <div class="affiliate">
-      <div class="affiliate-info">
-        <div class="affiliate-name">Fulano 1</div>
-        <div class="affiliate-sales">Vendas: 0</div>
-      </div>
-      <a href="https://wa.me/557791986049?text=Quero%20ser%20cliente%20via%20Fulano1" target="_blank" class="btn-link">Link</a>
-    </div>
 
-    <div class="affiliate">
-      <div class="affiliate-info">
-        <div class="affiliate-name">Ciclano 2</div>
-        <div class="affiliate-sales">Vendas: 0</div>
-      </div>
-      <a href="https://wa.me/557791986049?text=Quero%20ser%20cliente%20via%20Ciclano2" target="_blank" class="btn-link">Link</a>
-    </div>
+  <section class="plans">
+    <h2>Confira nossos planos atualizados ⬇️</h2>
+    <div class="plan-item">📅 15 DIAS DE USO: R$14,99</div>
+    <div class="plan-item">📅 Mensal: R$ 20,99 - 1 acesso</div>
+    <div class="plan-item">📅 Mensal: R$ 25,99 - 2 acessos</div>
+    <div class="plan-item">📅 Bimestral: R$ 41,99 - 1 acesso</div>
+    <div class="plan-item">📅 Bimestral: R$ 43,99 - 2 acessos</div>
+    <div class="plan-item">📅 Trimestral: R$ 74,99 - 1 acesso</div>
+    <div class="plan-item">📅 Trimestral: R$ 76,99 - 2 acessos</div>
+    <div class="plan-item">📅 Semestral: R$ 149,99 - 1 acesso</div>
+    <div class="plan-item">📅 Semestral: R$ 153,99 - 2 acessos</div>
+    <div class="plan-item">📅 Anual: R$ 297,99 - 1 acesso</div>
+    <div class="plan-item">📅 Anual: R$ 299,99 - 2 acessos</div>
+    <div class="highlight">✅ Teste grátis disponível!</div>
+    <div class="highlight">Qual plano melhor se encaixa no seu perfil? Posso te ajudar a escolher.</div>
+  </section>
 
-    <div class="affiliate">
-      <div class="affiliate-info">
-        <div class="affiliate-name">Beltrano 3</div>
-        <div class="affiliate-sales">Vendas: 0</div>
-      </div>
-      <a href="https://wa.me/557791986049?text=Quero%20ser%20cliente%20via%20Beltrano3" target="_blank" class="btn-link">Link</a>
-    </div>
-  </main>
-  <footer>
-    &copy; 2025 ConectPlay - Todos os direitos reservados
-  </footer>
+  <a id="whatsapp-contact" href="https://wa.me/557791986049" target="_blank" title="Falar no WhatsApp">&#x2709;</a>
+
+  <script>
+    function gerarLink() {
+      const input = document.getElementById('affiliate-name');
+      let nome = input.value.trim();
+
+      if(nome === '') {
+        alert('Por favor, digite seu nome ou apelido.');
+        return;
+      }
+
+      const nomeURL = encodeURIComponent(nome);
+      const link = `https://wa.me/557791986049?text=Quero%20ser%20cliente%20via%20${nomeURL}`;
+
+      const div = document.getElementById('generated-link');
+      div.innerHTML = `
+        <p>Seu link personalizado:</p>
+        <a href="${link}" target="_blank">${link}</a>
+        <p>Copie e compartilhe esse link para ganhar sua comissão.</p>
+      `;
+    }
+  </script>
 </body>
 </html>
