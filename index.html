@@ -3,151 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gerador de Link Afiliado - ConectPlay</title>
+  <title>ConectPlay</title>
   <style>
     body {
-      margin: 0; 
-      font-family: Arial, sans-serif; 
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #4b0082, #1e90ff);
       color: white;
-      display: flex; 
-      flex-direction: column; 
-      align-items: center;
-      min-height: 100vh; 
+      min-height: 100vh;
       padding: 20px;
       text-align: center;
     }
     header img {
-      max-width: 250px;
+      max-width: 200px;
       height: auto;
       margin-bottom: 20px;
     }
-    input[type="text"] {
-      padding: 10px;
+    .plan-button {
+      display: inline-block;
+      background: #6a5acd;
+      padding: 12px 20px;
+      margin: 8px;
       border-radius: 8px;
-      border: none;
-      width: 250px;
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-    button {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      background-color: #6a5acd;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #483d8b;
-    }
-    #generated-link {
-      margin-top: 20px;
-      background: rgba(255,255,255,0.15);
-      padding: 10px;
-      border-radius: 8px;
-      word-break: break-word;
-    }
-    #whatsapp-contact {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25d366;
-      color: white;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 30px;
       text-decoration: none;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-    #whatsapp-contact:hover {
-      background: #1ebe57;
-    }
-    .plans {
-      margin-top: 30px;
-      background: rgba(255,255,255,0.15);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.25);
-      max-width: 400px;
-      width: 100%;
-      text-align: left;
-      color: #fff;
-    }
-    .plans h2 {
-      margin-top: 0;
-      text-align: center;
-    }
-    .plan-item {
-      margin-bottom: 8px;
+      color: white;
       font-size: 16px;
-      line-height: 1.4;
+      transition: background 0.3s;
     }
-    .highlight {
-      color: #00ff00;
+    .plan-button:hover {
+      background: #483d8b;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
       font-weight: bold;
-      margin-top: 10px;
-      text-align: center;
+      margin-top: 20px;
+    }
+    .whatsapp-btn:hover {
+      background-color: #1ebe5d;
+    }
+    .whatsapp-btn svg {
+      margin-right: 8px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      opacity: 0.8;
+      text-align: left;
+    }
+    .disclaimer {
+      background: rgba(255,255,255,0.15);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="images/logo-conectplay.png" alt="Logo ConectPlay" />
-    <h1>Gerador de Link de Afiliado</h1>
-    <p>Digite seu nome ou apelido para gerar seu link personalizado.</p>
-    <input type="text" id="affiliate-name" placeholder="Seu nome ou apelido" />
-    <br />
-    <button onclick="gerarLink()">Gerar Link</button>
-    <div id="generated-link"></div>
-  </header>
+  <!-- Logo (corrigiremos depois) -->
+  <img src="images/logo-conectplay.png" alt="Logo ConectPlay" />
 
-  <section class="plans">
-    <h2>Confira nossos planos atualizados ⬇️</h2>
-    <div class="plan-item">📅 15 DIAS DE USO: R$14,99</div>
-    <div class="plan-item">📅 Mensal: R$ 20,99 - 1 acesso</div>
-    <div class="plan-item">📅 Mensal: R$ 25,99 - 2 acessos</div>
-    <div class="plan-item">📅 Bimestral: R$ 41,99 - 1 acesso</div>
-    <div class="plan-item">📅 Bimestral: R$ 43,99 - 2 acessos</div>
-    <div class="plan-item">📅 Trimestral: R$ 74,99 - 1 acesso</div>
-    <div class="plan-item">📅 Trimestral: R$ 76,99 - 2 acessos</div>
-    <div class="plan-item">📅 Semestral: R$ 149,99 - 1 acesso</div>
-    <div class="plan-item">📅 Semestral: R$ 153,99 - 2 acessos</div>
-    <div class="plan-item">📅 Anual: R$ 297,99 - 1 acesso</div>
-    <div class="plan-item">📅 Anual: R$ 299,99 - 2 acessos</div>
-    <div class="highlight">✅ Teste grátis disponível!</div>
-    <div class="highlight">Qual plano melhor se encaixa no seu perfil? Posso te ajudar a escolher.</div>
-  </section>
+  <h1>Escolha seu Plano ConectPlay</h1>
 
-  <a id="whatsapp-contact" href="https://wa.me/557791986049" target="_blank" title="Falar no WhatsApp">&#x2709;</a>
+  <!-- Botões dos planos -->
+  <div>
+    <a class="plan-button" href="#">15 dias – R$ 14,99</a>
+    <a class="plan-button" href="#">Mensal – R$ 20,99 (1 acesso)</a>
+    <a class="plan-button" href="#">Mensal – R$ 25,99 (2 acessos)</a>
+    <a class="plan-button" href="#">Bimestral – R$ 41,99 (1 acesso)</a>
+    <a class="plan-button" href="#">Bimestral – R$ 43,99 (2 acessos)</a>
+    <a class="plan-button" href="#">Trimestral – R$ 74,99 (1 acesso)</a>
+    <a class="plan-button" href="#">Trimestral – R$ 76,99 (2 acessos)</a>
+    <a class="plan-button" href="#">Semestral – R$ 149,99 (1 acesso)</a>
+    <a class="plan-button" href="#">Semestral – R$ 153,99 (2 acessos)</a>
+    <a class="plan-button" href="#">Anual – R$ 297,99 (1 acesso)</a>
+    <a class="plan-button" href="#">Anual – R$ 299,99 (2 acessos)</a>
+  </div>
 
-  <script>
-    function gerarLink() {
-      const input = document.getElementById('affiliate-name');
-      let nome = input.value.trim();
+  <!-- Botão de contato -->
+  <a class="whatsapp-btn" href="https://wa.me/557791986049?text=Ol%C3%A1%2C%20quero%20conhecer%20os%20planos%20da%20ConectPlay!%20Vim%20por%20indica%C3%A7%C3%A3o." target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="22" height="22" fill="white">
+      <path d="M380.9 97.1C339 … (SVG completo omitido para brevidade) …"/>
+    </svg>
+    Falar no WhatsApp
+  </a>
 
-      if(nome === '') {
-        alert('Por favor, digite seu nome ou apelido.');
-        return;
-      }
+  <!-- Termos de serviço / Isenção de responsabilidade -->
+  <div class="disclaimer">
+    <strong>Termos de Uso</strong><br>
+    Ao usar nossos links de afiliado, você concorda que ConectPlay não se responsabiliza por danos diretos ou indiretos decorrentes do uso dos serviços adquiridos. Todos os planos são oferecidos "como estão", e recomendamos ler atentamente antes de contratar. O uso dos links é voluntário e conforme sua própria escolha.
+  </div>
 
-      const nomeURL = encodeURIComponent(nome);
-      const link = `https://wa.me/557791986049?text=Quero%20ser%20cliente%20via%20${nomeURL}`;
-
-      const div = document.getElementById('generated-link');
-      div.innerHTML = `
-        <p>Seu link personalizado:</p>
-        <a href="${link}" target="_blank">${link}</a>
-        <p>Copie e compartilhe esse link para ganhar sua comissão.</p>
-      `;
-    }
-  </script>
 </body>
 </html>
