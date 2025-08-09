@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>ConectPlay — Afiliados e Planos</title>
 
-<!-- Estilos básicos -->
 <style>
   :root{
     --bg1:#241041;
@@ -30,7 +29,6 @@
   h1{ margin:4px 0 6px; font-weight:600; }
   p.lead{ opacity:0.9; margin-top:0; }
 
-  /* Top box - afiliado */
   .top-box{
     background: var(--card);
     padding:12px;
@@ -80,7 +78,6 @@
     max-width:100%;
   }
 
-  /* grid: plans / top sellers / commissions */
   .grid{
     display:grid;
     grid-template-columns: 1fr 360px;
@@ -89,7 +86,6 @@
   }
   @media(max-width:880px){ .grid{ grid-template-columns: 1fr; } }
 
-  /* Plans list */
   .plans{
     display:flex; flex-direction:column; gap:10px;
     margin-bottom:10px;
@@ -106,7 +102,6 @@
   .plan-title{ font-weight:700; margin-bottom:4px; }
   .plan-price{ opacity:0.95; font-size:14px; }
 
-  /* whatsapp button small */
   .wh-btn{
     display:inline-flex; align-items:center; gap:8px;
     background:var(--whatsapp); color:#fff; padding:8px 12px; border-radius:8px;
@@ -114,11 +109,10 @@
   }
   .wh-btn svg{ width:18px; height:18px; }
 
-  /* right column cards */
   .card{ background: var(--card); padding:12px; border-radius:10px; margin-bottom:12px; }
   .top-table{ width:100%; border-collapse:collapse; }
-  .top-table td, .top-table th{ padding:8px; color:#fff; }
-  .top-table th{ border-bottom: 1px solid rgba(255,255,255,0.2); text-align:left; }
+  .top-table td, .top-table th { padding:8px; border-bottom:1px solid rgba(255,255,255,0.15); }
+  .top-table th { text-align:left; }
   .gold{ background: linear-gradient(90deg,#FFD54A,#FFC107); color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
   .silver{ background:#e6e6e6; color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
   .bronze{ background:#d4a373; color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
@@ -168,7 +162,6 @@
     </div>
 
     <div class="grid">
-
       <div>
         <h2 style="margin-top:0">Planos</h2>
         <div class="plans" id="plans-list"></div>
@@ -191,7 +184,7 @@
       <aside>
         <div class="card">
           <h3>Ranking rápido</h3>
-          <div id="ranking-list"></div>
+          <div id="ranking-list">Carregando ranking...</div>
         </div>
 
         <div class="card">
@@ -230,7 +223,6 @@
           </p>
         </div>
       </aside>
-
     </div>
 
     <footer>
@@ -238,17 +230,28 @@
     </footer>
   </div>
 
-  <!-- PapaParse local -->
   <script src="js/papaparse.min.js"></script>
-
   <script>
-  /*************************************************************************
-   * CONFIGURAÇÕES
-   *************************************************************************/
+  // Configurações
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=0&single=true&output=csv";
   const PHONE_NUMBER = "557791986049";
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/SEU_SCRIPT_ID/exec"; // Troque pelo seu URL do Google Apps Script
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynEchioQdDVs0stSt2xMsWlOPD60yeF4FPLB2r3QVniv_imlk2shxvyGBlalU_OmO7/exec";
 
+  // DOM refs
+  const affiliateSelect = document.getElementById('affiliate-select');
+  const manualName = document.getElementById('manual-name');
+  const messagePreview = document.getElementById('message-preview');
+  const btnGenerate = document.getElementById('btn-generate');
+  const btnCopy = document.getElementById('btn-copy');
+  const copyOk = document.getElementById('copy-ok');
+  const plansList = document.getElementById('plans-list');
+  const top3Table = document.getElementById('top3-table');
+  const rankingList = document.getElementById('ranking-list');
+  const fixedWhatsapp = document.getElementById('fixed-whatsapp');
+
+  let affiliates = [];
+
+  // Planos
   const PLANS = [
     { id:'15dias', title: '15 DIAS DE USO', subtitle:'Teste - 15 dias', price: 'R$14,99' },
     { id:'mensal1', title: 'Mensal', subtitle:'1 acesso', price: 'R$20,99' },
@@ -263,25 +266,7 @@
     { id:'anual2', title: 'Anual', subtitle:'2 acessos', price: 'R$299,99' }
   ];
 
-  /*************************************************************************
-   * REFERÊNCIAS DOM
-   *************************************************************************/
-  const affiliateSelect = document.getElementById('affiliate-select');
-  const manualName = document.getElementById('manual-name');
-  const messagePreview = document.getElementById('message-preview');
-  const btnGenerate = document.getElementById('btn-generate');
-  const btnCopy = document.getElementById('btn-copy');
-  const copyOk = document.getElementById('copy-ok');
-  const plansList = document.getElementById('plans-list');
-  const top3Table = document.getElementById('top3-table');
-  const rankingList = document.getElementById('ranking-list');
-  const fixedWhatsapp = document.getElementById('fixed-whatsapp');
-
-  let affiliates = [];
-
-  /*************************************************************************
-   * Função para normalizar nomes para URL
-   *************************************************************************/
+  // Normaliza nome para slug (URL)
   function makeSlug(name){
     return name.trim()
       .toLowerCase()
@@ -291,137 +276,151 @@
       .replace(/^\-+|\-+$/g,'');
   }
 
-  /*************************************************************************
-   * Carregar lista de afiliados do CSV via PapaParse
-   *************************************************************************/
+  // Carrega afiliados do CSV
   function loadAffiliates(){
     Papa.parse(CSV_URL, {
       download:true,
       header:true,
-      complete:function(results){
-        affiliates = results.data.filter(r => r && r.apelido);
-        populateAffiliateSelect();
-      },
-      error:function(err){
-        console.error("Erro ao carregar CSV:", err);
-        affiliateSelect.innerHTML = `<option value="">Erro ao carregar afiliados</option>`;
+      complete: function(results){
+        if(results.errors.length){
+          console.error("Erro ao carregar CSV:", results.errors);
+          affiliateSelect.innerHTML = '<option value="">Erro ao carregar afiliados</option>';
+          return;
+        }
+        affiliates = results.data.filter(d => d.apelido && d.apelido.trim().length > 0);
+        if(affiliates.length === 0){
+          affiliateSelect.innerHTML = '<option value="">Nenhum afiliado encontrado</option>';
+          return;
+        }
+
+        // Preencher select
+        affiliateSelect.innerHTML = '<option value="">-- Selecione um afiliado --</option>';
+        affiliates.forEach(a => {
+          affiliateSelect.innerHTML += `<option value="${makeSlug(a.apelido)}">${a.apelido}</option>`;
+        });
+
+        // Atualiza preview com primeiro da lista (opcional)
+        updateMessagePreview();
       }
     });
   }
 
-  function populateAffiliateSelect(){
-    affiliateSelect.innerHTML = `<option value="">-- Selecione um afiliado --</option>`;
-    affiliates.forEach(a => {
-      let slug = makeSlug(a.apelido);
-      affiliateSelect.innerHTML += `<option value="${slug}">${a.apelido}</option>`;
-    });
-  }
-
-  /*************************************************************************
-   * Mostrar os planos na lista
-   *************************************************************************/
-  function showPlans(){
-    plansList.innerHTML = '';
-    PLANS.forEach(plan => {
-      let card = document.createElement('div');
-      card.className = 'plan-card';
-      card.innerHTML = `<div class="plan-info">
-        <div class="plan-title">${plan.title} <small>(${plan.subtitle})</small></div>
-        <div class="plan-price">${plan.price}</div>
-      </div>`;
-      plansList.appendChild(card);
-    });
-  }
-
-  /*************************************************************************
-   * Atualiza preview da mensagem que será enviada no WhatsApp
-   *************************************************************************/
+  // Atualiza mensagem preview
   function updateMessagePreview(){
-    let slug = affiliateSelect.value;
-    let manual = manualName.value.trim();
-    let apelido = manual ? manual : affiliates.find(a => makeSlug(a.apelido) === slug)?.apelido || "Sem apelido";
-    let mensagem = `Olá! Quero assinar IPTV com o código de afiliado: ${apelido}.`;
-    messagePreview.textContent = mensagem;
+    let slug = manualName.value.trim() || affiliateSelect.value;
+    if(!slug){
+      messagePreview.textContent = "Por favor, selecione ou digite um apelido.";
+      return;
+    }
+    let cleanSlug = makeSlug(slug);
+    let original = manualName.value.trim() || (affiliates.find(a=>makeSlug(a.apelido)===cleanSlug)?.apelido) || cleanSlug;
+    messagePreview.textContent = `Olá! Quero assinar IPTV com o código de afiliado: ${original}.`;
   }
 
-  /*************************************************************************
-   * Função para copiar o link gerado
-   *************************************************************************/
-  function copyLink(){
-    let link = btnGenerate.dataset.link;
-    if(!link) return alert("Gere o link primeiro!");
+  // Carrega planos no HTML
+  function loadPlans(){
+    plansList.innerHTML = "";
+    PLANS.forEach(p=>{
+      plansList.innerHTML += `<div class="plan-card">
+        <div class="plan-info">
+          <div class="plan-title">${p.title}</div>
+          <div class="plan-price">${p.subtitle} — ${p.price}</div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Carrega ranking (exemplo simples, você pode ligar ao CSV e atualizar)
+  function loadRanking(){
+    // Exemplo fixo - você pode carregar do CSV e contar vendas
+    let sampleRanking = [
+      {apelido:"João", vendas: 45},
+      {apelido:"Maria", vendas: 30},
+      {apelido:"Carlos", vendas: 18}
+    ];
+
+    if(sampleRanking.length === 0){
+      rankingList.textContent = "Nenhum ranking disponível";
+      return;
+    }
+    let html = '<table style="width:100%;border-collapse:collapse;">';
+    html += '<thead><tr><th>Posição</th><th>Afiliado</th><th>Vendas</th></tr></thead><tbody>';
+    sampleRanking.forEach((item, i)=>{
+      let medal = "";
+      if(i===0) medal = '<span class="gold">🥇</span>';
+      else if(i===1) medal = '<span class="silver">🥈</span>';
+      else if(i===2) medal = '<span class="bronze">🥉</span>';
+      html += `<tr>
+        <td>${i+1} ${medal}</td>
+        <td>${item.apelido}</td>
+        <td>${item.vendas}</td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    rankingList.innerHTML = html;
+  }
+
+  // Botão copiar
+  btnCopy.addEventListener('click', () => {
+    let link = btnGenerate.dataset.link || "";
+    if(!link){
+      alert("Nenhum link para copiar.");
+      return;
+    }
     navigator.clipboard.writeText(link).then(() => {
       copyOk.style.display = "inline";
-      setTimeout(() => { copyOk.style.display = "none"; }, 2500);
-    });
-  }
+      setTimeout(() => { copyOk.style.display = "none"; }, 1500);
+    }).catch(()=>alert("Erro ao copiar link."));
+  });
 
-  /*************************************************************************
-   * Função para registrar o link gerado no Google Apps Script
-   *************************************************************************/
-  function registerLink(afiliado){
-    const url = `${GOOGLE_SCRIPT_URL}?afiliado=${encodeURIComponent(afiliado)}&cliente=Gerou+link&plano=--`;
-    fetch(url)
+  // Gera link e registra no GAS
+  btnGenerate.addEventListener('click', () => {
+    let slug = manualName.value.trim() || affiliateSelect.value;
+    if(!slug){
+      alert("Por favor, selecione ou digite um apelido válido.");
+      return;
+    }
+    let apelidoLimpo = makeSlug(slug);
+    let originalApelido = manualName.value.trim() || affiliates.find(a => makeSlug(a.apelido) === apelidoLimpo)?.apelido || apelidoLimpo;
+
+    // Registro no GAS
+    fetch(`${GOOGLE_SCRIPT_URL}?afiliado=${encodeURIComponent(apelidoLimpo)}&cliente=Gerou+link&plano=--`)
       .then(res => res.text())
-      .then(text => console.log("Registro no GAS:", text))
-      .catch(err => console.error("Erro no registro GAS:", err));
-  }
+      .then(text => {
+        //console.log(text);
+        // Monta mensagem e abre WhatsApp
+        let msg = `Olá! Quero assinar IPTV com o código de afiliado: ${originalApelido}.`;
+        let whatsappUrl = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=` + encodeURIComponent(msg);
 
-  /*************************************************************************
-   * Inicialização do app
-   *************************************************************************/
+        btnGenerate.dataset.link = whatsappUrl;
+        btnCopy.disabled = false;
+
+        window.open(whatsappUrl, "_blank");
+      })
+      .catch(err => {
+        alert("Erro ao registrar link. Tente novamente.");
+        console.error(err);
+      });
+  });
+
+  // Atualiza preview se mudar
+  affiliateSelect.addEventListener('change', () => {
+    manualName.value = "";
+    updateMessagePreview();
+  });
+  manualName.addEventListener('input', () => updateMessagePreview());
+
+  // Inicializa página
   function init(){
     loadAffiliates();
-    showPlans();
-    updateMessagePreview();
-
-    // Atualiza preview se muda o select ou input manual
-    affiliateSelect.addEventListener('change', updateMessagePreview);
-    manualName.addEventListener('input', updateMessagePreview);
-
-    // Gerar link
-    btnGenerate.addEventListener('click', () => {
-      let slug = manualName.value.trim() || affiliateSelect.value;
-      if(!slug){
-        alert("Por favor, selecione ou digite um apelido válido.");
-        return;
-      }
-
-      let apelidoLimpo = makeSlug(slug);
-      let originalApelido = manualName.value.trim() || affiliates.find(a => makeSlug(a.apelido) === apelidoLimpo)?.apelido || apelidoLimpo;
-
-      // Registrar no Google Apps Script
-      registerLink(apelidoLimpo);
-
-      // Montar URL para WhatsApp
-      let msg = `Olá! Quero assinar IPTV com o código de afiliado: ${originalApelido}.`;
-      let whatsappUrl = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=` + encodeURIComponent(msg);
-
-      btnGenerate.dataset.link = whatsappUrl;
-      btnCopy.disabled = false;
-
-      // Abrir WhatsApp
-      window.open(whatsappUrl, "_blank");
-    });
-
-    // Copiar link
-    btnCopy.addEventListener('click', copyLink);
-
-    // Fixar número WhatsApp do atendimento
-    fixedWhatsapp.href = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}`;
-
-    // Exemplo de ranking (você deve puxar da planilha depois)
-    rankingList.innerHTML = `
-      <ol>
-        <li><span class="gold">João Silva — 45 vendas</span></li>
-        <li><span class="silver">Maria Souza — 32 vendas</span></li>
-        <li><span class="bronze">Carlos Lima — 28 vendas</span></li>
-      </ol>
-    `;
+    loadPlans();
+    loadRanking();
+    btnCopy.disabled = true;
+    fixedWhatsapp.href = "https://api.whatsapp.com/send?phone="+PHONE_NUMBER;
   }
 
-  window.onload = init;
-  </script>
+  init();
 
+  </script>
 </body>
 </html>
