@@ -3,98 +3,193 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gerar Link de Afiliado - ConectPlay</title>
+<title>ConectPlay — Programa de Afiliados</title>
+
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
   body {
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: #0b0720;
     color: #f5f5f7;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+    padding: 24px;
   }
   .container {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    width: 320px;
-    text-align: center;
+    max-width: 980px;
+    margin: auto;
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  h1 {
+    margin-top: 0;
+  }
+  label {
+    display: block;
+    margin: 12px 0 6px;
   }
   input[type="text"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
-    margin-bottom: 12px;
     font-size: 16px;
+    margin-bottom: 12px;
   }
-  input[readonly] {
-    background: #222;
-    user-select: all;
-  }
-  button {
-    background: linear-gradient(90deg, #6f3bff, #22b0ff);
-    border: none;
+  .btn-wpp {
     padding: 10px 15px;
     border-radius: 8px;
+    background: linear-gradient(90deg, #6f3bff, #22b0ff);
+    border: none;
     color: white;
     font-weight: 700;
     cursor: pointer;
-    margin: 5px 0;
-    width: 100%;
+    margin: 6px 0;
+    display: inline-block;
+    text-decoration: none;
   }
-  button:active {
-    transform: scale(0.98);
+  #affiliateLink {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: none;
+    background: #222;
+    color: #eee;
+  }
+  .plans {
+    margin-top: 20px;
+  }
+  .plan {
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.02);
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>Gerar link de afiliado</h2>
-  <input type="text" id="apelidoInput" placeholder="Digite seu nome ou apelido" />
-  <button id="gerarBtn">Gerar Link</button>
-  <input type="text" id="linkAfiliado" readonly placeholder="Seu link aparecerá aqui" />
-  <button id="copiarBtn">Copiar Link</button>
+  <h1>Programa de Afiliados ConectPlay</h1>
+
+  <label for="apelidoInput">Digite seu nome ou apelido:</label>
+  <input type="text" id="apelidoInput" placeholder="Seu apelido" />
+
+  <button id="gerarBtn" class="btn-wpp">Gerar link de afiliado</button>
+
+  <label for="affiliateLink">Seu link de afiliado:</label>
+  <input type="text" id="affiliateLink" readonly placeholder="Aqui aparecerá seu link" />
+
+  <div class="plans" id="plansContainer">
+    <h2>Planos disponíveis</h2>
+    <!-- Planos serão inseridos aqui -->
+  </div>
 </div>
 
 <script>
-  const gerarBtn = document.getElementById('gerarBtn');
-  const copiarBtn = document.getElementById('copiarBtn');
-  const apelidoInput = document.getElementById('apelidoInput');
-  const linkAfiliado = document.getElementById('linkAfiliado');
+  // Configurações
+  const WHATSAPP_NUMBER = '5577991986049'; // Seu WhatsApp
+  const WPP_BASE_MESSAGE = `Confira nossos planos atualizados ⬇️
+📅 15 DIAS DE USO: R$14,99
+📅 Mensal: R$ 20,99 (1 acesso) / R$ 25,99 (2 acessos)
+📅 Bimestral: R$ 41,99 (1 acesso) / R$ 43,99 (2 acessos)
+📅 Trimestral: R$ 74,99 (1 acesso) / R$ 76,99 (2 acessos)
+📅 Semestral: R$149,99 (1 acesso) / R$153,99 (2 acessos)
+📅 Anual: R$297,99 (1 acesso) / R$299,99 (2 acessos)
 
-  // Função para gerar o link com o apelido na query string
+✅ Teste grátis disponível!
+
+Gostaria do plano: `;
+
+  const PLANS = [
+    { id: '15dias', name: '15 DIAS', price: 'R$14,99', accesses: '1 acesso' },
+    { id: 'mensal_1', name: 'Mensal', price: 'R$20,99', accesses: '1 acesso' },
+    { id: 'mensal_2', name: 'Mensal', price: 'R$25,99', accesses: '2 acessos' },
+    { id: 'bimestral_1', name: 'Bimestral', price: 'R$41,99', accesses: '1 acesso' },
+    { id: 'bimestral_2', name: 'Bimestral', price: 'R$43,99', accesses: '2 acessos' },
+    { id: 'trimestral_1', name: 'Trimestral', price: 'R$74,99', accesses: '1 acesso' },
+    { id: 'trimestral_2', name: 'Trimestral', price: 'R$76,99', accesses: '2 acessos' },
+    { id: 'semestral_1', name: 'Semestral', price: 'R$149,99', accesses: '1 acesso' },
+    { id: 'semestral_2', name: 'Semestral', price: 'R$153,99', accesses: '2 acessos' },
+    { id: 'anual_1', name: 'Anual', price: 'R$297,99', accesses: '1 acesso' },
+    { id: 'anual_2', name: 'Anual', price: 'R$299,99', accesses: '2 acessos' }
+  ];
+
+  // Função para ler parâmetro da URL
+  function getParam(name) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(name);
+  }
+
+  // Monta o link de afiliado com o apelido
   function gerarLink(apelido) {
-    if (!apelido) return '';
     const baseUrl = window.location.origin + window.location.pathname;
     const url = new URL(baseUrl);
     url.searchParams.set('apelido', apelido.trim());
     return url.toString();
   }
 
-  gerarBtn.addEventListener('click', () => {
-    const apelido = apelidoInput.value.trim();
-    if (apelido === '') {
+  // Mostra os planos e adiciona os botões WhatsApp
+  function renderPlans(apelido) {
+    const container = document.getElementById('plansContainer');
+    container.innerHTML = '<h2>Planos disponíveis</h2>';
+    PLANS.forEach(plan => {
+      const div = document.createElement('div');
+      div.className = 'plan';
+
+      // Monta a mensagem para WhatsApp com o plano e apelido
+      const msg = WPP_BASE_MESSAGE + `${plan.name} - ${plan.accesses} - ${plan.price}` + (apelido ? `\n\nApelido do afiliado: ${apelido}` : '');
+      const encodedMsg = encodeURIComponent(msg);
+      const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+
+      div.innerHTML = `
+        <div><strong>${plan.name} — ${plan.accesses}</strong> — ${plan.price}</div>
+        <a href="${waLink}" target="_blank" class="btn-wpp">Quero esse plano</a>
+      `;
+
+      container.appendChild(div);
+    });
+  }
+
+  // Atualiza o campo do link de afiliado e renderiza os planos
+  function atualizarPaginaComApelido(apelido) {
+    document.getElementById('apelidoInput').value = apelido;
+    document.getElementById('affiliateLink').value = gerarLink(apelido);
+    renderPlans(apelido);
+  }
+
+  // Evento do botão para gerar link
+  document.getElementById('gerarBtn').addEventListener('click', () => {
+    const apelido = document.getElementById('apelidoInput').value.trim();
+    if (!apelido) {
       alert('Por favor, digite seu nome ou apelido.');
       return;
     }
-    const link = gerarLink(apelido);
-    linkAfiliado.value = link;
+    atualizarPaginaComApelido(apelido);
+    // Atualiza URL no navegador (sem recarregar)
+    const url = new URL(window.location.href);
+    url.searchParams.set('apelido', apelido);
+    window.history.replaceState({}, '', url);
   });
 
-  copiarBtn.addEventListener('click', () => {
-    if (!linkAfiliado.value) {
-      alert('Gere um link antes de copiar.');
-      return;
+  // Na carga da página, tenta pegar apelido da URL e já atualizar
+  document.addEventListener('DOMContentLoaded', () => {
+    let apelido = getParam('apelido');
+    if (apelido) {
+      atualizarPaginaComApelido(apelido);
     }
-    linkAfiliado.select();
-    navigator.clipboard.writeText(linkAfiliado.value).then(() => {
-      alert('Link copiado para a área de transferência!');
-    }).catch(() => {
-      alert('Não foi possível copiar o link. Tente manualmente.');
-    });
+  });
+
+  // Botão copiar link
+  document.getElementById('affiliateLink').addEventListener('click', function(){
+    this.select();
   });
 </script>
 
