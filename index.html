@@ -1,351 +1,369 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ConectPlay — Afiliados & Planos</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ConectPlay - Sistema de Afiliados</title>
 <style>
-  :root{
-    --bg1:#241041;
-    --bg2:#0e5bff;
-    --card: rgba(255,255,255,0.10);
-    --accent: #6a5acd;
-    --accent-hover: #483d8b;
-    --whatsapp: #25D366;
+  body {
+    background: linear-gradient(135deg, #241041, #0e5bff);
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0; padding: 20px;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
   }
-  body{
-    margin:0;
-    font-family: "Arial",sans-serif;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2));
-    color:#fff;
-    padding:20px;
-    min-height:100vh;
+  .container {
+    max-width: 900px;
+    margin: auto;
+    flex-grow: 1;
   }
-  .container{ max-width:980px; margin:0 auto; }
-  header{ text-align:center; margin-bottom:18px; }
-  h1{ margin:4px 0 6px; font-weight:600; }
-
-  .top-box{
-    background: var(--card);
-    padding:12px;
-    border-radius:10px;
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-bottom:18px;
-    flex-wrap:wrap;
+  h1 {
+    text-align: center;
+    margin-bottom: 12px;
   }
-  .top-left{ flex:1 1 320px; min-width:220px; }
-  label{ display:block; font-size:13px; opacity:0.9; margin-bottom:6px; }
-  select,input[type="text"]{
-    width:100%;
-    padding:10px;
-    border-radius:8px;
+  label {
+    font-weight: bold;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px 0;
+    font-size: 1rem;
+    border-radius: 6px;
     border: none;
-    background: rgba(255,255,255,0.05);
-    color: #fff;
-    box-sizing:border-box;
+    box-sizing: border-box;
   }
-  .small{ font-size:13px; opacity:0.9; margin-top:6px; }
-
-  .top-actions{ display:flex; gap:10px; align-items:center; }
-  .btn{
-    background: var(--accent);
-    color:white;
-    padding:10px 14px;
-    border-radius:8px;
-    text-decoration:none;
-    display:inline-block;
-    font-weight:600;
-    border:none;
-    cursor:pointer;
+  .plans {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
   }
-  .btn:hover{ background: var(--accent-hover); }
-  .btn-outline{
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.12);
+  .plan-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    padding: 14px 18px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    min-width: 150px;
+    transition: background-color 0.25s ease;
+    text-align: center;
   }
-
-  .link-preview{
-    background: rgba(255,255,255,0.06);
-    padding:10px;
-    border-radius:8px;
-    word-break:break-word;
-    max-width:100%;
+  .plan-btn:hover {
+    background: #483d8b;
   }
-
-  .plans{
-    margin-bottom:20px;
+  #link-preview {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    border-radius: 8px;
+    min-height: 60px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    word-break: break-word;
+    text-align: center;
   }
-  .plan-card{
-    background: var(--card);
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:10px;
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
   }
-  .plan-title{
-    font-weight:700;
+  button.action-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 180px;
+    font-size: 1rem;
   }
-  .plan-price{
-    opacity:0.9;
-    margin-top:4px;
+  .btn-copy {
+    background: #6a5acd;
+    color: white;
   }
-
-  .summary {
-    background: var(--card);
-    padding:12px;
-    border-radius:10px;
-    margin-top:20px;
+  .btn-copy:hover {
+    background: #483d8b;
   }
-
-  footer{ margin-top:30px; font-size:13px; opacity:0.9; text-align:center; }
+  .btn-register {
+    background: #25d366;
+    color: white;
+  }
+  .btn-register:hover {
+    background: #1ebe57;
+  }
+  #summary {
+    background: rgba(255,255,255,0.1);
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+  #ranking {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  #ranking h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  #ranking ol {
+    padding-left: 20px;
+  }
+  #ranking li {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  footer {
+    background: rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 12px 8px;
+    color: #ddd;
+    font-size: 0.9rem;
+    border-top: 1px solid #444;
+  }
 </style>
 </head>
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <header>
-      <h1>ConectPlay — Afiliados & Planos</h1>
-      <p>Gere seu link, compartilhe e registre vendas diretamente aqui.</p>
-    </header>
+  <h1>ConectPlay - Sistema de Afiliados</h1>
 
-    <div class="top-box">
+  <label for="affiliate">Digite seu apelido de afiliado:</label>
+  <input id="affiliate" type="text" placeholder="Ex: joao-silva" autocomplete="off" />
 
-      <div class="top-left">
-        <label for="affiliate-input">Digite seu apelido (sem espaços ou símbolos):</label>
-        <input id="affiliate-input" type="text" placeholder="Ex: joao-silva" />
-        <div class="small">Apenas letras, números e hífens são permitidos.</div>
-      </div>
-
-      <div style="flex:0 0 320px;">
-        <label>Pré-visualização da mensagem (para WhatsApp):</label>
-        <div class="link-preview" id="message-preview">—</div>
-
-        <div style="display:flex; gap:8px; margin-top:8px;">
-          <button class="btn btn-outline" id="btn-generate" disabled>Gerar Link</button>
-          <button class="btn" id="btn-copy" disabled>Copiar Texto</button>
-          <button class="btn" id="btn-register" disabled>Registrar Venda</button>
-        </div>
-      </div>
-
-    </div>
-
-    <section class="plans" id="plans-list">
-      <h2>Planos Disponíveis</h2>
-      <!-- planos serão inseridos aqui -->
-    </section>
-
-    <section class="summary" id="summary">
-      <h3>Resumo das Vendas do Afiliado</h3>
-      <p id="summary-text">Digite seu apelido para ver suas vendas e comissão.</p>
-    </section>
-
+  <div class="plans" id="plans-container">
+    <!-- Botões dos planos aparecerão aqui -->
   </div>
 
-  <footer>
-    &copy; 2025 ConectPlay. Todos os direitos reservados.
-  </footer>
+  <div id="link-preview">Digite seu apelido e clique em um plano para gerar o link.</div>
+
+  <div class="actions">
+    <button class="action-btn btn-copy" id="btn-copy" disabled>Copiar mensagem</button>
+    <button class="action-btn btn-register" id="btn-register" disabled>Registrar venda</button>
+  </div>
+
+  <div id="summary">Digite seu apelido para ver seu resumo de vendas e comissão.</div>
+
+  <div id="ranking">
+    <h2>Top 5 Afiliados</h2>
+    <ol id="ranking-list"><li>Carregando...</li></ol>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 ConectPlay - Todos os direitos reservados. Desenvolvido por Fabrizio Souza.
+</footer>
 
 <script>
-  // URL do seu Google Apps Script (troque pelo seu)
+  // URL do seu Google Apps Script que registra venda
   const GAS_URL = "https://script.google.com/macros/s/AKfycbyRsL2wd3BUMdI1NyrAZYQeeUulYJpAVc4TkBEfZJBJsPGPJQgCfWfe79O__XI364Oz/exec";
 
-  // Planos (fácil de alterar)
+  // Link CSV público da aba resumo da planilha
+  const CSV_VENDAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=144607695&single=true&output=csv";
+
   const PLANS = [
-    { id:'15dias', title: '15 DIAS DE USO', price: 'R$14,99' },
-    { id:'mensal1', title: 'Mensal - 1 acesso', price: 'R$20,99' },
-    { id:'mensal2', title: 'Mensal - 2 acessos', price: 'R$25,99' },
-    { id:'bimestral1', title: 'Bimestral - 1 acesso', price: 'R$41,99' },
-    { id:'bimestral2', title: 'Bimestral - 2 acessos', price: 'R$43,99' },
-    { id:'trimestral1', title: 'Trimestral - 1 acesso', price: 'R$74,99' },
-    { id:'trimestral2', title: 'Trimestral - 2 acessos', price: 'R$76,99' },
-    { id:'semestral1', title: 'Semestral - 1 acesso', price: 'R$149,99' },
-    { id:'semestral2', title: 'Semestral - 2 acessos', price: 'R$153,99' },
-    { id:'anual1', title: 'Anual - 1 acesso', price: 'R$297,99' },
-    { id:'anual2', title: 'Anual - 2 acessos', price: 'R$299,99' }
+    { id: "15dias", title: "15 DIAS DE USO", price: "R$14,99" },
+    { id: "mensal1", title: "Mensal - 1 acesso", price: "R$20,99" },
+    { id: "mensal2", title: "Mensal - 2 acessos", price: "R$25,99" },
+    { id: "bimestral1", title: "Bimestral - 1 acesso", price: "R$41,99" },
+    { id: "bimestral2", title: "Bimestral - 2 acessos", price: "R$43,99" },
+    { id: "trimestral1", title: "Trimestral - 1 acesso", price: "R$74,99" },
+    { id: "trimestral2", title: "Trimestral - 2 acessos", price: "R$76,99" },
+    { id: "semestral1", title: "Semestral - 1 acesso", price: "R$149,99" },
+    { id: "semestral2", title: "Semestral - 2 acessos", price: "R$153,99" },
+    { id: "anual1", title: "Anual - 1 acesso", price: "R$297,99" },
+    { id: "anual2", title: "Anual - 2 acessos", price: "R$299,99" }
   ];
 
-  // Referências DOM
-  const affiliateInput = document.getElementById('affiliate-input');
-  const messagePreview = document.getElementById('message-preview');
-  const btnGenerate = document.getElementById('btn-generate');
-  const btnCopy = document.getElementById('btn-copy');
-  const btnRegister = document.getElementById('btn-register');
-  const plansList = document.getElementById('plans-list');
-  const summaryText = document.getElementById('summary-text');
+  const affiliateInput = document.getElementById("affiliate");
+  const plansContainer = document.getElementById("plans-container");
+  const linkPreview = document.getElementById("link-preview");
+  const btnCopy = document.getElementById("btn-copy");
+  const btnRegister = document.getElementById("btn-register");
+  const summary = document.getElementById("summary");
+  const rankingList = document.getElementById("ranking-list");
 
-  // Estado interno
-  let selectedPlanId = null;
-  let affiliateSlug = "";
+  let currentAffiliate = "";
+  let currentPlan = null;
+  let currentMessage = "";
 
-  // Função para normalizar apelido para URL / slug
-  function makeSlug(name) {
-    return name.trim()
-      .toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,"")
-      .replace(/[^a-z0-9\-]+/g,'-')
-      .replace(/\-+/g,'-')
-      .replace(/^\-+|\-+$/g,'');
+  // Cria slug para URL e planilha
+  function makeSlug(text) {
+    return text.trim().toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\-]+/g, "-")
+      .replace(/\-+/g, "-")
+      .replace(/^\-+|\-+$/g, "");
   }
 
-  // Mostrar planos na página
-  function showPlans() {
-    plansList.innerHTML = "<h2>Planos Disponíveis</h2>" + PLANS.map(plan => `
-      <div class="plan-card">
-        <input type="radio" name="plan" id="plan-${plan.id}" value="${plan.id}">
-        <label for="plan-${plan.id}">
-          <span class="plan-title">${plan.title}</span><br>
-          <span class="plan-price">${plan.price}</span>
-        </label>
-      </div>
-    `).join('');
-    // Evento para marcar plano selecionado
-    plansList.querySelectorAll('input[name="plan"]').forEach(input => {
-      input.addEventListener('change', () => {
-        selectedPlanId = input.value;
-        updateMessagePreview();
-        checkButtons();
-      });
+  // Cria botões dos planos
+  function createPlanButtons() {
+    plansContainer.innerHTML = "";
+    PLANS.forEach(plan => {
+      const btn = document.createElement("button");
+      btn.className = "plan-btn";
+      btn.textContent = `${plan.title} (${plan.price})`;
+      btn.title = `Clique para gerar link para o plano ${plan.title}`;
+      btn.onclick = () => onPlanClick(plan);
+      plansContainer.appendChild(btn);
     });
   }
 
-  // Atualizar preview da mensagem
-  function updateMessagePreview() {
-    affiliateSlug = makeSlug(affiliateInput.value);
-    if(!affiliateSlug) {
-      messagePreview.textContent = "Digite um apelido válido.";
-      disableButtons();
+  // Ao clicar no plano, gera link WhatsApp e mensagem
+  function onPlanClick(plan) {
+    currentAffiliate = makeSlug(affiliateInput.value);
+    if (!currentAffiliate) {
+      alert("Por favor, digite seu apelido de afiliado antes de escolher o plano.");
       return;
     }
-    if(!selectedPlanId) {
-      messagePreview.textContent = "Escolha um plano para gerar o link.";
-      disableButtons();
-      return;
-    }
-    const plan = PLANS.find(p => p.id === selectedPlanId);
-    if(!plan) {
-      messagePreview.textContent = "Plano inválido.";
-      disableButtons();
-      return;
-    }
-
-    const msg = `Olá! Quero assinar IPTV com o código de afiliado: ${affiliateSlug}. Plano: ${plan.title} (${plan.price}).`;
-    messagePreview.textContent = msg;
-    enableButtons();
-  }
-
-  function enableButtons(){
-    btnGenerate.disabled = false;
+    currentPlan = plan;
+    const message = `Olá! Quero assinar IPTV com o código de afiliado: ${currentAffiliate}. Plano: ${plan.title} (${plan.price}).`;
+    currentMessage = message;
+    linkPreview.textContent = message;
     btnCopy.disabled = false;
     btnRegister.disabled = false;
   }
 
-  function disableButtons(){
-    btnGenerate.disabled = true;
-    btnCopy.disabled = true;
-    btnRegister.disabled = true;
-  }
-
-  // Copiar mensagem para área de transferência
-  btnCopy.addEventListener('click', () => {
-    navigator.clipboard.writeText(messagePreview.textContent).then(() => {
+  // Copiar mensagem
+  btnCopy.onclick = () => {
+    if (!currentMessage) return;
+    navigator.clipboard.writeText(currentMessage).then(() => {
       alert("Mensagem copiada!");
+    }).catch(() => {
+      alert("Erro ao copiar. Copie manualmente.");
     });
-  });
+  };
 
-  // Gerar link WhatsApp e abrir nova aba
-  btnGenerate.addEventListener('click', () => {
-    const phone = "557791986049"; // Seu número WhatsApp com DDD e sem "+"
-    const url = `https://api.whatsapp.com/send?phone=${phone}&text=` + encodeURIComponent(messagePreview.textContent);
-    window.open(url, "_blank");
-  });
-
-  // Registrar venda na planilha via Google Apps Script
-  btnRegister.addEventListener('click', () => {
-    if(!affiliateSlug || !selectedPlanId) {
-      alert("Preencha o apelido e selecione um plano.");
+  // Registrar venda na planilha via GAS
+  btnRegister.onclick = () => {
+    if (!currentAffiliate || !currentPlan) {
+      alert("Preencha o apelido e escolha o plano antes de registrar a venda.");
       return;
     }
-    const plan = PLANS.find(p => p.id === selectedPlanId);
-
-    const url = `${GAS_URL}?afiliado=${encodeURIComponent(affiliateSlug)}&cliente=Cliente&plano=${encodeURIComponent(plan.title)}`;
-
+    const url = `${GAS_URL}?afiliado=${encodeURIComponent(currentAffiliate)}&cliente=Cliente&plano=${encodeURIComponent(currentPlan.title)}`;
     fetch(url)
-      .then(resp => resp.text())
-      .then(data => {
+      .then(r => r.text())
+      .then(() => {
         alert("Venda registrada com sucesso!");
-        loadAffiliateSummary(affiliateSlug);
+        loadAffiliateSummary(currentAffiliate);
+        loadRanking();
       })
-      .catch(err => {
-        console.error(err);
-        alert("Erro ao registrar venda.");
-      });
-  });
+      .catch(() => alert("Erro ao registrar venda. Tente novamente."));
+  };
 
-  // Função para buscar a contagem de vendas do afiliado na planilha via CSV pública
+  // Carregar resumo do afiliado
   function loadAffiliateSummary(affiliate) {
-    // URL pública da sua planilha CSV, substitua pelo seu link correto da aba com as vendas consolidadas
-    const CSV_VENDAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=144607695&single=true&output=csv";
-
+    summary.textContent = "Carregando resumo...";
     fetch(CSV_VENDAS_URL)
-      .then(resp => resp.text())
+      .then(r => r.text())
       .then(text => {
-        const lines = text.trim().split('\n');
-        // Esperando colunas: Apelido Afiliado, Total Vendas (na aba resumo)
-        let totalVendas = 0;
-        for(let i=1; i<lines.length; i++) {
-          const cols = lines[i].split(',');
-          const apelido = cols[0].trim();
-          const vendas = parseInt(cols[1]) || 0;
-          if(apelido.toLowerCase() === affiliate.toLowerCase()) {
-            totalVendas = vendas;
+        const rows = text.trim().split("\n");
+        let vendas = 0;
+
+        for (let i = 1; i < rows.length; i++) {
+          const cols = rows[i].split(",");
+          const apelido = cols[0].trim().toLowerCase();
+          if (apelido === affiliate.toLowerCase()) {
+            vendas = parseInt(cols[1]) || 0;
             break;
           }
         }
 
-        const comissao = calcularComissao(totalVendas);
+        const comissao = calculaComissao(vendas);
 
-        if(totalVendas > 0){
-          summaryText.innerHTML = `
+        if (vendas > 0) {
+          summary.innerHTML = `
             Olá, <strong>${affiliate}</strong>!<br>
-            Você fez <strong>${totalVendas}</strong> venda(s).<br>
-            Sua comissão por venda é <strong>R$ ${comissao.toFixed(2)}</strong>.<br>
-            Você já ganhou <strong>R$ ${(totalVendas*comissao).toFixed(2)}</strong>.
+            Você fez <strong>${vendas}</strong> venda(s).<br>
+            Sua comissão por venda é <strong>R$${comissao.toFixed(2)}</strong>.<br>
+            Você já ganhou <strong>R$${(vendas * comissao).toFixed(2)}</strong>.
           `;
         } else {
-          summaryText.innerHTML = `Olá, <strong>${affiliate}</strong>! Ainda não há vendas registradas.`;
+          summary.textContent = `Olá, ${affiliate}! Ainda não há vendas registradas.`;
         }
-
-      }).catch(err => {
-        console.error("Erro ao carregar resumo:", err);
-        summaryText.textContent = "Erro ao carregar resumo de vendas.";
+      })
+      .catch(() => {
+        summary.textContent = "Erro ao carregar resumo de vendas.";
       });
   }
 
-  // Função que calcula a comissão com base no número de vendas
-  function calcularComissao(vendas) {
-    if(vendas >= 601) return 10.00;
-    if(vendas >= 301) return 9.00;
-    if(vendas >= 101) return 8.00;
-    if(vendas >= 1) return 7.00;
+  // Calcular comissão por faixa de vendas
+  function calculaComissao(vendas) {
+    if (vendas >= 601) return 10.0;
+    if (vendas >= 301) return 9.0;
+    if (vendas >= 101) return 8.0;
+    if (vendas >= 1) return 7.0;
     return 0;
   }
 
-  // Evento para atualizar o preview e resumo quando digitar apelido
-  affiliateInput.addEventListener('input', () => {
-    updateMessagePreview();
-    if(makeSlug(affiliateInput.value)) {
-      loadAffiliateSummary(makeSlug(affiliateInput.value));
+  // Carregar ranking top 5 da planilha
+  function loadRanking() {
+    rankingList.innerHTML = "<li>Carregando...</li>";
+    fetch(CSV_VENDAS_URL)
+      .then(r => r.text())
+      .then(text => {
+        const rows = text.trim().split("\n");
+        let data = [];
+        for (let i = 1; i < rows.length; i++) {
+          const cols = rows[i].split(",");
+          const apelido = cols[0].trim();
+          const vendas = parseInt(cols[1]) || 0;
+          if (apelido) data.push({ apelido, vendas });
+        }
+        // Ordena decrescente por vendas
+        data.sort((a, b) => b.vendas - a.vendas);
+        // Pega top 5
+        const top5 = data.slice(0, 5);
+        if (top5.length === 0) {
+          rankingList.innerHTML = "<li>Nenhum dado encontrado.</li>";
+          return;
+        }
+        rankingList.innerHTML = "";
+        top5.forEach(({apelido, vendas}, idx) => {
+          rankingList.innerHTML += `<li><strong>${apelido}</strong>: ${vendas} venda(s)</li>`;
+        });
+      })
+      .catch(() => {
+        rankingList.innerHTML = "<li>Erro ao carregar ranking.</li>";
+      });
+  }
+
+  // Atualiza resumo e limpa botões ao mudar apelido
+  affiliateInput.addEventListener("input", () => {
+    const slug = makeSlug(affiliateInput.value);
+    if (!slug) {
+      summary.textContent = "Digite seu apelido para ver seu resumo de vendas e comissão.";
+      btnCopy.disabled = true;
+      btnRegister.disabled = true;
+      linkPreview.textContent = "Digite seu apelido e clique em um plano para gerar o link.";
+      currentMessage = "";
+      currentPlan = null;
     } else {
-      summaryText.textContent = "Digite seu apelido para ver suas vendas e comissão.";
+      loadAffiliateSummary(slug);
+      btnCopy.disabled = true;
+      btnRegister.disabled = true;
+      linkPreview.textContent = "Clique em um plano para gerar o link.";
+      currentMessage = "";
+      currentPlan = null;
     }
   });
 
-  // Inicializa a página
-  showPlans();
-  disableButtons();
+  // Inicializa
+  createPlanButtons();
+  loadRanking();
 </script>
 
 </body>
