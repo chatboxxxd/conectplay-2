@@ -2,196 +2,343 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ConectPlay — Programa de Afiliados</title>
-
-<!-- Google font -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ConectPlay — Afiliados & Planos</title>
+<link rel="icon" href="images/logo-conectplay.png">
 <style>
-  body {
-    font-family: "Montserrat", sans-serif;
-    background: #0b0720;
-    color: #f5f5f7;
-    padding: 24px;
+  :root{
+    --bg1: #10062a;    /* escuro roxo */
+    --bg2: #0b1b3a;    /* azul noturno */
+    --neon-a: #7b5cff; /* roxo neon */
+    --neon-b: #2ce8ff; /* ciano neon */
+    --card: rgba(255,255,255,0.04);
+    --muted: rgba(255,255,255,0.6);
+    --whatsapp: #25D366;
+    --glass: rgba(255,255,255,0.03);
   }
-  .container {
-    max-width: 980px;
-    margin: auto;
-    background: rgba(255,255,255,0.03);
-    border-radius: 16px;
-    padding: 28px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  *{box-sizing:border-box;font-family:Inter, "Arial",sans-serif}
+  body{
+    margin:0;
+    min-height:100vh;
+    color:#eef2ff;
+    background: radial-gradient(1200px 400px at 10% 10%, rgba(124,92,255,0.12), transparent),
+                linear-gradient(135deg,var(--bg1),var(--bg2));
+    -webkit-font-smoothing:antialiased;
+    padding:20px;
   }
-  h1 {
-    margin-top: 0;
-  }
-  label {
-    display: block;
-    margin: 12px 0 6px;
-  }
-  input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-    margin-bottom: 12px;
-  }
-  .btn-wpp {
-    padding: 10px 15px;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #6f3bff, #22b0ff);
-    border: none;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    margin: 6px 0;
-    display: inline-block;
-    text-decoration: none;
-  }
-  #affiliateLink {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    margin: 12px 0;
-    border-radius: 8px;
-    border: none;
-    background: #222;
-    color: #eee;
-  }
-  .plans {
-    margin-top: 20px;
-  }
-  .plan {
-    margin-bottom: 10px;
-    background: rgba(255,255,255,0.02);
-    padding: 12px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .container{ max-width:1100px; margin:0 auto; }
+
+  header{ display:flex;gap:16px; align-items:center; margin-bottom:18px; }
+  header img{ width:96px; height:auto; border-radius:12px; box-shadow: 0 6px 24px rgba(46,14,120,0.28);}
+  header h1{ margin:0; font-size:20px; letter-spacing:0.6px; }
+  header p{ margin:4px 0 0 0; color:var(--muted); font-size:13px; }
+
+  .top{ display:flex; gap:16px; flex-wrap:wrap; background:var(--card); padding:16px; border-radius:12px; align-items:center;}
+  .col{ flex:1; min-width:220px; }
+  label{ display:block; font-size:13px; color:var(--muted); margin-bottom:8px; }
+  input[type="text"], select{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit; }
+  .link-preview{ background:var(--glass); padding:10px; border-radius:10px; color: #dfeaff; word-break:break-all; }
+
+  .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .btn{ background: linear-gradient(90deg,var(--neon-a), var(--neon-b)); color:#041022; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; box-shadow: 0 6px 18px rgba(46,14,120,0.18);}
+  .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); box-shadow:none; }
+  .small{ font-size:13px; color:var(--muted); margin-top:6px; }
+
+  .grid{ display:grid; grid-template-columns:1fr 360px; gap:16px; margin-top:18px; align-items:start;}
+  @media(max-width:980px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px; border-radius:12px; box-shadow: 0 6px 18px rgba(2,6,23,0.5); }
+  .plans{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .plan{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+  .plan .title{ font-weight:800; color:#f4f6ff; }
+  .plan .price{ color:var(--neon-b); font-weight:700; }
+
+  .wh-btn{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; background:var(--whatsapp); color:#032a12; font-weight:800; text-decoration:none; }
+
+  table{ width:100%; border-collapse:collapse; margin-top:8px; }
+  th, td{ padding:8px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); font-size:14px; color:#e9eefc; }
+  th{ color:var(--muted); font-weight:700; background:transparent; }
+
+  footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
+  .terms{ margin-top:10px; background:rgba(0,0,0,0.18); padding:10px; border-radius:8px; color:#dfe8ff; font-size:13px; }
+  .note{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  .copy-ok{ color:#00ff8a; font-weight:800; margin-left:8px; display:none; }
 </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <img src="images/logo-conectplay.png" alt="ConectPlay logo" />
+      <div>
+        <h1>ConectPlay — Afiliados & Planos</h1>
+        <p>Gere seu link, compartilhe e acompanhe seu desempenho. Pagamentos por venda confirmado.</p>
+      </div>
+    </header>
 
-<div class="container">
-  <h1>Programa de Afiliados ConectPlay</h1>
+    <!-- TOP: afiliado / gerar link -->
+    <div class="top card">
+      <div class="col">
+        <label for="affiliateInput">Digite seu apelido (gera link):</label>
+        <input id="affiliateInput" type="text" placeholder="ex: joao-silva" />
+        <div class="small">Sem caracteres especiais — o sistema cria a versão "bonitinha".</div>
+      </div>
 
-  <label for="apelidoInput">Digite seu nome ou apelido:</label>
-  <input type="text" id="apelidoInput" placeholder="Seu apelido" />
+      <div style="flex:0 0 360px;">
+        <label>Pré-visualização / Link de compartilhamento:</label>
+        <div class="link-preview" id="message-preview">—</div>
 
-  <button id="gerarBtn" class="btn-wpp">Gerar link de afiliado</button>
+        <div class="actions">
+          <button class="btn" id="btn-generate">Gerar link</button>
+          <button class="btn ghost" id="btn-copy" disabled>Copiar link</button>
+          <span id="copy-ok" class="copy-ok">Copiado!</span>
+        </div>
+        <div class="note">Ao abrir com <code>?affiliate=seu-apelido</code> o campo já é preenchido automaticamente.</div>
+      </div>
+    </div>
 
-  <label for="affiliateLink">Seu link de afiliado:</label>
-  <input type="text" id="affiliateLink" readonly placeholder="Aqui aparecerá seu link" />
+    <div class="grid">
+      <!-- LEFT -->
+      <div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0">Planos disponíveis</h3>
+          <div class="plans" id="plans-list">
+            <!-- preenchido via JS -->
+          </div>
+          <div class="note">Qualquer visitante pode escolher um plano e abrir WhatsApp com a mensagem pronta.</div>
+        </div>
 
-  <div class="plans" id="plansContainer">
-    <h2>Planos disponíveis</h2>
-    <!-- Planos serão inseridos aqui -->
+        <div class="card" style="margin-top:12px;">
+          <h3 style="margin:0 0 8px 0">Registrar Venda (Admin)</h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input id="saleAffiliate" type="text" placeholder="Apelido do afiliado" style="flex:1" />
+            <input id="saleCliente" type="text" placeholder="Nome do cliente" style="flex:1" />
+            <select id="salePlano" style="flex:1"></select>
+            <div style="width:100%; display:flex; gap:8px; margin-top:8px;">
+              <button class="btn" id="btn-addSale">Registrar Venda</button>
+              <button class="btn ghost" id="btn-refresh">Atualizar Ranking</button>
+            </div>
+          </div>
+          <div id="sale-msg" class="small"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0">Ranking de Afiliados</h3>
+          <table aria-label="ranking">
+            <thead>
+              <tr><th>#</th><th>Apelido</th><th>Vendas</th></tr>
+            </thead>
+            <tbody id="ranking-body">
+              <tr><td colspan="3" style="text-align:center;color:var(--muted)">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <h3 style="margin:0 0 8px 0">Contato</h3>
+          <div style="display:flex;gap:8px;flex-direction:column;">
+            <a id="fixed-whatsapp" class="wh-btn" href="#" target="_blank">Falar no WhatsApp</a>
+            <div class="small">Telefone: +55 77 9198-6049</div>
+          </div>
+        </div>
+
+        <div class="card terms" style="margin-top:12px;">
+          <strong>Termos e Isenção</strong>
+          <p class="small" style="margin-top:8px">
+            O uso de links de afiliado é voluntário. A ConectPlay não se responsabiliza por decisões, pagamentos ou resultados decorrentes de transações feitas por terceiros. O afiliado é responsável por promover corretamente o serviço e seguir as regras locais e legais. Ao usar os links, você declara ser maior de idade e agir por sua própria responsabilidade.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      &copy; 2025 ConectPlay. Todos os direitos reservados.
+    </footer>
   </div>
-</div>
 
 <script>
-  // Configurações
-  const WHATSAPP_NUMBER = '5577991986049'; // Seu WhatsApp
-  const WPP_BASE_MESSAGE = `Confira nossos planos atualizados ⬇️
-📅 15 DIAS DE USO: R$14,99
-📅 Mensal: R$ 20,99 (1 acesso) / R$ 25,99 (2 acessos)
-📅 Bimestral: R$ 41,99 (1 acesso) / R$ 43,99 (2 acessos)
-📅 Trimestral: R$ 74,99 (1 acesso) / R$ 76,99 (2 acessos)
-📅 Semestral: R$149,99 (1 acesso) / R$153,99 (2 acessos)
-📅 Anual: R$297,99 (1 acesso) / R$299,99 (2 acessos)
+/* ===========================
+   CONFIGURE AQUI sua URL GAS
+   =========================== */
+const GAS_URL = 'COLE_AQUI_SEU_URL_DO_GAS'; // ex: 'https://script.google.com/macros/s/AKfy.../exec'
+const PHONE_NUMBER = '557791986049';
 
-✅ Teste grátis disponível!
+/* ===== Planos (mesma lista do seu projeto) ===== */
+const PLANS = [
+  { id:'15dias', title:'15 DIAS DE USO', subtitle:'Teste - 15 dias', price:14.99 },
+  { id:'mensal1', title:'Mensal', subtitle:'1 acesso', price:20.99 },
+  { id:'mensal2', title:'Mensal', subtitle:'2 acessos', price:25.99 },
+  { id:'bimestral1', title:'Bimestral', subtitle:'1 acesso', price:41.99 },
+  { id:'bimestral2', title:'Bimestral', subtitle:'2 acessos', price:43.99 },
+  { id:'trimestral1', title:'Trimestral', subtitle:'1 acesso', price:74.99 },
+  { id:'trimestral2', title:'Trimestral', subtitle:'2 acessos', price:76.99 },
+  { id:'semestral1', title:'Semestral', subtitle:'1 acesso', price:149.99 },
+  { id:'semestral2', title:'Semestral', subtitle:'2 acessos', price:153.99 },
+  { id:'anual1', title:'Anual', subtitle:'1 acesso', price:297.99 },
+  { id:'anual2', title:'Anual', subtitle:'2 acessos', price:299.99 }
+];
 
-Gostaria do plano: `;
+/* ===== DOM refs ===== */
+const affiliateInput = document.getElementById('affiliateInput');
+const messagePreview = document.getElementById('message-preview');
+const btnGenerate = document.getElementById('btn-generate');
+const btnCopy = document.getElementById('btn-copy');
+const copyOk = document.getElementById('copy-ok');
+const plansList = document.getElementById('plans-list');
+const fixedWhatsapp = document.getElementById('fixed-whatsapp');
+const rankingBody = document.getElementById('ranking-body');
 
-  const PLANS = [
-    { id: '15dias', name: '15 DIAS', price: 'R$14,99', accesses: '1 acesso' },
-    { id: 'mensal_1', name: 'Mensal', price: 'R$20,99', accesses: '1 acesso' },
-    { id: 'mensal_2', name: 'Mensal', price: 'R$25,99', accesses: '2 acessos' },
-    { id: 'bimestral_1', name: 'Bimestral', price: 'R$41,99', accesses: '1 acesso' },
-    { id: 'bimestral_2', name: 'Bimestral', price: 'R$43,99', accesses: '2 acessos' },
-    { id: 'trimestral_1', name: 'Trimestral', price: 'R$74,99', accesses: '1 acesso' },
-    { id: 'trimestral_2', name: 'Trimestral', price: 'R$76,99', accesses: '2 acessos' },
-    { id: 'semestral_1', name: 'Semestral', price: 'R$149,99', accesses: '1 acesso' },
-    { id: 'semestral_2', name: 'Semestral', price: 'R$153,99', accesses: '2 acessos' },
-    { id: 'anual_1', name: 'Anual', price: 'R$297,99', accesses: '1 acesso' },
-    { id: 'anual_2', name: 'Anual', price: 'R$299,99', accesses: '2 acessos' }
-  ];
+const saleAffiliate = document.getElementById('saleAffiliate');
+const saleCliente = document.getElementById('saleCliente');
+const salePlano = document.getElementById('salePlano');
+const btnAddSale = document.getElementById('btn-addSale');
+const btnRefresh = document.getElementById('btn-refresh');
+const saleMsg = document.getElementById('sale-msg');
 
-  // Função para ler parâmetro da URL
-  function getParam(name) {
-    const url = new URL(window.location.href);
-    return url.searchParams.get(name);
-  }
+/* ===== utilities ===== */
+function makeSlug(name){
+  return name.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9\-]+/g,'-').replace(/\-+/g,'-').replace(/^\-+|\-+$/g,'');
+}
+function buildWhatsAppUrl(msg){
+  return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
 
-  // Monta o link de afiliado com o apelido
-  function gerarLink(apelido) {
-    const baseUrl = window.location.origin + window.location.pathname;
-    const url = new URL(baseUrl);
-    url.searchParams.set('apelido', apelido.trim());
-    return url.toString();
-  }
+/* ===== render planos ===== */
+function renderPlans(){
+  plansList.innerHTML = '';
+  PLANS.forEach(p=>{
+    const div = document.createElement('div');
+    div.className = 'plan';
+    div.innerHTML = `
+      <div>
+        <div class="title">${p.title} <span style="font-weight:600;color:var(--muted);font-size:13px">• ${p.subtitle}</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;">
+        <div class="price">R$ ${p.price.toFixed(2)}</div>
+        <button class="btn" style="margin-top:8px;" onclick="openPlan('${p.title}','${p.price}')">Assinar</button>
+      </div>
+    `;
+    plansList.appendChild(div);
 
-  // Mostra os planos e adiciona os botões WhatsApp
-  function renderPlans(apelido) {
-    const container = document.getElementById('plansContainer');
-    container.innerHTML = '<h2>Planos disponíveis</h2>';
-    PLANS.forEach(plan => {
-      const div = document.createElement('div');
-      div.className = 'plan';
-
-      // Monta a mensagem para WhatsApp com o plano e apelido
-      const msg = WPP_BASE_MESSAGE + `${plan.name} - ${plan.accesses} - ${plan.price}` + (apelido ? `\n\nApelido do afiliado: ${apelido}` : '');
-      const encodedMsg = encodeURIComponent(msg);
-      const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
-
-      div.innerHTML = `
-        <div><strong>${plan.name} — ${plan.accesses}</strong> — ${plan.price}</div>
-        <a href="${waLink}" target="_blank" class="btn-wpp">Quero esse plano</a>
-      `;
-
-      container.appendChild(div);
-    });
-  }
-
-  // Atualiza o campo do link de afiliado e renderiza os planos
-  function atualizarPaginaComApelido(apelido) {
-    document.getElementById('apelidoInput').value = apelido;
-    document.getElementById('affiliateLink').value = gerarLink(apelido);
-    renderPlans(apelido);
-  }
-
-  // Evento do botão para gerar link
-  document.getElementById('gerarBtn').addEventListener('click', () => {
-    const apelido = document.getElementById('apelidoInput').value.trim();
-    if (!apelido) {
-      alert('Por favor, digite seu nome ou apelido.');
-      return;
-    }
-    atualizarPaginaComApelido(apelido);
-    // Atualiza URL no navegador (sem recarregar)
-    const url = new URL(window.location.href);
-    url.searchParams.set('apelido', apelido);
-    window.history.replaceState({}, '', url);
+    // popular select do admin
+    const opt = document.createElement('option');
+    opt.value = p.title;
+    opt.textContent = `${p.title} — R$ ${p.price.toFixed(2)}`;
+    salePlano.appendChild(opt);
   });
+}
 
-  // Na carga da página, tenta pegar apelido da URL e já atualizar
-  document.addEventListener('DOMContentLoaded', () => {
-    let apelido = getParam('apelido');
-    if (apelido) {
-      atualizarPaginaComApelido(apelido);
-    }
+/* ===== preview e copiar link ===== */
+function updatePreview(){
+  const manual = affiliateInput.value.trim();
+  const slug = manual ? makeSlug(manual) : '';
+  if(!slug){
+    messagePreview.textContent = 'Digite seu apelido para gerar o link.';
+    btnCopy.disabled = true;
+    return;
+  }
+  const link = `${window.location.origin}${window.location.pathname}?affiliate=${encodeURIComponent(slug)}`;
+  messagePreview.textContent = `Compartilhe este link: ${link}`;
+  btnCopy.dataset.link = link;
+  btnCopy.disabled = false;
+}
+btnGenerate.addEventListener('click', ()=>{
+  updatePreview();
+  copyOk.style.display = 'none';
+});
+btnCopy.addEventListener('click', ()=>{
+  const link = btnCopy.dataset.link;
+  if(!link) return;
+  navigator.clipboard.writeText(link).then(()=> {
+    copyOk.style.display = 'inline';
+    setTimeout(()=> copyOk.style.display = 'none', 2500);
   });
+});
+affiliateInput.addEventListener('input', updatePreview);
 
-  // Botão copiar link
-  document.getElementById('affiliateLink').addEventListener('click', function(){
-    this.select();
+/* ===== abrir whatsapp do plano ===== */
+function openPlan(planTitle, price){
+  // inclui afiliado se tiver
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliate = urlParams.get('affiliate') || affiliateInput.value.trim();
+  const affiliateText = affiliate ? `Afiliado: ${affiliate}. ` : '';
+  const msg = `Olá! Quero adquirir o plano ${planTitle} por R$${parseFloat(price).toFixed(2)}. ${affiliateText}`;
+  window.open(buildWhatsAppUrl(msg), '_blank');
+}
+
+/* ===== ranking & vendas via GAS ===== */
+async function fetchRanking(){
+  if(!GAS_URL){ renderRankingEmpty('Configure GAS_URL'); return; }
+  try{
+    const res = await fetch(`${GAS_URL}?acao=getRanking`);
+    const json = await res.json();
+    renderRanking(json.ranking || []);
+  }catch(err){
+    console.error(err);
+    renderRankingEmpty('Erro ao carregar ranking');
+  }
+}
+function renderRanking(list){
+  rankingBody.innerHTML = '';
+  if(!list || list.length===0){
+    rankingBody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">Nenhum afiliado encontrado</td></tr>`;
+    return;
+  }
+  list.forEach((it, idx)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${idx+1}</td><td>${it.affiliate}</td><td>${it.totalSales}</td>`;
+    rankingBody.appendChild(tr);
   });
+}
+function renderRankingEmpty(msg){
+  rankingBody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">${msg}</td></tr>`;
+}
+
+/* ===== registrar venda (admin) - chama GAS addSale via GET ===== */
+btnAddSale.addEventListener('click', async ()=>{
+  const afiliado = saleAffiliate.value.trim();
+  const cliente = saleCliente.value.trim() || 'Cliente';
+  const plano = salePlano.value || 'Plano';
+  if(!afiliado){ saleMsg.textContent = 'Digite o apelido do afiliado.'; return; }
+  if(!GAS_URL){ saleMsg.textContent = 'Configure GAS_URL no código.'; return; }
+  saleMsg.textContent = 'Enviando...';
+  try{
+    const url = `${GAS_URL}?acao=addSale&affiliate=${encodeURIComponent(afiliado)}&cliente=${encodeURIComponent(cliente)}&plano=${encodeURIComponent(plano)}`;
+    const res = await fetch(url);
+    const text = await res.text();
+    saleMsg.textContent = 'Venda registrada.';
+    saleAffiliate.value=''; saleCliente.value=''; salePlano.selectedIndex = 0;
+    fetchRanking();
+    setTimeout(()=> saleMsg.textContent='', 2500);
+  }catch(e){
+    console.error(e);
+    saleMsg.textContent = 'Erro ao registrar venda.';
+  }
+});
+
+btnRefresh.addEventListener('click', ()=> fetchRanking());
+
+/* ===== configura whatsapp fixo ===== */
+fixedWhatsapp.href = buildWhatsAppUrl('Olá, quero conhecer os planos da ConectPlay!');
+
+/* ===== inicialização ===== */
+(function init(){
+  renderPlans();
+  // Se houver affiliate na URL, preencher input e atualizar preview
+  const urlParams = new URLSearchParams(window.location.search);
+  const affiliate = urlParams.get('affiliate');
+  if(affiliate){
+    affiliateInput.value = affiliate;
+    updatePreview();
+  } else {
+    updatePreview();
+  }
+  fetchRanking();
+})();
 </script>
-
 </body>
 </html>
