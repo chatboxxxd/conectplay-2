@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ConectPlay — Afiliados e Planos</title>
+<title>ConectPlay — Afiliados & Planos</title>
 
 <style>
   :root{
@@ -19,15 +19,12 @@
     font-family: "Arial",sans-serif;
     background: linear-gradient(135deg,var(--bg1),var(--bg2));
     color:#fff;
-    -webkit-font-smoothing:antialiased;
     padding:20px;
     min-height:100vh;
   }
   .container{ max-width:980px; margin:0 auto; }
   header{ text-align:center; margin-bottom:18px; }
-  header img{ max-width:180px; height:auto; display:block; margin: 0 auto 8px; }
   h1{ margin:4px 0 6px; font-weight:600; }
-  p.lead{ opacity:0.9; margin-top:0; }
 
   .top-box{
     background: var(--card);
@@ -78,196 +75,113 @@
     max-width:100%;
   }
 
-  .grid{
-    display:grid;
-    grid-template-columns: 1fr 360px;
-    gap:16px;
-    align-items:start;
-  }
-  @media(max-width:880px){ .grid{ grid-template-columns: 1fr; } }
-
   .plans{
-    display:flex; flex-direction:column; gap:10px;
-    margin-bottom:10px;
+    margin-bottom:20px;
   }
   .plan-card{
     background: var(--card);
     padding:12px;
     border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    margin-bottom:10px;
   }
-  .plan-info{ text-align:left; }
-  .plan-title{ font-weight:700; margin-bottom:4px; }
-  .plan-price{ opacity:0.95; font-size:14px; }
-
-  .wh-btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--whatsapp); color:#fff; padding:8px 12px; border-radius:8px;
-    text-decoration:none; font-weight:700; border:none; cursor:pointer;
+  .plan-title{
+    font-weight:700;
   }
-  .wh-btn svg{ width:18px; height:18px; }
+  .plan-price{
+    opacity:0.9;
+    margin-top:4px;
+  }
 
-  .card{ background: var(--card); padding:12px; border-radius:10px; margin-bottom:12px; }
-  .top-table{ width:100%; border-collapse:collapse; }
-  .top-table td, .top-table th { padding:8px; border-bottom:1px solid rgba(255,255,255,0.15); }
-  .top-table th { text-align:left; }
-  .gold{ background: linear-gradient(90deg,#FFD54A,#FFC107); color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
-  .silver{ background:#e6e6e6; color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
-  .bronze{ background:#d4a373; color:#000; padding:6px 8px; border-radius:6px; font-weight:700;}
+  .summary {
+    background: var(--card);
+    padding:12px;
+    border-radius:10px;
+    margin-top:20px;
+  }
 
-  .commissions { display:grid; gap:6px; }
-  .commissions .row{ display:flex; justify-content:space-between; padding:6px; border-radius:6px; background:rgba(255,255,255,0.03); }
-
-  footer{ margin-top:18px; font-size:13px; opacity:0.9; }
-  .terms{ margin-top:12px; background: rgba(0,0,0,0.15); padding:12px; border-radius:8px; font-size:13px; color:#eee; }
-
-  .copy-ok{ color:#00ff8a; font-weight:700; margin-left:8px; }
+  footer{ margin-top:30px; font-size:13px; opacity:0.9; text-align:center; }
 </style>
 </head>
 <body>
+
   <div class="container">
+
     <header>
-      <img src="images/logo-conectplay.png" alt="Logo ConectPlay" onerror="this.style.display='none'"/>
       <h1>ConectPlay — Afiliados & Planos</h1>
-      <p class="lead">Gere seu link, compartilhe e acompanhe o ranking. Teste grátis disponível!</p>
+      <p>Gere seu link, compartilhe e registre vendas diretamente aqui.</p>
     </header>
 
-    <div class="top-box" id="top-box">
-      <div class="top-left">
-        <label for="affiliate-select">Escolha um afiliado (ou digite um apelido):</label>
-        <select id="affiliate-select">
-          <option value="">-- Selecionar afiliado (carregando...) --</option>
-        </select>
+    <div class="top-box">
 
-        <div style="margin-top:8px;">
-          <label for="manual-name">Ou escreva seu apelido (limpo):</label>
-          <input id="manual-name" type="text" placeholder="Ex: joao-silva (sem espaços estranhos)" />
-          <div class="small">Dica: evite símbolos; o sistema sugere automaticamente versão "bonitinha".</div>
-        </div>
+      <div class="top-left">
+        <label for="affiliate-input">Digite seu apelido (sem espaços ou símbolos):</label>
+        <input id="affiliate-input" type="text" placeholder="Ex: joao-silva" />
+        <div class="small">Apenas letras, números e hífens são permitidos.</div>
       </div>
 
       <div style="flex:0 0 320px;">
-        <label>Pré-visualização da mensagem (o cliente verá isto):</label>
+        <label>Pré-visualização da mensagem (para WhatsApp):</label>
         <div class="link-preview" id="message-preview">—</div>
 
         <div style="display:flex; gap:8px; margin-top:8px;">
-          <button class="btn btn-outline" id="btn-generate">Gerar link</button>
-          <button class="btn" id="btn-copy" title="Copiar link (WhatsApp)" disabled>Copiar link</button>
-          <span id="copy-ok" class="copy-ok" style="display:none">Copiado!</span>
-        </div>
-        <div style="margin-top:8px;font-size:12px;opacity:0.9">Link real (copiado) é o URL pronto para WhatsApp.</div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div>
-        <h2 style="margin-top:0">Planos</h2>
-        <div class="plans" id="plans-list"></div>
-
-        <h3>🏆 Top Afiliados do Mês</h3>
-        <div class="card" id="top3-card">
-          <table class="top-table" id="top3-table"></table>
-        </div>
-
-        <h3>💰 Comissões</h3>
-        <div class="card commissions">
-          <div class="row"><div>1 – 100 indicações</div><div>R$ 7,00 por indicação</div></div>
-          <div class="row"><div>101 – 300</div><div>R$ 8,00 por indicação</div></div>
-          <div class="row"><div>301 – 600</div><div>R$ 9,00 por indicação</div></div>
-          <div class="row"><div>601 – 1000</div><div>R$ 10,00 por indicação</div></div>
-          <div class="row" style="background:rgba(255,215,0,0.10)"><div>Bônus ao chegar em 1000</div><div>R$ 2.000 + 1 ano de TV grátis</div></div>
+          <button class="btn btn-outline" id="btn-generate" disabled>Gerar Link</button>
+          <button class="btn" id="btn-copy" disabled>Copiar Texto</button>
+          <button class="btn" id="btn-register" disabled>Registrar Venda</button>
         </div>
       </div>
 
-      <aside>
-        <div class="card">
-          <h3>Ranking rápido</h3>
-          <div id="ranking-list">Carregando ranking...</div>
-        </div>
-
-        <div class="card">
-          <h3>Contato</h3>
-          <div style="display:flex;gap:8px;flex-direction:column;">
-            <a class="wh-btn" id="fixed-whatsapp" href="#" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" fill="#fff">
-                <path d="M380.9 97.1C339 55.1 283.2 32 224 32 100.3 32 0 132.3 0 
-                256c0 45 11.8 88.8 34.3 127.1L0 480l101.7-33.5C138.1 
-                466.2 180.3 480 224 480h.1c123.7 0 224-100.3 
-                224-224 0-59.2-23.1-115-67.1-158.9zM224 438.7c-39.3 
-                0-77.8-11.3-110.9-32.7l-7.9-5-60.3 19.9 
-                19.6-58.7-5.2-8.1c-20.8-32.5-31.8-70.1-31.8-108.8 
-                0-110.1 89.9-200 200-200 53.4 0 103.6 20.8 
-                141.4 58.6 37.8 37.8 58.6 88 58.6 141.4 
-                0 110.1-89.9 200-200 200zm111.5-146.6c-6.1-3-36.1-17.8-41.7-19.8-5.6-2-9.7-3-13.8 
-                3-4 6.1-15.9 19.8-19.5 23.8-3.6 4-7.1 4.5-13.2 
-                1.5-36.1-18-59.8-32.2-83.8-72.7-6.3-10.9 
-                6.3-10.1 18-33.6 2-4 1-7.5-.5-10.5-1.5-3-13.8-33.2-18.9-45.4-5-12.1-10.1-10.4-13.8-10.6-3.6-.2-7.6-.2-11.7-.2s-10.9 
-                1.5-16.6 7.5c-5.7 6.1-21.8 21.4-21.8 52.3 0 30.9 22.4 60.8 25.5 
-                64.9 3 4 43.9 67.1 106.5 94.1 14.9 6.4 26.5 
-                10.2 35.6 13.1 15 4.8 28.6 4.1 39.4 2.5 
-                12-1.8 36.1-14.8 41.2-29.1 5.1-14.3 5.1-26.5 
-                3.6-29.1-1.5-2.6-5.6-4.1-11.7-7.1z"/>
-              </svg>
-              Falar no WhatsApp
-            </a>
-            <div style="font-size:13px;opacity:0.95">Telefone: +55 77 9198-6049</div>
-          </div>
-        </div>
-
-        <div class="card terms">
-          <strong>Termos e Isenção</strong>
-          <p style="margin:8px 0 0 0; line-height:1.4;">
-            O uso de links de afiliado é voluntário. A ConectPlay não se responsabiliza por decisões, pagamentos ou resultados decorrentes de transações feitas por terceiros. O afiliado é responsável por promover corretamente o serviço e seguir as regras locais e legais. Ao usar os links, você declara ser maior de idade e agir por sua própria responsabilidade.
-          </p>
-        </div>
-      </aside>
     </div>
 
-    <footer>
-      &copy; 2025 ConectPlay. Todos os direitos reservados.
-    </footer>
+    <section class="plans" id="plans-list">
+      <h2>Planos Disponíveis</h2>
+      <!-- planos serão inseridos aqui -->
+    </section>
+
+    <section class="summary" id="summary">
+      <h3>Resumo das Vendas do Afiliado</h3>
+      <p id="summary-text">Digite seu apelido para ver suas vendas e comissão.</p>
+    </section>
+
   </div>
 
-  <script src="js/papaparse.min.js"></script>
-  <script>
-  // Configurações
-  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=0&single=true&output=csv";
-  const PHONE_NUMBER = "557791986049";
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynEchioQdDVs0stSt2xMsWlOPD60yeF4FPLB2r3QVniv_imlk2shxvyGBlalU_OmO7/exec";
+  <footer>
+    &copy; 2025 ConectPlay. Todos os direitos reservados.
+  </footer>
 
-  // DOM refs
-  const affiliateSelect = document.getElementById('affiliate-select');
-  const manualName = document.getElementById('manual-name');
+<script>
+  // URL do seu Google Apps Script (troque pelo seu)
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbyRsL2wd3BUMdI1NyrAZYQeeUulYJpAVc4TkBEfZJBJsPGPJQgCfWfe79O__XI364Oz/exec";
+
+  // Planos (fácil de alterar)
+  const PLANS = [
+    { id:'15dias', title: '15 DIAS DE USO', price: 'R$14,99' },
+    { id:'mensal1', title: 'Mensal - 1 acesso', price: 'R$20,99' },
+    { id:'mensal2', title: 'Mensal - 2 acessos', price: 'R$25,99' },
+    { id:'bimestral1', title: 'Bimestral - 1 acesso', price: 'R$41,99' },
+    { id:'bimestral2', title: 'Bimestral - 2 acessos', price: 'R$43,99' },
+    { id:'trimestral1', title: 'Trimestral - 1 acesso', price: 'R$74,99' },
+    { id:'trimestral2', title: 'Trimestral - 2 acessos', price: 'R$76,99' },
+    { id:'semestral1', title: 'Semestral - 1 acesso', price: 'R$149,99' },
+    { id:'semestral2', title: 'Semestral - 2 acessos', price: 'R$153,99' },
+    { id:'anual1', title: 'Anual - 1 acesso', price: 'R$297,99' },
+    { id:'anual2', title: 'Anual - 2 acessos', price: 'R$299,99' }
+  ];
+
+  // Referências DOM
+  const affiliateInput = document.getElementById('affiliate-input');
   const messagePreview = document.getElementById('message-preview');
   const btnGenerate = document.getElementById('btn-generate');
   const btnCopy = document.getElementById('btn-copy');
-  const copyOk = document.getElementById('copy-ok');
+  const btnRegister = document.getElementById('btn-register');
   const plansList = document.getElementById('plans-list');
-  const top3Table = document.getElementById('top3-table');
-  const rankingList = document.getElementById('ranking-list');
-  const fixedWhatsapp = document.getElementById('fixed-whatsapp');
+  const summaryText = document.getElementById('summary-text');
 
-  let affiliates = [];
+  // Estado interno
+  let selectedPlanId = null;
+  let affiliateSlug = "";
 
-  // Planos
-  const PLANS = [
-    { id:'15dias', title: '15 DIAS DE USO', subtitle:'Teste - 15 dias', price: 'R$14,99' },
-    { id:'mensal1', title: 'Mensal', subtitle:'1 acesso', price: 'R$20,99' },
-    { id:'mensal2', title: 'Mensal', subtitle:'2 acessos', price: 'R$25,99' },
-    { id:'bimestral1', title: 'Bimestral', subtitle:'1 acesso', price: 'R$41,99' },
-    { id:'bimestral2', title: 'Bimestral', subtitle:'2 acessos', price: 'R$43,99' },
-    { id:'trimestral1', title: 'Trimestral', subtitle:'1 acesso', price: 'R$74,99' },
-    { id:'trimestral2', title: 'Trimestral', subtitle:'2 acessos', price: 'R$76,99' },
-    { id:'semestral1', title: 'Semestral', subtitle:'1 acesso', price: 'R$149,99' },
-    { id:'semestral2', title: 'Semestral', subtitle:'2 acessos', price: 'R$153,99' },
-    { id:'anual1', title: 'Anual', subtitle:'1 acesso', price: 'R$297,99' },
-    { id:'anual2', title: 'Anual', subtitle:'2 acessos', price: 'R$299,99' }
-  ];
-
-  // Normaliza nome para slug (URL)
-  function makeSlug(name){
+  // Função para normalizar apelido para URL / slug
+  function makeSlug(name) {
     return name.trim()
       .toLowerCase()
       .normalize('NFD').replace(/[\u0300-\u036f]/g,"")
@@ -276,151 +190,163 @@
       .replace(/^\-+|\-+$/g,'');
   }
 
-  // Carrega afiliados do CSV
-  function loadAffiliates(){
-    Papa.parse(CSV_URL, {
-      download:true,
-      header:true,
-      complete: function(results){
-        if(results.errors.length){
-          console.error("Erro ao carregar CSV:", results.errors);
-          affiliateSelect.innerHTML = '<option value="">Erro ao carregar afiliados</option>';
-          return;
-        }
-        affiliates = results.data.filter(d => d.apelido && d.apelido.trim().length > 0);
-        if(affiliates.length === 0){
-          affiliateSelect.innerHTML = '<option value="">Nenhum afiliado encontrado</option>';
-          return;
-        }
-
-        // Preencher select
-        affiliateSelect.innerHTML = '<option value="">-- Selecione um afiliado --</option>';
-        affiliates.forEach(a => {
-          affiliateSelect.innerHTML += `<option value="${makeSlug(a.apelido)}">${a.apelido}</option>`;
-        });
-
-        // Atualiza preview com primeiro da lista (opcional)
+  // Mostrar planos na página
+  function showPlans() {
+    plansList.innerHTML = "<h2>Planos Disponíveis</h2>" + PLANS.map(plan => `
+      <div class="plan-card">
+        <input type="radio" name="plan" id="plan-${plan.id}" value="${plan.id}">
+        <label for="plan-${plan.id}">
+          <span class="plan-title">${plan.title}</span><br>
+          <span class="plan-price">${plan.price}</span>
+        </label>
+      </div>
+    `).join('');
+    // Evento para marcar plano selecionado
+    plansList.querySelectorAll('input[name="plan"]').forEach(input => {
+      input.addEventListener('change', () => {
+        selectedPlanId = input.value;
         updateMessagePreview();
-      }
+        checkButtons();
+      });
     });
   }
 
-  // Atualiza mensagem preview
-  function updateMessagePreview(){
-    let slug = manualName.value.trim() || affiliateSelect.value;
-    if(!slug){
-      messagePreview.textContent = "Por favor, selecione ou digite um apelido.";
+  // Atualizar preview da mensagem
+  function updateMessagePreview() {
+    affiliateSlug = makeSlug(affiliateInput.value);
+    if(!affiliateSlug) {
+      messagePreview.textContent = "Digite um apelido válido.";
+      disableButtons();
       return;
     }
-    let cleanSlug = makeSlug(slug);
-    let original = manualName.value.trim() || (affiliates.find(a=>makeSlug(a.apelido)===cleanSlug)?.apelido) || cleanSlug;
-    messagePreview.textContent = `Olá! Quero assinar IPTV com o código de afiliado: ${original}.`;
-  }
-
-  // Carrega planos no HTML
-  function loadPlans(){
-    plansList.innerHTML = "";
-    PLANS.forEach(p=>{
-      plansList.innerHTML += `<div class="plan-card">
-        <div class="plan-info">
-          <div class="plan-title">${p.title}</div>
-          <div class="plan-price">${p.subtitle} — ${p.price}</div>
-        </div>
-      </div>`;
-    });
-  }
-
-  // Carrega ranking (exemplo simples, você pode ligar ao CSV e atualizar)
-  function loadRanking(){
-    // Exemplo fixo - você pode carregar do CSV e contar vendas
-    let sampleRanking = [
-      {apelido:"João", vendas: 45},
-      {apelido:"Maria", vendas: 30},
-      {apelido:"Carlos", vendas: 18}
-    ];
-
-    if(sampleRanking.length === 0){
-      rankingList.textContent = "Nenhum ranking disponível";
+    if(!selectedPlanId) {
+      messagePreview.textContent = "Escolha um plano para gerar o link.";
+      disableButtons();
       return;
     }
-    let html = '<table style="width:100%;border-collapse:collapse;">';
-    html += '<thead><tr><th>Posição</th><th>Afiliado</th><th>Vendas</th></tr></thead><tbody>';
-    sampleRanking.forEach((item, i)=>{
-      let medal = "";
-      if(i===0) medal = '<span class="gold">🥇</span>';
-      else if(i===1) medal = '<span class="silver">🥈</span>';
-      else if(i===2) medal = '<span class="bronze">🥉</span>';
-      html += `<tr>
-        <td>${i+1} ${medal}</td>
-        <td>${item.apelido}</td>
-        <td>${item.vendas}</td>
-      </tr>`;
-    });
-    html += '</tbody></table>';
-    rankingList.innerHTML = html;
+    const plan = PLANS.find(p => p.id === selectedPlanId);
+    if(!plan) {
+      messagePreview.textContent = "Plano inválido.";
+      disableButtons();
+      return;
+    }
+
+    const msg = `Olá! Quero assinar IPTV com o código de afiliado: ${affiliateSlug}. Plano: ${plan.title} (${plan.price}).`;
+    messagePreview.textContent = msg;
+    enableButtons();
   }
 
-  // Botão copiar
+  function enableButtons(){
+    btnGenerate.disabled = false;
+    btnCopy.disabled = false;
+    btnRegister.disabled = false;
+  }
+
+  function disableButtons(){
+    btnGenerate.disabled = true;
+    btnCopy.disabled = true;
+    btnRegister.disabled = true;
+  }
+
+  // Copiar mensagem para área de transferência
   btnCopy.addEventListener('click', () => {
-    let link = btnGenerate.dataset.link || "";
-    if(!link){
-      alert("Nenhum link para copiar.");
-      return;
-    }
-    navigator.clipboard.writeText(link).then(() => {
-      copyOk.style.display = "inline";
-      setTimeout(() => { copyOk.style.display = "none"; }, 1500);
-    }).catch(()=>alert("Erro ao copiar link."));
+    navigator.clipboard.writeText(messagePreview.textContent).then(() => {
+      alert("Mensagem copiada!");
+    });
   });
 
-  // Gera link e registra no GAS
+  // Gerar link WhatsApp e abrir nova aba
   btnGenerate.addEventListener('click', () => {
-    let slug = manualName.value.trim() || affiliateSelect.value;
-    if(!slug){
-      alert("Por favor, selecione ou digite um apelido válido.");
+    const phone = "557791986049"; // Seu número WhatsApp com DDD e sem "+"
+    const url = `https://api.whatsapp.com/send?phone=${phone}&text=` + encodeURIComponent(messagePreview.textContent);
+    window.open(url, "_blank");
+  });
+
+  // Registrar venda na planilha via Google Apps Script
+  btnRegister.addEventListener('click', () => {
+    if(!affiliateSlug || !selectedPlanId) {
+      alert("Preencha o apelido e selecione um plano.");
       return;
     }
-    let apelidoLimpo = makeSlug(slug);
-    let originalApelido = manualName.value.trim() || affiliates.find(a => makeSlug(a.apelido) === apelidoLimpo)?.apelido || apelidoLimpo;
+    const plan = PLANS.find(p => p.id === selectedPlanId);
 
-    // Registro no GAS
-    fetch(`${GOOGLE_SCRIPT_URL}?afiliado=${encodeURIComponent(apelidoLimpo)}&cliente=Gerou+link&plano=--`)
-      .then(res => res.text())
-      .then(text => {
-        //console.log(text);
-        // Monta mensagem e abre WhatsApp
-        let msg = `Olá! Quero assinar IPTV com o código de afiliado: ${originalApelido}.`;
-        let whatsappUrl = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=` + encodeURIComponent(msg);
+    const url = `${GAS_URL}?afiliado=${encodeURIComponent(affiliateSlug)}&cliente=Cliente&plano=${encodeURIComponent(plan.title)}`;
 
-        btnGenerate.dataset.link = whatsappUrl;
-        btnCopy.disabled = false;
-
-        window.open(whatsappUrl, "_blank");
+    fetch(url)
+      .then(resp => resp.text())
+      .then(data => {
+        alert("Venda registrada com sucesso!");
+        loadAffiliateSummary(affiliateSlug);
       })
       .catch(err => {
-        alert("Erro ao registrar link. Tente novamente.");
         console.error(err);
+        alert("Erro ao registrar venda.");
       });
   });
 
-  // Atualiza preview se mudar
-  affiliateSelect.addEventListener('change', () => {
-    manualName.value = "";
-    updateMessagePreview();
-  });
-  manualName.addEventListener('input', () => updateMessagePreview());
+  // Função para buscar a contagem de vendas do afiliado na planilha via CSV pública
+  function loadAffiliateSummary(affiliate) {
+    // URL pública da sua planilha CSV, substitua pelo seu link correto da aba com as vendas consolidadas
+    const CSV_VENDAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=144607695&single=true&output=csv";
 
-  // Inicializa página
-  function init(){
-    loadAffiliates();
-    loadPlans();
-    loadRanking();
-    btnCopy.disabled = true;
-    fixedWhatsapp.href = "https://api.whatsapp.com/send?phone="+PHONE_NUMBER;
+    fetch(CSV_VENDAS_URL)
+      .then(resp => resp.text())
+      .then(text => {
+        const lines = text.trim().split('\n');
+        // Esperando colunas: Apelido Afiliado, Total Vendas (na aba resumo)
+        let totalVendas = 0;
+        for(let i=1; i<lines.length; i++) {
+          const cols = lines[i].split(',');
+          const apelido = cols[0].trim();
+          const vendas = parseInt(cols[1]) || 0;
+          if(apelido.toLowerCase() === affiliate.toLowerCase()) {
+            totalVendas = vendas;
+            break;
+          }
+        }
+
+        const comissao = calcularComissao(totalVendas);
+
+        if(totalVendas > 0){
+          summaryText.innerHTML = `
+            Olá, <strong>${affiliate}</strong>!<br>
+            Você fez <strong>${totalVendas}</strong> venda(s).<br>
+            Sua comissão por venda é <strong>R$ ${comissao.toFixed(2)}</strong>.<br>
+            Você já ganhou <strong>R$ ${(totalVendas*comissao).toFixed(2)}</strong>.
+          `;
+        } else {
+          summaryText.innerHTML = `Olá, <strong>${affiliate}</strong>! Ainda não há vendas registradas.`;
+        }
+
+      }).catch(err => {
+        console.error("Erro ao carregar resumo:", err);
+        summaryText.textContent = "Erro ao carregar resumo de vendas.";
+      });
   }
 
-  init();
+  // Função que calcula a comissão com base no número de vendas
+  function calcularComissao(vendas) {
+    if(vendas >= 601) return 10.00;
+    if(vendas >= 301) return 9.00;
+    if(vendas >= 101) return 8.00;
+    if(vendas >= 1) return 7.00;
+    return 0;
+  }
 
-  </script>
+  // Evento para atualizar o preview e resumo quando digitar apelido
+  affiliateInput.addEventListener('input', () => {
+    updateMessagePreview();
+    if(makeSlug(affiliateInput.value)) {
+      loadAffiliateSummary(makeSlug(affiliateInput.value));
+    } else {
+      summaryText.textContent = "Digite seu apelido para ver suas vendas e comissão.";
+    }
+  });
+
+  // Inicializa a página
+  showPlans();
+  disableButtons();
+</script>
+
 </body>
 </html>
