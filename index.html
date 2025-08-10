@@ -3,160 +3,268 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Programa de Afiliados ConectPlay</title>
+<title>ConectPlay - Afiliados</title>
 <style>
-  body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-  h1, h2 { color: #0073e6; }
-  label { display: block; margin-top: 10px; }
-  input[type=text] { padding: 8px; width: 250px; }
-  button { margin-top: 15px; padding: 10px 15px; background: #0073e6; color: white; border: none; cursor: pointer; }
-  button:hover { background: #005bb5; }
-  #ranking { margin-top: 30px; }
-  table { border-collapse: collapse; width: 100%; max-width: 600px; }
-  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-  th { background-color: #0073e6; color: white; }
-  footer { margin-top: 40px; font-size: 0.9em; color: #666; }
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    color: white;
+    margin: 0; padding: 0 10px 40px;
+    text-align: center;
+  }
+  header {
+    padding: 20px 0;
+  }
+  header img {
+    max-width: 250px;
+  }
+  section {
+    max-width: 500px;
+    margin: 20px auto;
+    background: rgba(255 255 255 / 0.05);
+    border-radius: 10px;
+    padding: 15px;
+  }
+  h2 {
+    color: #00ff88;
+    margin-bottom: 15px;
+  }
+  input[type=text], select {
+    width: 90%;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  button {
+    background: #00ff88;
+    border: none;
+    border-radius: 6px;
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #00cc6a;
+  }
+  .planos-list {
+    text-align: left;
+  }
+  .plano-item {
+    background: #111;
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .plano-item button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #222;
+    padding: 8px;
+  }
+  th {
+    background: #00ff88;
+    color: black;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #666;
+  }
+  footer a {
+    color: #00ff88;
+    text-decoration: none;
+  }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 
-<h1>Programa de Afiliados ConectPlay</h1>
+<header>
+  <img src="https://via.placeholder.com/250x90?text=ConectPlay" alt="Logo ConectPlay" />
+</header>
 
 <section>
-  <h2>Gerar seu link de indicação</h2>
-  <label for="affiliateName">Seu apelido (sem espaços):</label>
-  <input type="text" id="affiliateName" placeholder="Ex: joaosilva" />
-
-  <button onclick="gerarLink()">Gerar Link</button>
-
-  <p id="linkGerado" style="margin-top: 10px; font-weight: bold; color: green;"></p>
+  <h2>Registrar Venda</h2>
+  <form id="saleForm">
+    <input type="text" name="apelido" placeholder="Apelido do Afiliado" required />
+    <input type="text" name="cliente" placeholder="Nome do Cliente" required />
+    <select name="plano" required>
+      <option value="">Selecione o Plano</option>
+      <option value="15 dias">15 dias - R$14,99</option>
+      <option value="Mensal">Mensal - R$20,99 (1 acesso)</option>
+      <option value="Mensal 2 acessos">Mensal - R$25,99 (2 acessos)</option>
+      <option value="Bimestral">Bimestral - R$41,99 (1 acesso)</option>
+      <option value="Bimestral 2 acessos">Bimestral - R$43,99 (2 acessos)</option>
+      <option value="Trimestral">Trimestral - R$74,99 (1 acesso)</option>
+      <option value="Trimestral 2 acessos">Trimestral - R$76,99 (2 acessos)</option>
+      <option value="Semestral">Semestral - R$149,99 (1 acesso)</option>
+      <option value="Semestral 2 acessos">Semestral - R$153,99 (2 acessos)</option>
+      <option value="Anual">Anual - R$297,99 (1 acesso)</option>
+      <option value="Anual 2 acessos">Anual - R$299,99 (2 acessos)</option>
+    </select>
+    <button type="submit">Registrar Venda</button>
+  </form>
 </section>
 
 <section>
-  <h2>Planos disponíveis</h2>
-  <button onclick="abrirWhatsApp('15 dias - R$14,99')">15 dias - R$14,99</button>
-  <button onclick="abrirWhatsApp('Mensal - R$20,99 (1 acesso)')">Mensal - R$20,99 (1 acesso)</button>
-  <button onclick="abrirWhatsApp('Mensal - R$25,99 (2 acessos)')">Mensal - R$25,99 (2 acessos)</button>
-  <button onclick="abrirWhatsApp('Bimestral - R$41,99 (1 acesso)')">Bimestral - R$41,99 (1 acesso)</button>
-  <button onclick="abrirWhatsApp('Bimestral - R$43,99 (2 acessos)')">Bimestral - R$43,99 (2 acessos)</button>
-  <button onclick="abrirWhatsApp('Trimestral - R$74,99 (1 acesso)')">Trimestral - R$74,99 (1 acesso)</button>
-  <button onclick="abrirWhatsApp('Trimestral - R$76,99 (2 acessos)')">Trimestral - R$76,99 (2 acessos)</button>
-  <button onclick="abrirWhatsApp('Semestral - R$149,99 (1 acesso)')">Semestral - R$149,99 (1 acesso)</button>
-  <button onclick="abrirWhatsApp('Semestral - R$153,99 (2 acessos)')">Semestral - R$153,99 (2 acessos)</button>
-  <button onclick="abrirWhatsApp('Anual - R$297,99 (1 acesso)')">Anual - R$297,99 (1 acesso)</button>
-  <button onclick="abrirWhatsApp('Anual - R$299,99 (2 acessos)')">Anual - R$299,99 (2 acessos)</button>
+  <h2>Planos Disponíveis</h2>
+  <div class="planos-list">
+    <div class="plano-item">
+      <div>15 dias - R$14,99</div>
+      <button onclick="abrirWhatsApp('15 dias - R$14,99')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Mensal - R$20,99 (1 acesso)</div>
+      <button onclick="abrirWhatsApp('Mensal - R$20,99 (1 acesso)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Mensal - R$25,99 (2 acessos)</div>
+      <button onclick="abrirWhatsApp('Mensal - R$25,99 (2 acessos)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Bimestral - R$41,99 (1 acesso)</div>
+      <button onclick="abrirWhatsApp('Bimestral - R$41,99 (1 acesso)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Bimestral - R$43,99 (2 acessos)</div>
+      <button onclick="abrirWhatsApp('Bimestral - R$43,99 (2 acessos)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Trimestral - R$74,99 (1 acesso)</div>
+      <button onclick="abrirWhatsApp('Trimestral - R$74,99 (1 acesso)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Trimestral - R$76,99 (2 acessos)</div>
+      <button onclick="abrirWhatsApp('Trimestral - R$76,99 (2 acessos)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Semestral - R$149,99 (1 acesso)</div>
+      <button onclick="abrirWhatsApp('Semestral - R$149,99 (1 acesso)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Semestral - R$153,99 (2 acessos)</div>
+      <button onclick="abrirWhatsApp('Semestral - R$153,99 (2 acessos)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Anual - R$297,99 (1 acesso)</div>
+      <button onclick="abrirWhatsApp('Anual - R$297,99 (1 acesso)')">Comprar</button>
+    </div>
+    <div class="plano-item">
+      <div>Anual - R$299,99 (2 acessos)</div>
+      <button onclick="abrirWhatsApp('Anual - R$299,99 (2 acessos)')">Comprar</button>
+    </div>
+  </div>
 </section>
 
 <section>
-  <h2>Seu resumo de vendas e comissão</h2>
-  <label for="searchAffiliate">Digite seu apelido para ver seu total de vendas e comissão:</label>
-  <input type="text" id="searchAffiliate" placeholder="Ex: joaosilva" />
-  <button onclick="mostrarResumo()">Mostrar Resumo</button>
-
-  <div id="resumo" style="margin-top: 15px; font-weight: bold;"></div>
-</section>
-
-<section id="ranking">
-  <h2>Top Afiliados (Ranking)</h2>
-  <table id="rankingTable">
+  <h2>Ranking de Afiliados</h2>
+  <table>
     <thead>
-      <tr><th>Posição</th><th>Apelido</th><th>Total de Vendas</th><th>Comissão por Venda (R$)</th><th>Total Ganho (R$)</th></tr>
+      <tr><th>Afiliado</th><th>Vendas</th><th>Comissão</th></tr>
     </thead>
-    <tbody>
+    <tbody id="rankingBody">
+      <tr><td colspan="3">Carregando...</td></tr>
     </tbody>
   </table>
 </section>
 
 <footer>
-  <p>© 2025 ConectPlay. Todos os direitos reservados.</p>
+  <p>© 2025 ConectPlay. Todos os direitos reservados. <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <script>
-  const SCRIPT_URL = 'COLE_AQUI_A_URL_DO_SEU_SCRIPT_GAS';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzelYH4nP-xEd9i5NXOzWYmw3URHDe9dRnIhOE10aJ7H6THkvNVnBcSDhCt__-iBQX4BQ/exec';
+  const urlCsv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVxgmYQsCQMXj4hycv10FMS8vNm1CF3EXgbyz2yVE-_ljhsPMmv0HOppUlYnMUejkuVcErojpLchgF/pub?output=csv';
 
-  function gerarLink() {
-    const affiliate = document.getElementById('affiliateName').value.trim();
-    if(!affiliate){
-      alert('Por favor, insira seu apelido.');
-      return;
-    }
-    // Link para vender planos pelo WhatsApp (você pode ajustar o número e mensagem padrão)
-    const baseLink = `https://wa.me/557791986049?text=Olá,%20quero%20assinar%20um%20plano,%20meu%20indicação%20é%20${affiliate}`;
-    document.getElementById('linkGerado').textContent = `Seu link de indicação: ${baseLink}`;
-  }
+  // Enviar formulário para Google Sheets via Apps Script
+  document.getElementById('saleForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
 
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.result === 'success') {
+        alert('Venda registrada com sucesso!');
+        form.reset();
+        carregarRanking(); // Atualiza ranking
+      } else {
+        alert('Erro ao registrar: ' + (data.message || 'Erro desconhecido'));
+      }
+    })
+    .catch(() => alert('Erro de comunicação'));
+  });
+
+  // Abrir WhatsApp com mensagem pronta
   function abrirWhatsApp(plano) {
-    const affiliate = document.getElementById('affiliateName').value.trim();
-    if(!affiliate){
-      alert('Para escolher um plano, primeiro gere seu link inserindo seu apelido.');
-      return;
-    }
-    const msg = encodeURIComponent(`Olá, quero assinar o plano: ${plano}. Indicação: ${affiliate}`);
-    const url = `https://wa.me/557791986049?text=${msg}`;
+    const numero = '557791986049';
+    const msg = encodeURIComponent(`Olá, quero comprar o plano ${plano} pelo ConectPlay.`);
+    const url = `https://wa.me/${numero}?text=${msg}`;
     window.open(url, '_blank');
   }
 
-  async function mostrarResumo() {
-    const affiliate = document.getElementById('searchAffiliate').value.trim();
-    if(!affiliate){
-      alert('Digite seu apelido para consultar o resumo.');
-      return;
-    }
+  // Carregar ranking da planilha CSV, agrupar por Apelido
+  function carregarRanking() {
+    Papa.parse(urlCsv, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const tbody = document.getElementById('rankingBody');
+        if(results.errors.length) {
+          tbody.innerHTML = '<tr><td colspan="3">Erro ao carregar ranking.</td></tr>';
+          console.error(results.errors);
+          return;
+        }
 
-    try {
-      const res = await fetch(`${SCRIPT_URL}?acao=getSales&affiliate=${affiliate}`);
-      const data = await res.json();
-      const vendas = data.totalSales || 0;
+        const vendas = results.data;
+        const ranking = {};
 
-      // Defina sua regra de comissão por venda aqui:
-      let comissaoPorVenda = 7; // padrão
-      if(vendas > 100 && vendas <= 300) comissaoPorVenda = 8;
-      else if(vendas > 300) comissaoPorVenda = 9;
+        vendas.forEach(row => {
+          const apelido = row['Apelido']?.trim() || 'Sem Apelido';
+          if (!ranking[apelido]) ranking[apelido] = { vendas: 0 };
+          ranking[apelido].vendas++;
+        });
 
-      const totalGanho = vendas * comissaoPorVenda;
+        const rankingArray = Object.entries(ranking)
+          .map(([apelido, dados]) => ({ apelido, vendas: dados.vendas }))
+          .sort((a,b) => b.vendas - a.vendas);
 
-      document.getElementById('resumo').innerHTML = 
-        `Olá, <b>${affiliate}</b>!<br>` +
-        `Você fez <b>${vendas}</b> vendas.<br>` +
-        `Sua comissão por venda é R$ <b>${comissaoPorVenda.toFixed(2)}</b>.<br>` +
-        `Você já ganhou R$ <b>${totalGanho.toFixed(2)}</b>.`;
-    } catch(err) {
-      alert('Erro ao buscar dados. Tente novamente.');
-    }
+        tbody.innerHTML = '';
+        rankingArray.forEach(item => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${item.apelido}</td>
+              <td>${item.vendas}</td>
+              <td>R$ 0,00</td>
+            </tr>
+          `;
+        });
+      }
+    });
   }
 
-  async function carregarRanking() {
-    try {
-      const res = await fetch(`${SCRIPT_URL}?acao=getRanking`);
-      const ranking = await res.json();
-
-      const tbody = document.querySelector('#rankingTable tbody');
-      tbody.innerHTML = '';
-
-      ranking.forEach((item, index) => {
-        const vendas = item.sales;
-        let comissaoPorVenda = 7;
-        if(vendas > 100 && vendas <= 300) comissaoPorVenda = 8;
-        else if(vendas > 300) comissaoPorVenda = 9;
-
-        const totalGanho = vendas * comissaoPorVenda;
-
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${index+1}</td>
-          <td>${item.affiliate}</td>
-          <td>${vendas}</td>
-          <td>R$ ${comissaoPorVenda.toFixed(2)}</td>
-          <td>R$ ${totalGanho.toFixed(2)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } catch(err) {
-      console.error('Erro ao carregar ranking:', err);
-    }
-  }
-
-  // Carrega ranking ao abrir a página
+  // Carrega ranking ao abrir página
   carregarRanking();
 </script>
 
