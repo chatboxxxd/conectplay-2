@@ -7,52 +7,101 @@
 <link rel="icon" href="images/logo-conectplay.png">
 <style>
   :root{
-    --bg1: #10062a;
-    --bg2: #0b1b3a;
-    --neon-a: #7b5cff;
-    --neon-b: #2ce8ff;
+    --bg1: #10062a;    /* escuro roxo */
+    --bg2: #0b1b3a;    /* azul noturno */
+    --neon-a: #7b5cff; /* roxo neon */
+    --neon-b: #2ce8ff; /* ciano neon */
     --card: rgba(255,255,255,0.04);
     --muted: rgba(255,255,255,0.6);
     --whatsapp: #25D366;
     --glass: rgba(255,255,255,0.03);
   }
   *{box-sizing:border-box;font-family:Inter, "Arial",sans-serif}
-  body{ margin:0; min-height:100vh; color:#eef2ff;
+  body{
+    margin:0;
+    min-height:100vh;
+    color:#eef2ff;
     background: radial-gradient(1200px 400px at 10% 10%, rgba(124,92,255,0.12), transparent),
                 linear-gradient(135deg,var(--bg1),var(--bg2));
-    -webkit-font-smoothing:antialiased; padding:20px;}
+    -webkit-font-smoothing:antialiased;
+    padding:20px;
+  }
   .container{ max-width:1100px; margin:0 auto; }
+
   header{ display:flex;gap:16px; align-items:center; margin-bottom:18px; }
   header img{ width:96px; height:auto; border-radius:12px; box-shadow: 0 6px 24px rgba(46,14,120,0.28);}
   header h1{ margin:0; font-size:20px; letter-spacing:0.6px; }
   header p{ margin:4px 0 0 0; color:var(--muted); font-size:13px; }
+
   .top{ display:flex; gap:16px; flex-wrap:wrap; background:var(--card); padding:16px; border-radius:12px; align-items:center;}
   .col{ flex:1; min-width:220px; }
   label{ display:block; font-size:13px; color:var(--muted); margin-bottom:8px; }
   input[type="text"], select{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit; }
   .link-preview{ background:var(--glass); padding:10px; border-radius:10px; color: #dfeaff; word-break:break-all; }
+
   .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
   .btn{ background: linear-gradient(90deg,var(--neon-a), var(--neon-b)); color:#041022; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; box-shadow: 0 6px 18px rgba(46,14,120,0.18);}
   .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); box-shadow:none; }
   .small{ font-size:13px; color:var(--muted); margin-top:6px; }
+
   .grid{ display:grid; grid-template-columns:1fr 360px; gap:16px; margin-top:18px; align-items:start;}
   @media(max-width:980px){ .grid{ grid-template-columns:1fr; } }
+
   .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px; border-radius:12px; box-shadow: 0 6px 18px rgba(2,6,23,0.5); }
   .plans{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
   .plan{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
   .plan .title{ font-weight:800; color:#f4f6ff; }
   .plan .price{ color:var(--neon-b); font-weight:700; }
+
   .wh-btn{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; background:var(--whatsapp); color:#032a12; font-weight:800; text-decoration:none; }
+
   table{ width:100%; border-collapse:collapse; margin-top:8px; }
   th, td{ padding:8px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); font-size:14px; color:#e9eefc; }
   th{ color:var(--muted); font-weight:700; background:transparent; }
+
   footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
   .terms{ margin-top:10px; background:rgba(0,0,0,0.18); padding:10px; border-radius:8px; color:#dfe8ff; font-size:13px; }
   .note{ font-size:13px; color:var(--muted); margin-top:8px; }
+
   .copy-ok{ color:#00ff8a; font-weight:800; margin-left:8px; display:none; }
-  .status { font-size:13px; margin-top:6px; color:var(--muted); }
-  .status.success { color:#00ff8a; font-weight:700; }
-  .status.error { color:#ff7b7b; font-weight:700; }
+
+  /* Novo estilo para exportar CSV */
+  .export-container {
+    margin-top: 30px; 
+    padding: 16px; 
+    background: rgba(255,255,255,0.05); 
+    border-radius: 12px; 
+    max-width: 600px; 
+    margin-left: auto; 
+    margin-right: auto;
+  }
+  .export-container h2 {
+    color: var(--neon-a);
+    margin-bottom: 12px;
+  }
+  .export-container button {
+    background: linear-gradient(90deg, var(--neon-a), var(--neon-b)); 
+    color: #041022; 
+    font-weight: 700; 
+    border: none; 
+    padding: 12px 20px; 
+    border-radius: 10px; 
+    cursor: pointer;
+  }
+  .export-container button:disabled {
+    background: #4b3f99;
+    cursor: not-allowed;
+  }
+  .export-container #msg {
+    margin-top: 12px; 
+    color: #dfeaff; 
+    font-size: 14px;
+  }
+  .export-container a {
+    color: var(--neon-b);
+    font-weight: 700;
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
@@ -61,7 +110,7 @@
       <img src="images/logo-conectplay.png" alt="ConectPlay logo" />
       <div>
         <h1>ConectPlay — Afiliados & Planos</h1>
-        <p>Gere seu link, compartilhe e acompanhe seu desempenho. Pagamentos por venda confirmada.</p>
+        <p>Gere seu link, compartilhe e acompanhe seu desempenho. Pagamentos por venda confirmado.</p>
       </div>
     </header>
 
@@ -82,7 +131,6 @@
           <button class="btn ghost" id="btn-copy" disabled>Copiar link</button>
           <span id="copy-ok" class="copy-ok">Copiado!</span>
         </div>
-        <div id="af-status" class="status" style="display:none"></div>
         <div class="note">Ao abrir com <code>?affiliate=seu-apelido</code> o campo já é preenchido automaticamente.</div>
       </div>
     </div>
@@ -144,6 +192,13 @@
       </aside>
     </div>
 
+    <!-- NOVO: Exportar CSV -->
+    <div class="export-container">
+      <h2>Exportar CSV da aba Vendas</h2>
+      <button id="exportBtn">Gerar e baixar CSV</button>
+      <div id="msg"></div>
+    </div>
+
     <footer>
       &copy; 2025 ConectPlay. Todos os direitos reservados.
     </footer>
@@ -151,12 +206,9 @@
 
 <script>
 /* ===========================
-   CONFIGURA AQUI sua URL GAS
+   CONFIGURE AQUI sua URL GAS
    =========================== */
-/* Substitua abaixo pela URL do seu Apps Script (já publicado como 'aplicativo da web').
-   Ex: 'https://script.google.com/macros/s/AKfycbztsUIoMui.../exec'
-*/
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbztsUIoMuiBX0nm6ZRFmwtmxYq0v7BSnoR-q_7MNsWBDxdER0xPdWP7A2QYeYzkEMkI8A/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz8urCFXSd22j31BIG-GIYY9I6LXVTHG642wmiIKJmgYoF-Zl_PxM65uvexHBb_THcsLg/exec';
 const PHONE_NUMBER = '557791986049';
 
 /* ===== Planos (mesma lista do seu projeto) ===== */
@@ -190,8 +242,6 @@ const salePlano = document.getElementById('salePlano');
 const btnAddSale = document.getElementById('btn-addSale');
 const btnRefresh = document.getElementById('btn-refresh');
 const saleMsg = document.getElementById('sale-msg');
-
-const afStatus = document.getElementById('af-status');
 
 /* ===== utilities ===== */
 function makeSlug(name){
@@ -244,10 +294,6 @@ function updatePreview(){
 btnGenerate.addEventListener('click', ()=>{
   updatePreview();
   copyOk.style.display = 'none';
-  const slug = makeSlug(affiliateInput.value || '');
-  if(!slug) return;
-  // salva apelido no GAS (adiciona à planilha)
-  salvarApelido(slug);
 });
 btnCopy.addEventListener('click', ()=>{
   const link = btnCopy.dataset.link;
@@ -257,117 +303,110 @@ btnCopy.addEventListener('click', ()=>{
     setTimeout(()=> copyOk.style.display = 'none', 2500);
   });
 });
-affiliateInput.addEventListener('input', updatePreview);
-
-/* ===== abrir whatsapp do plano ===== */
-function openPlan(planTitle, price){
-  const urlParams = new URLSearchParams(window.location.search);
-  const affiliate = urlParams.get('affiliate') || affiliateInput.value.trim();
-  const affiliateText = affiliate ? `Afiliado: ${affiliate}. ` : '';
-  const msg = `Olá! Quero adquirir o plano ${planTitle} por R$${parseFloat(price).toFixed(2)}. ${affiliateText}`;
-  window.open(buildWhatsAppUrl(msg), '_blank');
-}
-
-/* ===== salvar apelido no GAS ===== */
-async function salvarApelido(apelido){
-  if(!GAS_URL){
-    showAfStatus('Erro: GAS_URL não configurada', 'error');
-    return;
-  }
-  showAfStatus('Salvando apelido...', '');
-  try{
-    const url = `${GAS_URL}?acao=addAffiliate&affiliate=${encodeURIComponent(apelido)}`;
-    const res = await fetch(url, { method: 'GET', mode: 'cors' });
-    const text = await res.text();
-    // espera resposta amigável do GAS; considerar sucesso se resposta contiver "sucesso" ou status 200
-    showAfStatus('Apelido salvo com sucesso.', 'success');
-    // atualizar ranking após salvar
-    setTimeout(()=> fetchRanking(), 800);
-  }catch(err){
-    console.error('Erro salvarApelido', err);
-    showAfStatus('Erro ao salvar apelido.', 'error');
-  }
-}
-function showAfStatus(msg, type){
-  afStatus.style.display = 'block';
-  afStatus.textContent = msg;
-  afStatus.className = 'status' + (type ? (' ' + type) : '');
-  if(type === 'success'){
-    setTimeout(()=> afStatus.style.display = 'none', 2500);
-  }
-}
-
-/* ===== ranking & vendas via GAS ===== */
-async function fetchRanking(){
-  if(!GAS_URL){ renderRankingEmpty('Configure GAS_URL'); return; }
-  try{
-    const res = await fetch(`${GAS_URL}?acao=getRanking`);
-    const json = await res.json();
-    renderRanking(json.ranking || []);
-  }catch(err){
-    console.error(err);
-    renderRankingEmpty('Erro ao carregar ranking');
-  }
-}
-function renderRanking(list){
-  rankingBody.innerHTML = '';
-  if(!list || list.length===0){
-    rankingBody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">Nenhum afiliado encontrado</td></tr>`;
-    return;
-  }
-  list.forEach((it, idx)=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${idx+1}</td><td>${it.affiliate}</td><td>${it.totalSales}</td>`;
-    rankingBody.appendChild(tr);
-  });
-}
-function renderRankingEmpty(msg){
-  rankingBody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--muted)">${msg}</td></tr>`;
-}
-
-/* ===== registrar venda (admin) - chama GAS addSale via GET ===== */
-btnAddSale.addEventListener('click', async ()=>{
-  const afiliado = saleAffiliate.value.trim();
-  const cliente = saleCliente.value.trim() || 'Cliente';
-  const plano = salePlano.value || 'Plano';
-  if(!afiliado){ saleMsg.textContent = 'Digite o apelido do afiliado.'; return; }
-  if(!GAS_URL){ saleMsg.textContent = 'Configure GAS_URL no código.'; return; }
-  saleMsg.textContent = 'Enviando...';
-  try{
-    const url = `${GAS_URL}?acao=addSale&affiliate=${encodeURIComponent(afiliado)}&cliente=${encodeURIComponent(cliente)}&plano=${encodeURIComponent(plano)}`;
-    const res = await fetch(url);
-    const text = await res.text();
-    saleMsg.textContent = 'Venda registrada.';
-    saleAffiliate.value=''; saleCliente.value=''; salePlano.selectedIndex = 0;
-    fetchRanking();
-    setTimeout(()=> saleMsg.textContent='', 2500);
-  }catch(e){
-    console.error(e);
-    saleMsg.textContent = 'Erro ao registrar venda.';
+affiliateInput.addEventListener('input', ()=> {
+  updatePreview();
+});
+window.addEventListener('load', ()=> {
+  // preenche se tem ?affiliate=
+  const params = new URLSearchParams(window.location.search);
+  const a = params.get('affiliate');
+  if(a){
+    affiliateInput.value = a;
+    updatePreview();
   }
 });
 
-btnRefresh.addEventListener('click', ()=> fetchRanking());
-
-/* ===== configura whatsapp fixo ===== */
-fixedWhatsapp.href = buildWhatsAppUrl('Olá, quero conhecer os planos da ConectPlay!');
-
-/* ===== inicialização ===== */
-(function init(){
-  renderPlans();
-  const urlParams = new URLSearchParams(window.location.search);
-  const affiliate = urlParams.get('affiliate');
-  if(affiliate){
-    affiliateInput.value = affiliate;
-    updatePreview();
-    // opcional: salvar automaticamente quem entrou pelo link (gera apelido na planilha)
-    const slug = makeSlug(affiliate);
-    if(slug) salvarApelido(slug);
-  } else {
-    updatePreview();
+/* ===== planos open whatsapp ===== */
+function openPlan(title, price){
+  const slug = makeSlug(affiliateInput.value);
+  if(!slug){
+    alert('Digite seu apelido para gerar o link primeiro.');
+    affiliateInput.focus();
+    return;
   }
+  const msg = `Olá! Quero assinar o plano "${title}" por R$${price.toFixed(2)}. Indicação do afiliado: ${slug}`;
+  window.open(buildWhatsAppUrl(msg), '_blank');
+}
+
+/* ===== atualizar link whatsapp fixo ===== */
+fixedWhatsapp.href = buildWhatsAppUrl('Olá, gostaria de atendimento personalizado');
+
+/* ===== ranking ===== */
+async function fetchRanking(){
+  rankingBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted)">Carregando...</td></tr>';
+  try {
+    const resp = await fetch(GAS_URL + '?acao=ranking');
+    if(!resp.ok) throw new Error('Erro ao buscar ranking');
+    const data = await resp.json();
+    if(!data || !Array.isArray(data)) throw new Error('Resposta inválida');
+    if(data.length === 0){
+      rankingBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Nenhum dado.</td></tr>';
+      return;
+    }
+    rankingBody.innerHTML = '';
+    data.forEach((item,i)=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${i+1}</td><td>${item.apelido}</td><td>${item.quantidade}</td>`;
+      rankingBody.appendChild(tr);
+    });
+  } catch(e){
+    rankingBody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#ff5050">Erro ao carregar ranking</td></tr>`;
+  }
+}
+
+/* ===== registrar venda via GAS ===== */
+btnAddSale.addEventListener('click', async ()=>{
+  const apelido = saleAffiliate.value.trim();
+  const cliente = saleCliente.value.trim();
+  const plano = salePlano.value.trim();
+  saleMsg.textContent = '';
+  if(!apelido || !cliente || !plano){
+    saleMsg.textContent = 'Preencha todos os campos para registrar a venda.';
+    return;
+  }
+  try {
+    const url = `${GAS_URL}?acao=addSale&apelido=${encodeURIComponent(apelido)}&cliente=${encodeURIComponent(cliente)}&plano=${encodeURIComponent(plano)}`;
+    const resp = await fetch(url);
+    if(!resp.ok) throw new Error('Erro na requisição');
+    const json = await resp.json();
+    if(json.success){
+      saleMsg.textContent = 'Venda registrada com sucesso!';
+      saleAffiliate.value = '';
+      saleCliente.value = '';
+      salePlano.selectedIndex = 0;
+      fetchRanking();
+    } else {
+      saleMsg.textContent = 'Falha ao registrar venda.';
+    }
+  } catch(err){
+    saleMsg.textContent = 'Erro: ' + err.message;
+  }
+});
+btnRefresh.addEventListener('click', fetchRanking);
+
+window.addEventListener('load', () => {
+  renderPlans();
   fetchRanking();
-})();
+});
+
+/* ===== Exportar CSV ===== */
+const exportBtn = document.getElementById('exportBtn');
+const msgDiv = document.getElementById('msg');
+
+exportBtn.addEventListener('click', async () => {
+  exportBtn.disabled = true;
+  msgDiv.textContent = 'Gerando arquivo CSV... aguarde.';
+  try {
+    const response = await fetch(`${GAS_URL}?acao=exportCSV`);
+    if (!response.ok) throw new Error('Erro na requisição');
+    const data = await response.json();
+    msgDiv.innerHTML = `Arquivo gerado: <a href="${data.url}" target="_blank" rel="noopener noreferrer">${data.nome}</a><br>Abra o link para baixar o CSV.`;
+  } catch (error) {
+    msgDiv.textContent = 'Erro ao gerar o CSV: ' + error.message;
+  } finally {
+    exportBtn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
