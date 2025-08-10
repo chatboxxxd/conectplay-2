@@ -3,367 +3,161 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ConectPlay - Sistema de Afiliados</title>
+<title>Programa de Afiliados ConectPlay</title>
 <style>
-  body {
-    background: linear-gradient(135deg, #241041, #0e5bff);
-    font-family: Arial, sans-serif;
-    color: white;
-    margin: 0; padding: 20px;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: space-between;
-  }
-  .container {
-    max-width: 900px;
-    margin: auto;
-    flex-grow: 1;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 12px;
-  }
-  label {
-    font-weight: bold;
-  }
-  input[type=text] {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0 15px 0;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: none;
-    box-sizing: border-box;
-  }
-  .plans {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 25px;
-  }
-  .plan-btn {
-    background: rgba(255,255,255,0.15);
-    border: none;
-    padding: 14px 18px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    min-width: 150px;
-    transition: background-color 0.25s ease;
-    text-align: center;
-  }
-  .plan-btn:hover {
-    background: #483d8b;
-  }
-  #link-preview {
-    background: rgba(255,255,255,0.1);
-    padding: 12px;
-    border-radius: 8px;
-    min-height: 60px;
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    word-break: break-word;
-    text-align: center;
-  }
-  .actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 25px;
-  }
-  button.action-btn {
-    padding: 12px 24px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    min-width: 180px;
-    font-size: 1rem;
-  }
-  .btn-copy {
-    background: #6a5acd;
-    color: white;
-  }
-  .btn-copy:hover {
-    background: #483d8b;
-  }
-  .btn-register {
-    background: #25d366;
-    color: white;
-  }
-  .btn-register:hover {
-    background: #1ebe57;
-  }
-  #summary {
-    background: rgba(255,255,255,0.1);
-    max-width: 600px;
-    margin: 0 auto 30px auto;
-    padding: 16px 20px;
-    border-radius: 10px;
-    font-size: 1.15rem;
-    text-align: center;
-    line-height: 1.5;
-  }
-  #ranking {
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 20px;
-  }
-  #ranking h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  #ranking ol {
-    padding-left: 20px;
-  }
-  #ranking li {
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-  footer {
-    background: rgba(0,0,0,0.3);
-    text-align: center;
-    padding: 12px 8px;
-    color: #ddd;
-    font-size: 0.9rem;
-    border-top: 1px solid #444;
-  }
+  body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+  h1, h2 { color: #0073e6; }
+  label { display: block; margin-top: 10px; }
+  input[type=text] { padding: 8px; width: 250px; }
+  button { margin-top: 15px; padding: 10px 15px; background: #0073e6; color: white; border: none; cursor: pointer; }
+  button:hover { background: #005bb5; }
+  #ranking { margin-top: 30px; }
+  table { border-collapse: collapse; width: 100%; max-width: 600px; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  th { background-color: #0073e6; color: white; }
+  footer { margin-top: 40px; font-size: 0.9em; color: #666; }
 </style>
 </head>
 <body>
 
-<div class="container">
+<h1>Programa de Afiliados ConectPlay</h1>
 
-  <h1>ConectPlay - Sistema de Afiliados</h1>
+<section>
+  <h2>Gerar seu link de indicação</h2>
+  <label for="affiliateName">Seu apelido (sem espaços):</label>
+  <input type="text" id="affiliateName" placeholder="Ex: joaosilva" />
 
-  <label for="affiliate">Digite seu apelido de afiliado:</label>
-  <input id="affiliate" type="text" placeholder="Ex: joao-silva" autocomplete="off" />
+  <button onclick="gerarLink()">Gerar Link</button>
 
-  <div class="plans" id="plans-container">
-    <!-- Botões dos planos aparecerão aqui -->
-  </div>
+  <p id="linkGerado" style="margin-top: 10px; font-weight: bold; color: green;"></p>
+</section>
 
-  <div id="link-preview">Digite seu apelido e clique em um plano para gerar o link.</div>
+<section>
+  <h2>Planos disponíveis</h2>
+  <button onclick="abrirWhatsApp('15 dias - R$14,99')">15 dias - R$14,99</button>
+  <button onclick="abrirWhatsApp('Mensal - R$20,99 (1 acesso)')">Mensal - R$20,99 (1 acesso)</button>
+  <button onclick="abrirWhatsApp('Mensal - R$25,99 (2 acessos)')">Mensal - R$25,99 (2 acessos)</button>
+  <button onclick="abrirWhatsApp('Bimestral - R$41,99 (1 acesso)')">Bimestral - R$41,99 (1 acesso)</button>
+  <button onclick="abrirWhatsApp('Bimestral - R$43,99 (2 acessos)')">Bimestral - R$43,99 (2 acessos)</button>
+  <button onclick="abrirWhatsApp('Trimestral - R$74,99 (1 acesso)')">Trimestral - R$74,99 (1 acesso)</button>
+  <button onclick="abrirWhatsApp('Trimestral - R$76,99 (2 acessos)')">Trimestral - R$76,99 (2 acessos)</button>
+  <button onclick="abrirWhatsApp('Semestral - R$149,99 (1 acesso)')">Semestral - R$149,99 (1 acesso)</button>
+  <button onclick="abrirWhatsApp('Semestral - R$153,99 (2 acessos)')">Semestral - R$153,99 (2 acessos)</button>
+  <button onclick="abrirWhatsApp('Anual - R$297,99 (1 acesso)')">Anual - R$297,99 (1 acesso)</button>
+  <button onclick="abrirWhatsApp('Anual - R$299,99 (2 acessos)')">Anual - R$299,99 (2 acessos)</button>
+</section>
 
-  <div class="actions">
-    <button class="action-btn btn-copy" id="btn-copy" disabled>Copiar mensagem</button>
-    <button class="action-btn btn-register" id="btn-register" disabled>Registrar venda</button>
-  </div>
+<section>
+  <h2>Seu resumo de vendas e comissão</h2>
+  <label for="searchAffiliate">Digite seu apelido para ver seu total de vendas e comissão:</label>
+  <input type="text" id="searchAffiliate" placeholder="Ex: joaosilva" />
+  <button onclick="mostrarResumo()">Mostrar Resumo</button>
 
-  <div id="summary">Digite seu apelido para ver seu resumo de vendas e comissão.</div>
+  <div id="resumo" style="margin-top: 15px; font-weight: bold;"></div>
+</section>
 
-  <div id="ranking">
-    <h2>Top 5 Afiliados</h2>
-    <ol id="ranking-list"><li>Carregando...</li></ol>
-  </div>
-</div>
+<section id="ranking">
+  <h2>Top Afiliados (Ranking)</h2>
+  <table id="rankingTable">
+    <thead>
+      <tr><th>Posição</th><th>Apelido</th><th>Total de Vendas</th><th>Comissão por Venda (R$)</th><th>Total Ganho (R$)</th></tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</section>
 
 <footer>
-  &copy; 2025 ConectPlay - Todos os direitos reservados. Desenvolvido por Fabrizio Souza.
+  <p>© 2025 ConectPlay. Todos os direitos reservados.</p>
 </footer>
 
 <script>
-  // URL do seu Google Apps Script que registra venda
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbyRsL2wd3BUMdI1NyrAZYQeeUulYJpAVc4TkBEfZJBJsPGPJQgCfWfe79O__XI364Oz/exec";
+  const SCRIPT_URL = 'COLE_AQUI_A_URL_DO_SEU_SCRIPT_GAS';
 
-  // Link CSV público da aba resumo da planilha
-  const CSV_VENDAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkBMVMdYu-Nfefrw8mqtyMtjNPJRteAnVWJw8aWBgVT6iq2EUMyjgNPGPlv5PUN7i38J_f4ui3bftm/pub?gid=144607695&single=true&output=csv";
-
-  const PLANS = [
-    { id: "15dias", title: "15 DIAS DE USO", price: "R$14,99" },
-    { id: "mensal1", title: "Mensal - 1 acesso", price: "R$20,99" },
-    { id: "mensal2", title: "Mensal - 2 acessos", price: "R$25,99" },
-    { id: "bimestral1", title: "Bimestral - 1 acesso", price: "R$41,99" },
-    { id: "bimestral2", title: "Bimestral - 2 acessos", price: "R$43,99" },
-    { id: "trimestral1", title: "Trimestral - 1 acesso", price: "R$74,99" },
-    { id: "trimestral2", title: "Trimestral - 2 acessos", price: "R$76,99" },
-    { id: "semestral1", title: "Semestral - 1 acesso", price: "R$149,99" },
-    { id: "semestral2", title: "Semestral - 2 acessos", price: "R$153,99" },
-    { id: "anual1", title: "Anual - 1 acesso", price: "R$297,99" },
-    { id: "anual2", title: "Anual - 2 acessos", price: "R$299,99" }
-  ];
-
-  const affiliateInput = document.getElementById("affiliate");
-  const plansContainer = document.getElementById("plans-container");
-  const linkPreview = document.getElementById("link-preview");
-  const btnCopy = document.getElementById("btn-copy");
-  const btnRegister = document.getElementById("btn-register");
-  const summary = document.getElementById("summary");
-  const rankingList = document.getElementById("ranking-list");
-
-  let currentAffiliate = "";
-  let currentPlan = null;
-  let currentMessage = "";
-
-  // Cria slug para URL e planilha
-  function makeSlug(text) {
-    return text.trim().toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9\-]+/g, "-")
-      .replace(/\-+/g, "-")
-      .replace(/^\-+|\-+$/g, "");
-  }
-
-  // Cria botões dos planos
-  function createPlanButtons() {
-    plansContainer.innerHTML = "";
-    PLANS.forEach(plan => {
-      const btn = document.createElement("button");
-      btn.className = "plan-btn";
-      btn.textContent = `${plan.title} (${plan.price})`;
-      btn.title = `Clique para gerar link para o plano ${plan.title}`;
-      btn.onclick = () => onPlanClick(plan);
-      plansContainer.appendChild(btn);
-    });
-  }
-
-  // Ao clicar no plano, gera link WhatsApp e mensagem
-  function onPlanClick(plan) {
-    currentAffiliate = makeSlug(affiliateInput.value);
-    if (!currentAffiliate) {
-      alert("Por favor, digite seu apelido de afiliado antes de escolher o plano.");
+  function gerarLink() {
+    const affiliate = document.getElementById('affiliateName').value.trim();
+    if(!affiliate){
+      alert('Por favor, insira seu apelido.');
       return;
     }
-    currentPlan = plan;
-    const message = `Olá! Quero assinar IPTV com o código de afiliado: ${currentAffiliate}. Plano: ${plan.title} (${plan.price}).`;
-    currentMessage = message;
-    linkPreview.textContent = message;
-    btnCopy.disabled = false;
-    btnRegister.disabled = false;
+    // Link para vender planos pelo WhatsApp (você pode ajustar o número e mensagem padrão)
+    const baseLink = `https://wa.me/557791986049?text=Olá,%20quero%20assinar%20um%20plano,%20meu%20indicação%20é%20${affiliate}`;
+    document.getElementById('linkGerado').textContent = `Seu link de indicação: ${baseLink}`;
   }
 
-  // Copiar mensagem
-  btnCopy.onclick = () => {
-    if (!currentMessage) return;
-    navigator.clipboard.writeText(currentMessage).then(() => {
-      alert("Mensagem copiada!");
-    }).catch(() => {
-      alert("Erro ao copiar. Copie manualmente.");
-    });
-  };
-
-  // Registrar venda na planilha via GAS
-  btnRegister.onclick = () => {
-    if (!currentAffiliate || !currentPlan) {
-      alert("Preencha o apelido e escolha o plano antes de registrar a venda.");
+  function abrirWhatsApp(plano) {
+    const affiliate = document.getElementById('affiliateName').value.trim();
+    if(!affiliate){
+      alert('Para escolher um plano, primeiro gere seu link inserindo seu apelido.');
       return;
     }
-    const url = `${GAS_URL}?afiliado=${encodeURIComponent(currentAffiliate)}&cliente=Cliente&plano=${encodeURIComponent(currentPlan.title)}`;
-    fetch(url)
-      .then(r => r.text())
-      .then(() => {
-        alert("Venda registrada com sucesso!");
-        loadAffiliateSummary(currentAffiliate);
-        loadRanking();
-      })
-      .catch(() => alert("Erro ao registrar venda. Tente novamente."));
-  };
-
-  // Carregar resumo do afiliado
-  function loadAffiliateSummary(affiliate) {
-    summary.textContent = "Carregando resumo...";
-    fetch(CSV_VENDAS_URL)
-      .then(r => r.text())
-      .then(text => {
-        const rows = text.trim().split("\n");
-        let vendas = 0;
-
-        for (let i = 1; i < rows.length; i++) {
-          const cols = rows[i].split(",");
-          const apelido = cols[0].trim().toLowerCase();
-          if (apelido === affiliate.toLowerCase()) {
-            vendas = parseInt(cols[1]) || 0;
-            break;
-          }
-        }
-
-        const comissao = calculaComissao(vendas);
-
-        if (vendas > 0) {
-          summary.innerHTML = `
-            Olá, <strong>${affiliate}</strong>!<br>
-            Você fez <strong>${vendas}</strong> venda(s).<br>
-            Sua comissão por venda é <strong>R$${comissao.toFixed(2)}</strong>.<br>
-            Você já ganhou <strong>R$${(vendas * comissao).toFixed(2)}</strong>.
-          `;
-        } else {
-          summary.textContent = `Olá, ${affiliate}! Ainda não há vendas registradas.`;
-        }
-      })
-      .catch(() => {
-        summary.textContent = "Erro ao carregar resumo de vendas.";
-      });
+    const msg = encodeURIComponent(`Olá, quero assinar o plano: ${plano}. Indicação: ${affiliate}`);
+    const url = `https://wa.me/557791986049?text=${msg}`;
+    window.open(url, '_blank');
   }
 
-  // Calcular comissão por faixa de vendas
-  function calculaComissao(vendas) {
-    if (vendas >= 601) return 10.0;
-    if (vendas >= 301) return 9.0;
-    if (vendas >= 101) return 8.0;
-    if (vendas >= 1) return 7.0;
-    return 0;
-  }
-
-  // Carregar ranking top 5 da planilha
-  function loadRanking() {
-    rankingList.innerHTML = "<li>Carregando...</li>";
-    fetch(CSV_VENDAS_URL)
-      .then(r => r.text())
-      .then(text => {
-        const rows = text.trim().split("\n");
-        let data = [];
-        for (let i = 1; i < rows.length; i++) {
-          const cols = rows[i].split(",");
-          const apelido = cols[0].trim();
-          const vendas = parseInt(cols[1]) || 0;
-          if (apelido) data.push({ apelido, vendas });
-        }
-        // Ordena decrescente por vendas
-        data.sort((a, b) => b.vendas - a.vendas);
-        // Pega top 5
-        const top5 = data.slice(0, 5);
-        if (top5.length === 0) {
-          rankingList.innerHTML = "<li>Nenhum dado encontrado.</li>";
-          return;
-        }
-        rankingList.innerHTML = "";
-        top5.forEach(({apelido, vendas}, idx) => {
-          rankingList.innerHTML += `<li><strong>${apelido}</strong>: ${vendas} venda(s)</li>`;
-        });
-      })
-      .catch(() => {
-        rankingList.innerHTML = "<li>Erro ao carregar ranking.</li>";
-      });
-  }
-
-  // Atualiza resumo e limpa botões ao mudar apelido
-  affiliateInput.addEventListener("input", () => {
-    const slug = makeSlug(affiliateInput.value);
-    if (!slug) {
-      summary.textContent = "Digite seu apelido para ver seu resumo de vendas e comissão.";
-      btnCopy.disabled = true;
-      btnRegister.disabled = true;
-      linkPreview.textContent = "Digite seu apelido e clique em um plano para gerar o link.";
-      currentMessage = "";
-      currentPlan = null;
-    } else {
-      loadAffiliateSummary(slug);
-      btnCopy.disabled = true;
-      btnRegister.disabled = true;
-      linkPreview.textContent = "Clique em um plano para gerar o link.";
-      currentMessage = "";
-      currentPlan = null;
+  async function mostrarResumo() {
+    const affiliate = document.getElementById('searchAffiliate').value.trim();
+    if(!affiliate){
+      alert('Digite seu apelido para consultar o resumo.');
+      return;
     }
-  });
 
-  // Inicializa
-  createPlanButtons();
-  loadRanking();
+    try {
+      const res = await fetch(`${SCRIPT_URL}?acao=getSales&affiliate=${affiliate}`);
+      const data = await res.json();
+      const vendas = data.totalSales || 0;
+
+      // Defina sua regra de comissão por venda aqui:
+      let comissaoPorVenda = 7; // padrão
+      if(vendas > 100 && vendas <= 300) comissaoPorVenda = 8;
+      else if(vendas > 300) comissaoPorVenda = 9;
+
+      const totalGanho = vendas * comissaoPorVenda;
+
+      document.getElementById('resumo').innerHTML = 
+        `Olá, <b>${affiliate}</b>!<br>` +
+        `Você fez <b>${vendas}</b> vendas.<br>` +
+        `Sua comissão por venda é R$ <b>${comissaoPorVenda.toFixed(2)}</b>.<br>` +
+        `Você já ganhou R$ <b>${totalGanho.toFixed(2)}</b>.`;
+    } catch(err) {
+      alert('Erro ao buscar dados. Tente novamente.');
+    }
+  }
+
+  async function carregarRanking() {
+    try {
+      const res = await fetch(`${SCRIPT_URL}?acao=getRanking`);
+      const ranking = await res.json();
+
+      const tbody = document.querySelector('#rankingTable tbody');
+      tbody.innerHTML = '';
+
+      ranking.forEach((item, index) => {
+        const vendas = item.sales;
+        let comissaoPorVenda = 7;
+        if(vendas > 100 && vendas <= 300) comissaoPorVenda = 8;
+        else if(vendas > 300) comissaoPorVenda = 9;
+
+        const totalGanho = vendas * comissaoPorVenda;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${index+1}</td>
+          <td>${item.affiliate}</td>
+          <td>${vendas}</td>
+          <td>R$ ${comissaoPorVenda.toFixed(2)}</td>
+          <td>R$ ${totalGanho.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch(err) {
+      console.error('Erro ao carregar ranking:', err);
+    }
+  }
+
+  // Carrega ranking ao abrir a página
+  carregarRanking();
 </script>
 
 </body>
