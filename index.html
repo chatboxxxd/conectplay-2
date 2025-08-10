@@ -287,7 +287,7 @@
 
         <div class="affiliate-actions">
           <input id="affiliateInput" type="text" readonly style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" value="" />
-          <button id="copyBtn" class="copybtn">Copiar link de afiliado</button>
+          <button id="copyBtn" class="copybtn" aria-label="Copiar link de afiliado">Copiar link de afiliado</button>
         </div>
       </div>
 
@@ -369,7 +369,7 @@ function renderPlans(){
         <div class="price">${p.price}</div>
       </div>
       <div>
-        <a class="btn-wpp" href="#" data-plan="${encodeURIComponent(p.name + ' - ' + p.accesses + ' - ' + p.price)}">Quero esse plano</a>
+        <a class="btn-wpp" href="#" data-plan="${encodeURIComponent(p.name + ' - ' + p.accesses + ' - ' + p.price)}" aria-label="Falar no WhatsApp para comprar plano ${p.name} - ${p.accesses} - ${p.price}">Quero esse plano</a>
       </div>
     `;
     container.appendChild(div);
@@ -392,7 +392,11 @@ function renderPlans(){
 /* cria link de afiliado (URL atual com ?apelido=XXXX) */
 function buildAffiliateLink(apelido){
   const url = new URL(window.location.href.split('#')[0]);
-  url.searchParams.set('apelido', apelido || '');
+  if(apelido){
+    url.searchParams.set('apelido', apelido);
+  } else {
+    url.searchParams.delete('apelido');
+  }
   return url.toString();
 }
 
@@ -413,100 +417,32 @@ async function copyToClipboard(text){
   }
 }
 
-/* Renderiza greeting se apelido presente */
+/* Renderiza greeting e link de afiliado */
 function renderGreeting(){
-  const apelido = getParam('apelido');
-  if(!apelido) return;
-  document.getElementById('greeting').style.display = 'flex';
-  document.getElementById('greetName').innerText = `Olá, ${apelido}!`;
-  document.getElementById('greetApelido').innerText = apelido;
-  const aff = buildAffiliateLink(apelido);
-  document.getElementById('affiliateInput').value = aff;
+  const apelido = getParam('apelido') || '';
+  if(apelido){
+    document.getElementById('greeting').style.display = 'flex';
+    document.getElementById('greetName').innerText = `Olá, ${apelido}!`;
+    document.getElementById('greetApelido').innerText = apelido;
+  } else {
+    document.getElementById('greeting').style.display = 'none';
+  }
+  const affLink = buildAffiliateLink(apelido);
+  const input = document.getElementById('affiliateInput');
+  input.value = affLink;
 }
 
-/* coloca link padrão (sem apelido) se não houver apelido */
-function renderAffiliateDefault(){
-  const current = buildAffiliateLink(getParam('apelido') || '');
-  document.getElementById('affiliateInput').value = current;
-  document.getElementById('copyBtn').addEventListener('click', function(){
-    copyToClipboard(current);
-  });
-}
-
-/* Lê CSV e monta ranking */
-function loadRanking(){
-  const rankingDiv = document.getElementById('rankingContent');
-  rankingDiv.innerHTML = '<em>Carregando ranking...</em>';
-
-  Papa.parse(CSV_URL, {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function(results){
-      let data = results.data || [];
-      // normalizar colnames: procurar colunas que contenham "apel" e "quant"
-      data = data.map(row => {
-        const newRow = {};
-        for(const k in row){
-          const lk = k.toLowerCase().trim();
-          if(lk.includes('apel') || lk.includes('nome')) newRow.Apelido = row[k].trim();
-          else if(lk.includes('quant') || lk.includes('qtd') || lk.includes('vezes') || lk.includes('vendas')) newRow.Quantidade = row[k].trim();
-          else newRow[k] = row[k];
-        }
-        // for safety:
-        if(!('Apelido' in newRow)) newRow.Apelido = row['Apelido'] || row['apelido'] || '';
-        if(!('Quantidade' in newRow)) newRow.Quantidade = row['Quantidade'] || row['quantidade'] || row['Quantidade ' ] || 0;
-        // parse number
-        let q = newRow.Quantidade === undefined ? 0 : newRow.Quantidade;
-        q = (''+q).replace(/[^\d\-\.]/g,''); // remove non-digits
-        newRow._q = parseInt(q) || 0;
-        return newRow;
-      });
-
-      // filtrar apenas com apelido
-      const filtered = data.filter(r => r.Apelido && r.Apelido.trim() !== '');
-      // ordenar
-      filtered.sort((a,b) => b._q - a._q);
-
-      if(filtered.length === 0){
-        rankingDiv.innerHTML = '<div class="small">Nenhum afiliado encontrado na planilha.</div>';
-        return;
-      }
-
-      // construir HTML
-      let html = '<ol>';
-      filtered.slice(0,20).forEach(r => {
-        html += `<li><strong>${escapeHtml(r.Apelido)}</strong> — ${r._q} vendas</li>`;
-      });
-      html += '</ol>';
-      rankingDiv.innerHTML = html;
-    },
-    error: function(err){
-      rankingDiv.innerHTML = '<div class="small">Erro ao carregar ranking: ' + (err && err.message ? err.message : 'Falha ao obter CSV') + '</div>';
-    }
-  });
-}
-
-/* small escape to prevent injection */
-function escapeHtml(s){
-  if(!s) return '';
-  return s.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
-}
-
-/* on load */
+/* Inicialização */
 document.addEventListener('DOMContentLoaded', function(){
   renderPlans();
   renderGreeting();
-  renderAffiliateDefault();
-  loadRanking();
 
-  // If user wants to copy affiliate link after editing input, attach button (it copies current input value)
+  // copiar link ao clicar no botão
   document.getElementById('copyBtn').addEventListener('click', function(){
-    const val = document.getElementById('affiliateInput').value;
-    if(val) copyToClipboard(val);
+    const input = document.getElementById('affiliateInput');
+    copyToClipboard(input.value);
   });
 });
 </script>
-
 </body>
 </html>
