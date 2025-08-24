@@ -21,7 +21,7 @@
     font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
     background: url("images/fundo-conectplay.png") center/cover no-repeat fixed, #0b0b1a;
   }
-  .container{width:min(1160px,92vw);margin:24px auto 80px}
+  .container{width:min(1160px,92vw);margin:24px auto 90px}
   header{ text-align:center; margin:6px 0 18px }
   header img{width:220px;height:auto;display:block;margin:0 auto 8px}
   header h1{font-size:clamp(28px,5vw,42px);font-weight:800}
@@ -65,8 +65,9 @@
     color:#fff; font-weight:700; cursor:pointer;
   }
 
-  footer{ text-align:center; margin:28px 0 8px; color:var(--muted); font-size:12px }
+  footer{ text-align:center; margin:28px 0 18px; color:var(--muted); font-size:12px }
   footer a{ color:#a9f2ec; text-decoration:underline }
+  .impressum{margin-top:14px; line-height:1.5}
 </style>
 </head>
 <body>
@@ -105,80 +106,35 @@
   <section class="plans">
     <h2>Planos ConectPlay</h2>
     <div class="grid">
-      <div class="card">
-        <h4>15 dias de uso</h4>
-        <div class="price">R$ 14,99</div>
-        <button class="wbtn" data-plano="15 dias de uso - R$ 14,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Mensal (1 acesso)</h4>
-        <div class="price">R$ 20,99</div>
-        <button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Mensal (2 acessos)</h4>
-        <div class="price">R$ 25,99</div>
-        <button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Bimestral (1 acesso)</h4>
-        <div class="price">R$ 41,99</div>
-        <button class="wbtn" data-plano="Bimestral (1 acesso) - R$ 41,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Bimestral (2 acessos)</h4>
-        <div class="price">R$ 43,99</div>
-        <button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Trimestral (1 acesso)</h4>
-        <div class="price">R$ 74,99</div>
-        <button class="wbtn" data-plano="Trimestral (1 acesso) - R$ 74,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Trimestral (2 acessos)</h4>
-        <div class="price">R$ 76,99</div>
-        <button class="wbtn" data-plano="Trimestral (2 acessos) - R$ 76,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Semestral (1 acesso)</h4>
-        <div class="price">R$ 149,99</div>
-        <button class="wbtn" data-plano="Semestral (1 acesso) - R$ 149,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Semestral (2 acessos)</h4>
-        <div class="price">R$ 153,99</div>
-        <button class="wbtn" data-plano="Semestral (2 acessos) - R$ 153,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Anual (1 acesso)</h4>
-        <div class="price">R$ 297,99</div>
-        <button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Falar no WhatsApp</button>
-      </div>
-
-      <div class="card">
-        <h4>Anual (2 acessos)</h4>
-        <div class="price">R$ 299,99</div>
-        <button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Falar no WhatsApp</button>
-      </div>
+      <div class="card"><h4>15 dias de uso</h4><div class="price">R$ 14,99</div><button class="wbtn" data-plano="15 dias de uso - R$ 14,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Mensal (1 acesso)</h4><div class="price">R$ 20,99</div><button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Mensal (2 acessos)</h4><div class="price">R$ 25,99</div><button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Bimestral (1 acesso)</h4><div class="price">R$ 41,99</div><button class="wbtn" data-plano="Bimestral (1 acesso) - R$ 41,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Bimestral (2 acessos)</h4><div class="price">R$ 43,99</div><button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Trimestral (1 acesso)</h4><div class="price">R$ 74,99</div><button class="wbtn" data-plano="Trimestral (1 acesso) - R$ 74,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Trimestral (2 acessos)</h4><div class="price">R$ 76,99</div><button class="wbtn" data-plano="Trimestral (2 acessos) - R$ 76,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Semestral (1 acesso)</h4><div class="price">R$ 149,99</div><button class="wbtn" data-plano="Semestral (1 acesso) - R$ 149,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Semestral (2 acessos)</h4><div class="price">R$ 153,99</div><button class="wbtn" data-plano="Semestral (2 acessos) - R$ 153,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Anual (1 acesso)</h4><div class="price">R$ 297,99</div><button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Anual (2 acessos)</h4><div class="price">R$ 299,99</div><button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Falar no WhatsApp</button></div>
     </div>
   </section>
 
-  <footer>
-    © 2025 ConectPlay — todos os direitos reservados •
-    <a href="./politica-de-privacidade.html">Política de Privacidade</a> •
-    <a href="./termos-de-servico.html">Termos de Serviço</a>
-  </footer>
 </div>
+
+<footer>
+  © 2025 ConectPlay — todos os direitos reservados •
+  <a href="./politica-de-privacidade.html">Política de Privacidade</a> •
+  <a href="./termos-de-servico.html">Termos de Serviço</a>
+  <div class="impressum">
+    <br><strong>Impressum</strong><br>
+    ConectPlay — Fabrizio Souza<br>
+    Barreiras, Bahia — Brasil<br>
+    📞 <a href="tel:+5577991986049" style="color:#a9f2ec;">+55 77 99198-6049</a><br>
+    ✉️ <a href="mailto:atendimento@conectplay.org" style="color:#a9f2ec;">atendimento@conectplay.org</a><br>
+    🌐 <a href="https://www.conectplay.org" style="color:#a9f2ec;">www.conectplay.org</a>
+  </div>
+</footer>
 
 <script>
   // número do WhatsApp
@@ -196,12 +152,12 @@
   const copyStatus = document.getElementById("copyStatus");
 
   if (apelidoURL){
-    inputApelido.value = apelidoURL;
+    inputApelido && (inputApelido.value = apelidoURL);
     renderLinks(apelidoURL);
   }
 
   // gerar link e fixar ?apelido= na URL
-  btnGerar.addEventListener("click", () => {
+  btnGerar && btnGerar.addEventListener("click", () => {
     const ap = (inputApelido.value || "").trim();
     if(!ap){ alert("Digite seu apelido."); return; }
     renderLinks(ap);
@@ -211,7 +167,7 @@
   // botões dos planos -> WhatsApp
   document.querySelectorAll(".wbtn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const ap = (inputApelido.value || apelidoURL || "").trim();
+      const ap = (inputApelido?.value || apelidoURL || "").trim();
       const plano = btn.getAttribute("data-plano");
       const url = buildWhats(plano, ap);
       localStorage.setItem("ultimoLink", url);
@@ -220,7 +176,7 @@
   });
 
   // copiar último link
-  btnCopiar.addEventListener("click", async () => {
+  btnCopiar && btnCopiar.addEventListener("click", async () => {
     const link = localStorage.getItem("ultimoLink");
     if(!link){ copyStatus.textContent = "Nenhum link gerado ainda."; return; }
     try{
@@ -232,10 +188,10 @@
 
   function renderLinks(ap){
     const siteLink = location.origin + location.pathname + "?apelido=" + encodeURIComponent(ap);
-    meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
+    if (meuLinkSite) meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
     const url = buildWhats("Contato inicial", ap);
     localStorage.setItem("ultimoLink", url);
-    ultimoLink.innerHTML = `💬 <b>Último WhatsApp:</b> <a style="color:#a9f2ec" href="${url}" target="_blank">${url}</a>`;
+    if (ultimoLink) ultimoLink.innerHTML = `💬 <b>Último WhatsApp:</b> <a style="color:#a9f2ec" href="${url}" target="_blank">${url}</a>`;
   }
 
   function buildWhats(plano, apelido){
