@@ -18,66 +18,79 @@
   html,body{
     height:100%;
     color:var(--text);
-    font-family:"Montserrat",sans-serif;
-    /* 🔥 Fundo ainda usa a imagem de fundo antiga */
-    background: url("images/logo-conectplay.png") center center / cover no-repeat fixed, #0b0b1a;
-  }
-  body::before{
-    content:"";
-    position:fixed; inset:0; pointer-events:none;
+    font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    /* 🔥 FUNDO = cenário da logomarca (sem o triângulo), em toda a página */
     background:
-      radial-gradient(1200px 600px at 10% 0%, rgba(26,6,89,.45) 0%, transparent 60%),
-      radial-gradient(1000px 800px at 110% 10%, rgba(11,42,93,.35) 0%, transparent 60%);
-    mix-blend-mode:screen;
+      url("images/fundo-conectplay.png?v=1") center center / cover no-repeat fixed,
+      radial-gradient(1200px 600px at 10% 0%, #1a0659 0%, transparent 60%),
+      radial-gradient(1000px 800px at 110% 10%, #0b2a5d 0%, transparent 60%),
+      #0b0b1a;
   }
+  /* leve realce para o fundo */
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background: radial-gradient(50% 30% at 50% 0%, rgba(0,0,0,.25), transparent 70%);
+  }
+
   .container{width:min(1160px,92vw);margin:28px auto 80px}
-  .hero{text-align:center;margin:30px 0 18px}
-  .hero h1{font-weight:800;margin:20px 0 6px;font-size:clamp(28px,5vw,42px)}
-  .hero p{margin:0;color:var(--muted);font-size:clamp(14px,2.4vw,18px)}
+
+  /* topo com a LOGO transparente */
+  .hero{ text-align:center; margin:26px 0 18px }
+  .hero img{ width:220px; max-width:60vw; height:auto; image-rendering:auto }
+  .hero h1{ font-weight:800; margin:14px 0 6px; font-size:clamp(28px,5vw,42px) }
+  .hero p{ margin:0; color:var(--muted); font-size:clamp(14px,2.4vw,18px) }
+
+  /* painel afiliado */
   .panel{
-    margin-top:28px;background:var(--card);border:1px solid var(--card-border);border-radius:20px;
-    padding:clamp(16px,3.2vw,28px);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(16px,2.8vw,28px);
-    backdrop-filter:blur(8px);
+    margin-top:22px; background:var(--card); border:1px solid var(--card-border); border-radius:20px;
+    padding:clamp(16px,3.2vw,28px); display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(16px,2.8vw,28px);
+    backdrop-filter: blur(8px);
   }
-  @media (max-width:920px){.panel{grid-template-columns:1fr}}
-  .input{display:flex;gap:10px;align-items:center}
+  @media (max-width:920px){ .panel{ grid-template-columns:1fr } }
+  .panel h3{ margin:0 0 12px; font-size:clamp(18px,3.2vw,22px) }
+  .input{ display:flex; gap:10px; align-items:center }
   input[type="text"]{
-    flex:1;height:50px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
-    background:rgba(255,255,255,.1);color:#fff;padding:0 14px;font-size:16px;outline:none;
+    flex:1; height:50px; border-radius:12px; border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.1); color:#fff; padding:0 14px; font-size:16px; outline:none;
   }
   .btn{
-    height:50px;min-width:190px;border:none;border-radius:12px;background:var(--btn);
-    color:#072016;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 6px 18px rgba(18,184,134,.35);
-    transition:background .2s,transform .06s;
+    height:50px; min-width:190px; border:none; border-radius:12px; background:var(--btn);
+    color:#072016; font-weight:800; font-size:16px; cursor:pointer; box-shadow:0 6px 18px rgba(18,184,134,.35);
+    transition:background .2s, transform .06s;
   }
-  .btn:hover{background:var(--btn-hover)} .btn:active{transform:scale(.98)}
-  .muted{color:var(--muted);font-size:14px;line-height:1.5;margin-top:12px}
-  .how{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
-  .plans{margin-top:22px}
-  .plans h2{font-size:clamp(20px,4vw,28px);margin-bottom:14px}
-  .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
-  .card{grid-column:span 6;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:18px;backdrop-filter:blur(8px)}
-  @media (max-width:820px){.card{grid-column:span 12}}
-  .price{font-size:clamp(18px,4vw,26px);font-weight:800;margin:2px 0 10px}
-  .cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn:hover{ background:var(--btn-hover) } .btn:active{ transform:scale(.98) }
+  .muted{ color:var(--muted); font-size:14px; line-height:1.5; margin-top:12px }
+  .how{ background:rgba(255,255,255,.05); border:1px dashed rgba(255,255,255,.25); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px }
+
+  /* planos */
+  .plans{ margin-top:22px }
+  .plans h2{ font-size:clamp(20px,4vw,28px); margin:0 0 14px }
+  .grid{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr) }
+  .card{ grid-column:span 6; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:18px; backdrop-filter:blur(8px) }
+  @media (max-width:820px){ .card{ grid-column:span 12 } }
+  .card h4{ margin:0 0 6px }
+  .price{ font-size:clamp(18px,4vw,26px); font-weight:800; margin:2px 0 10px }
+  .cta{ display:flex; gap:10px; flex-wrap:wrap }
   .cta .wbtn{
-    flex:1 1 220px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.18);
-    background:linear-gradient(180deg,rgba(20,209,197,.25),rgba(122,60,255,.25));color:#fff;font-weight:700;cursor:pointer;
+    flex:1 1 220px; height:46px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+    background:linear-gradient(180deg, rgba(20,209,197,.25), rgba(122,60,255,.25)); color:#fff; font-weight:700; cursor:pointer;
   }
-  footer{text-align:center;margin:28px 0 8px;color:var(--muted);font-size:12px}
-  footer a{color:#a9f2ec;text-decoration:underline}
+
+  footer{ text-align:center; margin:28px 0 8px; color:var(--muted); font-size:12px }
+  footer a{ color:#a9f2ec; text-decoration:underline }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- HERO (sem logo) -->
+  <!-- topo com logo transparente -->
   <section class="hero">
+    <img src="images/logo-conectplay.png?v=1" alt="ConectPlay">
     <h1>ConectPlay</h1>
     <p>Conectando você ao melhor do entretenimento!</p>
   </section>
 
-  <!-- PAINEL AFILIADO -->
+  <!-- afiliado -->
   <section class="panel">
     <div>
       <h3>Seu link de Afiliado</h3>
@@ -92,13 +105,13 @@
     <div class="how">
       <h3>Como funciona?</h3>
       <p>• Quem entrar com seu <b>?apelido=</b> verá os botões de WhatsApp identificados com você.</p>
-      <p>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido.</p>
+      <p>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido (se estiver na URL).</p>
       <button class="btn" id="btnCopiar" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)">Copiar último link gerado</button>
       <span id="copyStatus" class="muted" style="font-size:12px;"></span>
     </div>
   </section>
 
-  <!-- PLANOS -->
+  <!-- planos -->
   <section class="plans">
     <h2>Planos ConectPlay</h2>
     <div class="grid">
