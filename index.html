@@ -5,74 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ConectPlay — Conectando você ao melhor do entretenimento!</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 <style>
   :root{
     --card: rgba(0,0,0,0.55);
-    --card-border: rgba(255,255,255,0.15);
+    --card-border: rgba(255,255,255,0.18);
     --text:#ffffff;
     --muted:#d7d7e6;
     --btn:#12b886;
     --btn-hover:#0fa77a;
   }
-
-  *{box-sizing:border-box; margin:0; padding:0;}
+  *{box-sizing:border-box;margin:0;padding:0}
   html,body{
     height:100%;
     color:var(--text);
-    font-family:"Montserrat",sans-serif;
-    /* 🔥 FUNDO DA LOGO EM TODA A PÁGINA */
-    background: url("imagens/logo-conectplay.png") center center / cover no-repeat fixed;
+    font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    /* 🔥 Fundo usando a PRÓPRIA arte */
+    background: url("images/logo-conectplay.png?v=6") center center / cover no-repeat fixed, #0b0b1a;
   }
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none;
+    background:
+      radial-gradient(1200px 600px at 10% 0%, rgba(26,6,89,.45) 0%, transparent 60%),
+      radial-gradient(1000px 800px at 110% 10%, rgba(11,42,93,.35) 0%, transparent 60%);
+    mix-blend-mode:screen;
+  }
+  .container{width:min(1160px,92vw);margin:28px auto 80px}
+  .hero{text-align:center;margin:30px 0 18px}
+  .hero img{width:260px;max-width:60vw;height:auto;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .hero h1{font-weight:800;margin:20px 0 6px;font-size:clamp(28px,5vw,42px)}
+  .hero p{margin:0;color:var(--muted);font-size:clamp(14px,2.4vw,18px)}
 
-  .container{width:min(1160px,92vw);margin:28px auto 80px;}
-
-  /* HERO */
-  .hero{text-align:center;margin:30px 0 18px;}
-  .hero img{width:260px;max-width:60vw;height:auto;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5);}
-  .hero h1{font-weight:800;margin:20px 0 6px;font-size:clamp(28px,5vw,42px);}
-  .hero p{margin:0;color:var(--muted);font-size:clamp(14px,2.4vw,18px);}
-
-  /* PAINEL AFILIADO */
   .panel{
     margin-top:28px;background:var(--card);border:1px solid var(--card-border);border-radius:20px;
     padding:clamp(16px,3.2vw,28px);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(16px,2.8vw,28px);
     backdrop-filter:blur(8px);
   }
-  @media(max-width:920px){.panel{grid-template-columns:1fr}}
-
+  @media (max-width:920px){.panel{grid-template-columns:1fr}}
+  .panel h3{margin:0 0 12px;font-size:clamp(18px,3.2vw,22px)}
+  .input{display:flex;gap:10px;align-items:center}
   input[type="text"]{
     flex:1;height:50px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
-    background:rgba(255,255,255,0.1);color:#fff;padding:0 14px;font-size:16px;
+    background:rgba(255,255,255,.1);color:#fff;padding:0 14px;font-size:16px;outline:none;
   }
   .btn{
     height:50px;min-width:190px;border:none;border-radius:12px;background:var(--btn);
     color:#072016;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 6px 18px rgba(18,184,134,.35);
-    transition:background .2s ease, transform .06s ease;
+    transition:background .2s,transform .06s;
   }
-  .btn:hover{background:var(--btn-hover)}
-  .btn:active{transform:scale(.98)}
+  .btn:hover{background:var(--btn-hover)} .btn:active{transform:scale(.98)}
+  .muted{color:var(--muted);font-size:14px;line-height:1.5;margin-top:12px}
+  .how{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
 
-  .muted{color:var(--muted);font-size:14px;line-height:1.5;margin-top:12px;}
-  .how{background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.25);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;}
-  .ghost{height:50px;border-radius:12px;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.18);padding:0 16px;font-weight:700;cursor:pointer;}
-
-  /* PLANOS */
-  .plans{margin-top:22px;}
-  .plans h2{font-size:clamp(20px,4vw,28px);margin-bottom:14px;}
-  .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr);}
-  .card{grid-column:span 6;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:18px;backdrop-filter:blur(8px);}
-  @media(max-width:820px){.card{grid-column:span 12}}
-  .price{font-size:clamp(18px,4vw,26px);font-weight:800;margin:2px 0 10px;}
-  .cta{display:flex;gap:10px;flex-wrap:wrap;}
+  .plans{margin-top:22px}
+  .plans h2{font-size:clamp(20px,4vw,28px);margin-bottom:14px}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+  .card{grid-column:span 6;background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:18px;backdrop-filter:blur(8px)}
+  @media (max-width:820px){.card{grid-column:span 12}}
+  .price{font-size:clamp(18px,4vw,26px);font-weight:800;margin:2px 0 10px}
+  .cta{display:flex;gap:10px;flex-wrap:wrap}
   .cta .wbtn{
     flex:1 1 220px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.18);
-    background:linear-gradient(180deg,rgba(20,209,197,.25),rgba(122,60,255,.25));
-    color:#fff;font-weight:700;cursor:pointer;
+    background:linear-gradient(180deg,rgba(20,209,197,.25),rgba(122,60,255,.25));color:#fff;font-weight:700;cursor:pointer;
   }
 
-  footer{text-align:center;margin:28px 0 8px;color:var(--muted);font-size:12px;}
-  footer a{color:#a9f2ec;text-decoration:underline;}
+  footer{text-align:center;margin:28px 0 8px;color:var(--muted);font-size:12px}
+  footer a{color:#a9f2ec;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -80,29 +78,29 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img src="imagens/logo-conectplay.png?v=4" alt="ConectPlay logo">
+    <img src="images/logo-conectplay.png?v=6" alt="ConectPlay logo">
     <h1>ConectPlay</h1>
     <p>Conectando você ao melhor do entretenimento!</p>
   </section>
 
-  <!-- PAINEL DE AFILIADO -->
+  <!-- PAINEL AFILIADO -->
   <section class="panel">
     <div>
       <h3>Seu link de Afiliado</h3>
-      <div class="input" style="display:flex;gap:10px;margin-top:10px;">
+      <div class="input">
         <input id="apelido" type="text" placeholder="Ex: joaosilva">
         <button class="btn" id="btnGerar">Gerar meus links</button>
       </div>
-      <p class="muted tiny">Compartilhe o link com <code>?apelido=SEU_NOME</code> ou use o link direto do WhatsApp; os botões dos planos também levam seu apelido.</p>
+      <p class="muted">Compartilhe o link com <code>?apelido=SEU_NOME</code> ou use o link direto do WhatsApp; os botões dos planos também levam seu apelido.</p>
       <div id="meuLinkSite" class="muted" style="margin-top:8px;"></div>
       <div id="ultimoLink" class="muted" style="margin-top:6px;"></div>
     </div>
-
     <div class="how">
       <h3>Como funciona?</h3>
       <p>• Quem entrar com seu <b>?apelido=</b> verá os botões de WhatsApp identificados com você.</p>
-      <p>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido (se estiver na URL).</p>
-      <button class="ghost" id="btnCopiar">Copiar último link gerado</button><span id="copyStatus" class="tiny"></span>
+      <p>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido.</p>
+      <button class="btn" id="btnCopiar" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)">Copiar último link gerado</button>
+      <span id="copyStatus" class="muted" style="font-size:12px;"></span>
     </div>
   </section>
 
@@ -168,7 +166,7 @@
       await navigator.clipboard.writeText(link);
       copyStatus.textContent = "Link copiado!";
       setTimeout(()=> copyStatus.textContent = "", 2000);
-    }catch(e){ copyStatus.textContent = "Falha ao copiar."; }
+    }catch{ copyStatus.textContent = "Falha ao copiar."; }
   });
 
   function renderLinks(ap){
