@@ -60,8 +60,8 @@
 </head>
 <body>
   <header>
-    <!-- LOGO dentro da pasta images/ -->
-    <img src="images/logo-conectplay.png" alt="ConectPlay">
+    <!-- LOGO com ?v=2 para quebrar cache -->
+    <img src="images/logo-conectplay.png?v=2" alt="ConectPlay">
     <h1>ConectPlay</h1>
     <p class="slogan">Conectando você ao melhor do entretenimento!</p>
   </header>
@@ -71,7 +71,7 @@
     <!-- Mostra afiliado ativo se acessar com ?apelido= -->
     <div id="affBar" class="topbar" style="display:none"></div>
 
-    <!-- GERADOR DE LINK DO AFILIADO (parte de cima) -->
+    <!-- GERADOR DE LINK DO AFILIADO -->
     <section class="section">
       <h2>Seu link de Afiliado</h2>
       <div class="row">
@@ -167,7 +167,7 @@
       <p class="mini" style="margin-top:10px">Todos os planos contam com <b>teste grátis</b>.</p>
     </section>
 
-    <!-- LISTA DE AFILIADOS (planilha com colunas Apelido, Quantidade) -->
+    <!-- LISTA DE AFILIADOS -->
     <section class="section">
       <h2>Afiliados</h2>
       <div class="mini">Lista carregada da sua planilha (Apelido e Quantidade).</div>
@@ -189,7 +189,7 @@
     <div style="margin-top:6px">&copy; 2025 ConectPlay. Todos os direitos reservados.</div>
   </footer>
 
-  <!-- PapaParse local; se falhar, carrega CDN -->
+  <!-- PapaParse local com fallback -->
   <script src="js/papaparse.min.js" onerror="
     var s=document.createElement('script');
     s.src='https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';
@@ -197,74 +197,66 @@
   "></script>
 
   <script>
-    const WHATS = '5577991986049'; // +55 77 99198-6049
+    const WHATS = '5577991986049';
     const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVxgmYQsCQMXj4hycv10FMS8vNm1CF3EXgbyz2yVE-_ljhsPMmv0HOppUlYnMUejkuVcErojpLchgF/pub?output=csv';
 
-    // util: pegar parâmetro da URL
-    function getParam(n){ const u=new URL(location.href); return (u.searchParams.get(n)||'').trim(); }
-    const apelidoAtivo = getParam('apelido');
+    function getParam(n){const u=new URL(location.href);return(u.searchParams.get(n)||'').trim();}
+    const apelidoAtivo=getParam('apelido');
 
-    // mostra barra e preenche input se veio com ?apelido=
     (function(){
-      if(!apelidoAtivo) return;
-      const bar = document.getElementById('affBar');
-      bar.textContent = `Você está com o afiliado: ${apelidoAtivo}`;
-      bar.style.display = 'block';
-      const ipt = document.getElementById('apelido');
-      if(ipt && !ipt.value) ipt.value = apelidoAtivo;
+      if(!apelidoAtivo)return;
+      const bar=document.getElementById('affBar');
+      bar.textContent=`Você está com o afiliado: ${apelidoAtivo}`;
+      bar.style.display='block';
+      const ipt=document.getElementById('apelido');
+      if(ipt&&!ipt.value)ipt.value=apelidoAtivo;
     })();
 
-    // gerar links do afiliado
-    let ultimoLink = '';
+    let ultimoLink='';
     function gerarLinks(){
-      const ap = (document.getElementById('apelido').value||'').trim();
-      const out = document.getElementById('linksOut');
-      if(!ap){ out.innerHTML = `<span class="mini">Digite um apelido.</span>`; return; }
-
-      const linkSite = `${location.origin}${location.pathname}?apelido=${encodeURIComponent(ap)}`;
-      const msg = `Ol%C3%A1%2C+vim+atrav%C3%A9s+do+afiliado+${encodeURIComponent(ap)}+e+quero+saber+os+planos+da+ConectPlay.%20Pode%20me%20ajudar%3F`;
-      const linkZap  = `https://wa.me/${WHATS}?text=${msg}`;
-
-      ultimoLink = linkZap;
-      out.innerHTML = `
+      const ap=(document.getElementById('apelido').value||'').trim();
+      const out=document.getElementById('linksOut');
+      if(!ap){out.innerHTML=`<span class="mini">Digite um apelido.</span>`;return;}
+      const linkSite=`${location.origin}${location.pathname}?apelido=${encodeURIComponent(ap)}`;
+      const msg=`Ol%C3%A1%2C+vim+atrav%C3%A9s+do+afiliado+${encodeURIComponent(ap)}+e+quero+saber+os+planos+da+ConectPlay.%20Pode%20me%20ajudar%3F`;
+      const linkZap=`https://wa.me/${WHATS}?text=${msg}`;
+      ultimoLink=linkZap;
+      out.innerHTML=`
         <p><b>Link do seu site:</b><br><a href="${linkSite}" target="_blank">${linkSite}</a></p>
-        <p><b>Link direto do WhatsApp:</b><br><a href="${linkZap}" target="_blank">${linkZap}</a></p>
-      `;
+        <p><b>Link direto do WhatsApp:</b><br><a href="${linkZap}" target="_blank">${linkZap}</a></p>`;
     }
     function copiarUltimo(){
-      if(!ultimoLink){ alert('Gere um link primeiro.'); return; }
+      if(!ultimoLink){alert('Gere um link primeiro.');return;}
       navigator.clipboard.writeText(ultimoLink).then(()=>alert('Link copiado!'));
     }
 
-    // abrir WhatsApp com plano + afiliado (se houver)
     function abrirWhats(plano){
-      const ap = apelidoAtivo || (document.getElementById('apelido').value||'').trim();
-      const base = `Olá, quero saber mais sobre o plano: ${plano}.`;
-      const plus = ap ? ` Vim através do afiliado ${ap}.` : '';
-      const text = encodeURIComponent(base + plus);
-      window.open(`https://wa.me/${WHATS}?text=${text}`, '_blank');
+      const ap=apelidoAtivo||(document.getElementById('apelido').value||'').trim();
+      const base=`Olá, quero saber mais sobre o plano: ${plano}.`;
+      const plus=ap?` Vim através do afiliado ${ap}.`:'';
+      const text=encodeURIComponent(base+plus);
+      window.open(`https://wa.me/${WHATS}?text=${text}`,'_blank');
     }
 
-    // carregar afiliados da planilha CSV
     function carregarAfiliados(){
-      if(!window.Papa){ return setTimeout(carregarAfiliados, 400); }
-      Papa.parse(CSV_URL, {
-        download:true, header:true,
-        complete: function(res){
-          const TB = document.querySelector('#tAfiliados tbody');
-          TB.innerHTML = '';
-          const rows = (res.data||[])
-            .filter(r => r.Apelido && r.Quantidade)
-            .map(r => ({a:r.Apelido.trim(), q:Number(String(r.Quantidade).replace(',','.'))||0}));
-          rows.sort((x,y)=> y.q - x.q);
+      if(!window.Papa){return setTimeout(carregarAfiliados,400);}
+      Papa.parse(CSV_URL,{
+        download:true,header:true,
+        complete:function(res){
+          const TB=document.querySelector('#tAfiliados tbody');
+          TB.innerHTML='';
+          const rows=(res.data||[])
+            .filter(r=>r.Apelido&&r.Quantidade)
+            .map(r=>({a:r.Apelido.trim(),q:Number(String(r.Quantidade).replace(',','.'))||0}));
+          rows.sort((x,y)=>y.q-x.q);
           rows.forEach(r=>{
             const tr=document.createElement('tr');
-            tr.innerHTML = `<td>${r.a}</td><td>${r.q}</td>`;
+            tr.innerHTML=`<td>${r.a}</td><td>${r.q}</td>`;
             TB.appendChild(tr);
           });
         },
-        error: function(){
-          document.querySelector('#tAfiliados tbody').innerHTML =
+        error:function(){
+          document.querySelector('#tAfiliados tbody').innerHTML=
             `<tr><td colspan="2">Não foi possível carregar a planilha. Verifique o link CSV.</td></tr>`;
         }
       });
