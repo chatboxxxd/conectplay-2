@@ -9,11 +9,11 @@
 
 <style>
   :root{
-    /* cores principais (harmonizadas com a logo) */
-    --bg-1:#1a0752;   /* roxo escuro */
-    --bg-2:#261a7a;   /* roxo/azulado */
-    --bg-3:#2c0d91;   /* roxo vivo */
-    --accent:#14d1c5; /* ciano do brilho */
+    /* cores alinhadas com a arte da logo */
+    --bg-1:#11033f;   /* roxo escuro */
+    --bg-2:#1f1464;   /* roxo azulado */
+    --bg-3:#2c0d91;   /* violeta vivo */
+    --accent:#14d1c5; /* ciano brilhante */
     --accent-2:#7a3cff; /* roxo neon */
     --card: rgba(255,255,255,.08);
     --card-border: rgba(255,255,255,.12);
@@ -29,21 +29,23 @@
     margin:0;
     color:var(--text);
     font-family:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-    background: radial-gradient(1200px 600px at 10% 0%, #1c065a 0%, transparent 60%),
-                radial-gradient(1000px 800px at 110% 10%, #0c2f66 0%, transparent 60%),
-                linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3) 100%);
+    background:
+      radial-gradient(1200px 600px at 10% 0%, #1a0659 0%, transparent 60%),
+      radial-gradient(1000px 800px at 110% 10%, #0b2a5d 0%, transparent 60%),
+      linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3) 100%);
     overflow-x:hidden;
   }
 
-  /* camada das linhas curvas (SVG cobrindo a tela toda) */
-  .bg-waves{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-    opacity:.35;
-    filter: drop-shadow(0 0 6px rgba(20,209,197,.25));
+  /* fundo com linhas animadas */
+  @keyframes waveShift {
+    0%   { transform: translateX(0px) translateY(0px) }
+    50%  { transform: translateX(-16px) translateY(6px) }
+    100% { transform: translateX(0px) translateY(0px) }
   }
+  .bg-waves { position:fixed; inset:0; z-index:-1; opacity:.38; pointer-events:none }
+  .bg-waves g { animation: waveShift 14s ease-in-out infinite; }
+  .bg-waves g:nth-of-type(2){ animation-duration: 18s; animation-delay: -3s; opacity:.55 }
+  .bg-waves g:nth-of-type(3){ animation-duration: 22s; animation-delay: -6s; opacity:.42 }
 
   /* contêiner principal */
   .container{
@@ -217,43 +219,46 @@
     color: var(--muted);
     font-size:12px;
   }
+  footer a{ color:#a9f2ec; text-decoration:underline }
 </style>
 </head>
 <body>
 
-<!-- linhas curvas em SVG (combina com a logo) -->
-<svg class="bg-waves" viewBox="0 0 1440 900" preserveAspectRatio="none">
+<!-- FUNDO ANIMADO COM LINHAS (estilo da sua logo) -->
+<svg class="bg-waves" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
   <defs>
-    <linearGradient id="strokeGrad" x1="0" x2="1" y1="0" y2="0">
+    <linearGradient id="strokeGrad2" x1="0" x2="1" y1="0" y2="0">
       <stop offset="0%" stop-color="#14d1c5" stop-opacity="0.55"/>
-      <stop offset="50%" stop-color="#7a3cff" stop-opacity="0.50"/>
+      <stop offset="50%" stop-color="#7a3cff" stop-opacity="0.55"/>
       <stop offset="100%" stop-color="#14d1c5" stop-opacity="0.55"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="2.2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- várias curvas com offsets e transparências diferentes -->
-  <g stroke="url(#strokeGrad)" stroke-width="1.2" fill="none" filter="url(#glow)" opacity="0.7">
-    <path d="M0,140 C220,100 320,220 520,180 C720,140 880,40 1120,120 C1260,170 1360,210 1440,200" />
-    <path d="M0,220 C240,170 360,290 520,260 C740,220 900,110 1120,180 C1280,230 1370,300 1440,280" opacity=".75"/>
-    <path d="M0,320 C220,280 330,380 520,340 C720,300 900,220 1120,300 C1300,360 1380,380 1440,360" opacity=".6"/>
-    <path d="M0,420 C240,380 350,470 520,440 C720,400 900,330 1120,400 C1300,450 1400,500 1440,500" opacity=".5"/>
-    <path d="M0,520 C240,500 360,560 520,540 C740,520 920,470 1120,520 C1280,560 1400,600 1440,600" opacity=".45"/>
-    <path d="M0,640 C220,600 320,690 520,660 C720,630 900,590 1120,640 C1320,690 1400,720 1440,720" opacity=".40"/>
+  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)">
+    <path d="M0,130 C220,90 320,210 520,170 C720,130 880,40 1120,120 C1260,170 1360,210 1440,200"/>
+    <path d="M0,210 C240,160 360,280 520,250 C740,210 900,110 1120,180 C1280,230 1370,300 1440,280" opacity=".85"/>
+    <path d="M0,310 C220,270 330,370 520,330 C720,290 900,210 1120,290 C1300,350 1380,380 1440,360" opacity=".6"/>
+  </g>
+
+  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)">
+    <path d="M0,420 C240,380 350,470 520,440 C720,400 900,330 1120,400 C1300,450 1400,500 1440,500" opacity=".52"/>
+    <path d="M0,540 C220,500 320,590 520,560 C720,530 900,490 1120,540 C1320,590 1400,620 1440,620" opacity=".45"/>
+  </g>
+
+  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)" opacity=".36">
+    <path d="M0,640 C220,600 320,690 520,660 C720,630 900,590 1120,640 C1320,690 1400,720 1440,720"/>
   </g>
 </svg>
 
 <div class="container">
 
   <section class="hero">
-    <!-- troque o src se quiser usar outro arquivo de logo -->
-    <img src="images/logo-conectplay.jpeg" alt="ConectPlay logo">
+    <!-- LOGO: pasta 'imagens' + quebra de cache -->
+    <img src="imagens/logo-conectplay.png?v=2" alt="ConectPlay logo">
     <h1>ConectPlay</h1>
     <p>Conectando você ao melhor do entretenimento!</p>
   </section>
@@ -381,12 +386,16 @@
     </div>
   </section>
 
-  <footer>© ConectPlay — todos os direitos reservados</footer>
+  <footer>
+    © ConectPlay — todos os direitos reservados •
+    <a href="./politica-de-privacidade.html">Política de Privacidade</a> •
+    <a href="./termos-de-servico.html">Termos de Serviço</a>
+  </footer>
 </div>
 
 <script>
-  // número do WhatsApp (Fabrizio)
-  const WAPP_NUMBER = "557791986049";
+  // número do WhatsApp (+55 77 99198-6049)
+  const WAPP_NUMBER = "5577991986049";
 
   const qs = new URLSearchParams(location.search);
   const inputApelido = document.getElementById("apelido");
