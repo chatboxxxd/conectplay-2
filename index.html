@@ -1,278 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>ConectPlay — Afiliados & Planos</title>
-<link rel="icon" href="images/logo-conectplay.png">
-<style>
-  :root{
-    --bg1: #10062a;    /* escuro roxo */
-    --bg2: #0b1b3a;    /* azul noturno */
-    --neon-a: #7b5cff; /* roxo neon */
-    --neon-b: #2ce8ff; /* ciano neon */
-    --card: rgba(255,255,255,0.04);
-    --muted: rgba(255,255,255,0.6);
-    --whatsapp: #25D366;
-    --glass: rgba(255,255,255,0.03);
-  }
-  *{box-sizing:border-box;font-family:Inter, "Arial",sans-serif}
-  body{
-    margin:0;
-    min-height:100vh;
-    color:#eef2ff;
-    background: radial-gradient(1200px 400px at 10% 10%, rgba(124,92,255,0.12), transparent),
-                linear-gradient(135deg,var(--bg1),var(--bg2));
-    -webkit-font-smoothing:antialiased;
-    padding:20px;
-  }
-  .container{ max-width:1100px; margin:0 auto; }
-
-  header{ display:flex;gap:16px; align-items:center; margin-bottom:18px; }
-  header img{ width:96px; height:auto; border-radius:12px; box-shadow: 0 6px 24px rgba(46,14,120,0.28);}
-  header h1{ margin:0; font-size:20px; letter-spacing:0.6px; }
-  header p{ margin:4px 0 0 0; color:var(--muted); font-size:13px; }
-
-  .top{ display:flex; gap:16px; flex-wrap:wrap; background:var(--card); padding:16px; border-radius:12px; align-items:center;}
-  .col{ flex:1; min-width:220px; }
-  label{ display:block; font-size:13px; color:var(--muted); margin-bottom:8px; }
-  input[type="text"], select{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit; }
-  .link-preview{ background:var(--glass); padding:10px; border-radius:10px; color: #dfeaff; word-break:break-all; }
-
-  .actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-  .btn{ background: linear-gradient(90deg,var(--neon-a), var(--neon-b)); color:#041022; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700; box-shadow: 0 6px 18px rgba(46,14,120,0.18);}
-  .btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); box-shadow:none; }
-  .small{ font-size:13px; color:var(--muted); margin-top:6px; }
-
-  .grid{ display:grid; grid-template-columns:1fr 360px; gap:16px; margin-top:18px; align-items:start;}
-  @media(max-width:980px){ .grid{ grid-template-columns:1fr; } }
-
-  .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:12px; border-radius:12px; box-shadow: 0 6px 18px rgba(2,6,23,0.5); }
-  .plans{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
-  .plan{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:10px; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
-  .plan .title{ font-weight:800; color:#f4f6ff; }
-  .plan .price{ color:var(--neon-b); font-weight:700; }
-
-  .wh-btn{ display:inline-flex; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; background:var(--whatsapp); color:#032a12; font-weight:800; text-decoration:none; }
-
-  table{ width:100%; border-collapse:collapse; margin-top:8px; }
-  th, td{ padding:8px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); font-size:14px; color:#e9eefc; }
-  th{ color:var(--muted); font-weight:700; background:transparent; }
-
-  footer{ margin-top:18px; color:var(--muted); font-size:13px; text-align:center; }
-  .terms{ margin-top:10px; background:rgba(0,0,0,0.18); padding:10px; border-radius:8px; color:#dfe8ff; font-size:13px; }
-  .note{ font-size:13px; color:var(--muted); margin-top:8px; }
-
-  .copy-ok{ color:#00ff8a; font-weight:800; margin-left:8px; display:none; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConectPlay – Afiliados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3, #4361ee);
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      padding: 20px;
+    }
+    header img {
+      max-width: 180px;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 10px 0;
+    }
+    section {
+      margin: 20px auto;
+      max-width: 500px;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 15px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    input {
+      background: #fff;
+      color: #000;
+    }
+    button {
+      background: #ff6b6b;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #ff4040;
+    }
+    footer {
+      margin: 40px auto 20px;
+      font-size: 14px;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: underline;
+    }
+    @media(max-width:600px){
+      h1 { font-size: 22px; }
+      section { margin: 10px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="images/logo-conectplay.png" alt="ConectPlay logo" />
-      <div>
-        <h1>ConectPlay — Afiliados & Planos</h1>
-        <p>Gere seu link, compartilhe e acompanhe seu desempenho. Pagamentos por venda confirmado.</p>
-      </div>
-    </header>
 
-    <!-- TOP: afiliado / gerar link -->
-    <div class="top card">
-      <div class="col">
-        <label for="affiliateInput">Digite seu apelido (gera link):</label>
-        <input id="affiliateInput" type="text" placeholder="ex: joao-silva" />
-        <div class="small">Sem caracteres especiais — o sistema cria a versão "bonitinha".</div>
-      </div>
+  <header>
+    <img src="images/logo-conectplay.png" alt="Logo ConectPlay">
+    <h1>ConectPlay – Afiliados</h1>
+    <p>Gere seu link de afiliado abaixo:</p>
+  </header>
 
-      <div style="flex:0 0 360px;">
-        <label>Link de WhatsApp para compartilhar:</label>
-        <div class="link-preview" id="message-preview">—</div>
+  <!-- FORMULÁRIO DE GERAR LINK DE AFILIADO -->
+  <section>
+    <label for="apelido">Seu apelido:</label>
+    <input type="text" id="apelido" placeholder="Digite seu apelido">
+    <button onclick="gerarLink()">Gerar meu link</button>
 
-        <div class="actions">
-          <button class="btn" id="btn-generate" disabled>Gerar link WhatsApp</button>
-          <button class="btn ghost" id="btn-copy" disabled>Copiar link</button>
-          <span id="copy-ok" class="copy-ok">Copiado!</span>
-        </div>
-        <div class="note">O link abre direto o WhatsApp para enviar mensagem ao número fixo.</div>
-      </div>
-    </div>
+    <p id="resultado"></p>
+  </section>
 
-    <div class="grid">
-      <!-- LEFT -->
-      <div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0">Planos disponíveis</h3>
-          <div class="plans" id="plans-list">
-            <!-- preenchido via JS -->
-          </div>
-          <div class="note">Qualquer visitante pode escolher um plano e abrir WhatsApp com a mensagem pronta.</div>
-        </div>
+  <!-- RODAPÉ COM POLÍTICAS -->
+  <footer>
+    <p>
+      <a href="https://www.conectplay.org/politica-de-privacidade">Política de Privacidade</a> |
+      <a href="https://www.conectplay.org/termos-de-servico">Termos de Serviço</a>
+    </p>
+    <p>&copy; 2025 ConectPlay. Todos os direitos reservados.</p>
+  </footer>
 
-        <div class="card" style="margin-top:12px;">
-          <h3 style="margin:0 0 8px 0">Registrar Venda (Admin)</h3>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <input id="saleAffiliate" type="text" placeholder="Apelido do afiliado" style="flex:1" />
-            <input id="saleCliente" type="text" placeholder="Nome do cliente" style="flex:1" />
-            <select id="salePlano" style="flex:1"></select>
-            <div style="width:100%; display:flex; gap:8px; margin-top:8px;">
-              <button class="btn" id="btn-addSale">Registrar Venda</button>
-              <button class="btn ghost" id="btn-refresh">Atualizar Ranking</button>
-            </div>
-          </div>
-          <div id="sale-msg" class="small"></div>
-        </div>
-      </div>
+  <script>
+    function gerarLink() {
+      const apelido = document.getElementById('apelido').value.trim();
+      const resultado = document.getElementById('resultado');
+      if (!apelido) {
+        resultado.innerHTML = "<span style='color:yellow'>Digite um apelido para gerar o link.</span>";
+        return;
+      }
+      const link = `https://wa.me/5577991986049?text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+afiliado+${encodeURIComponent(apelido)}+e+quero+saber+mais+sobre+os+planos+da+ConectPlay.`;
+      resultado.innerHTML = `<span style="color:lightgreen">Seu link:</span><br><a href="${link}" target="_blank" style="color:#fff">${link}</a>`;
+    }
+  </script>
 
-      <!-- RIGHT -->
-      <aside>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0">Ranking de Afiliados</h3>
-          <table aria-label="ranking">
-            <thead>
-              <tr><th>#</th><th>Apelido</th><th>Vendas</th></tr>
-            </thead>
-            <tbody id="ranking-body">
-              <tr><td colspan="3" style="text-align:center;color:var(--muted)">Carregando...</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="card" style="margin-top:12px;">
-          <h3 style="margin:0 0 8px 0">Contato</h3>
-          <div style="display:flex;gap:8px;flex-direction:column;">
-            <a id="fixed-whatsapp" class="wh-btn" href="#" target="_blank">Falar no WhatsApp</a>
-            <div class="small">Telefone: +55 77 9198-6049</div>
-          </div>
-        </div>
-
-        <div class="card terms" style="margin-top:12px;">
-          <strong>Termos e Isenção</strong>
-          <p class="small" style="margin-top:8px">
-            O uso de links de afiliado é voluntário. A ConectPlay não se responsabiliza por decisões, pagamentos ou resultados decorrentes de transações feitas por terceiros. O afiliado é responsável por promover corretamente o serviço e seguir as regras locais e legais. Ao usar os links, você declara ser maior de idade e agir por sua própria responsabilidade.
-          </p>
-        </div>
-      </aside>
-    </div>
-
-    <footer>
-      &copy; 2025 ConectPlay. Todos os direitos reservados.
-    </footer>
-  </div>
-
-<script>
-const PHONE_NUMBER = '557791986049'; // WhatsApp fixo, sem +
-
-const PLANS = [
-  { id:'15dias', title:'15 DIAS DE USO', subtitle:'Teste - 15 dias', price:14.99 },
-  { id:'mensal1', title:'Mensal', subtitle:'1 acesso', price:20.99 },
-  { id:'mensal2', title:'Mensal', subtitle:'2 acessos', price:25.99 },
-  { id:'bimestral1', title:'Bimestral', subtitle:'1 acesso', price:41.99 },
-  { id:'bimestral2', title:'Bimestral', subtitle:'2 acessos', price:43.99 },
-  { id:'trimestral1', title:'Trimestral', subtitle:'1 acesso', price:74.99 },
-  { id:'trimestral2', title:'Trimestral', subtitle:'2 acessos', price:76.99 },
-  { id:'semestral1', title:'Semestral', subtitle:'1 acesso', price:149.99 },
-  { id:'semestral2', title:'Semestral', subtitle:'2 acessos', price:153.99 },
-  { id:'anual1', title:'Anual', subtitle:'1 acesso', price:297.99 },
-  { id:'anual2', title:'Anual', subtitle:'2 acessos', price:299.99 }
-];
-
-const affiliateInput = document.getElementById('affiliateInput');
-const messagePreview = document.getElementById('message-preview');
-const btnGenerate = document.getElementById('btn-generate');
-const btnCopy = document.getElementById('btn-copy');
-const copyOk = document.getElementById('copy-ok');
-const plansList = document.getElementById('plans-list');
-const fixedWhatsapp = document.getElementById('fixed-whatsapp');
-
-const saleAffiliate = document.getElementById('saleAffiliate');
-const saleCliente = document.getElementById('saleCliente');
-const salePlano = document.getElementById('salePlano');
-const btnAddSale = document.getElementById('btn-addSale');
-const btnRefresh = document.getElementById('btn-refresh');
-const saleMsg = document.getElementById('sale-msg');
-
-function makeSlug(name){
-  return name.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-z0-9\-]+/g,'-').replace(/\-+/g,'-').replace(/^\-+|\-+$/g,'');
-}
-
-function buildWhatsAppUrl(msg){
-  return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`;
-}
-
-function updatePreview(){
-  const manual = affiliateInput.value.trim();
-  const slug = manual ? makeSlug(manual) : '';
-  if(!slug){
-    messagePreview.textContent = 'Digite seu apelido para gerar o link.';
-    btnCopy.disabled = true;
-    btnGenerate.disabled = true;
-    return;
-  }
-  const msg = `Olá! Sou afiliado ${slug} e indico o serviço da ConectPlay. Gostaria de saber mais!`;
-  const link = buildWhatsAppUrl(msg);
-  messagePreview.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="color:#dce6ff;">${link}</a>`;
-  btnCopy.dataset.link = link;
-  btnCopy.disabled = false;
-  btnGenerate.disabled = false;
-}
-
-btnGenerate.addEventListener('click', () => {
-  // Abre o link direto no WhatsApp em nova aba
-  const link = btnCopy.dataset.link;
-  if(link){
-    window.open(link, '_blank');
-  }
-});
-
-btnCopy.addEventListener('click', () => {
-  const link = btnCopy.dataset.link;
-  if(!link) return;
-  navigator.clipboard.writeText(link).then(() => {
-    copyOk.style.display = 'inline';
-    setTimeout(() => copyOk.style.display = 'none', 2500);
-  });
-});
-
-affiliateInput.addEventListener('input', updatePreview);
-
-function renderPlans(){
-  plansList.innerHTML = '';
-  PLANS.forEach(p=>{
-    const div = document.createElement('div');
-    div.className = 'plan';
-    div.innerHTML = `
-      <div>
-        <div class="title">${p.title} <span style="font-weight:600;color:var(--muted);font-size:13px">• ${p.subtitle}</span></div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;">
-        <div class="price">R$ ${p.price.toFixed(2)}</div>
-        <button class="btn" style="margin-top:8px;" onclick="openPlan('${p.title}',${p.price})">Assinar</button>
-      </div>
-    `;
-    plansList.appendChild(div);
-
-    const opt = document.createElement('option');
-    opt.value = p.title;
-    opt.textContent = `${p.title} — R$ ${p.price.toFixed(2)}`;
-    salePlano.appendChild(opt);
-  });
-}
-
-function openPlan(planTitle, price){
-  const affiliate = affiliateInput.value.trim();
-  const affiliateSlug = makeSlug(affiliate);
-  const affiliateText = affiliateSlug ? `Afiliado: ${affiliateSlug}. ` : '';
-  const msg = `Olá! Quero adquirir o plano ${planTitle} por R$${price.toFixed(2)}. ${affiliateText}`;
-  window.open(buildWhatsAppUrl(msg), '_blank');
-}
-
-fixedWhatsapp.href = buildWhatsAppUrl('Olá, quero conhecer os planos da ConectPlay!');
-
-(function init(){
-  renderPlans();
-  updatePreview();
-})();
-</script>
 </body>
 </html>
