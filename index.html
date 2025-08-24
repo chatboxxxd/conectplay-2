@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ConectPlay — Links de Afiliado</title>
+<title>ConectPlay — Conectando você ao melhor do entretenimento!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -19,7 +19,7 @@
     --card-border: rgba(255,255,255,.12);
     --text:#ffffff;
     --muted:#d7d7e6;
-    --btn:#12b886;        /* botão principal (verde/teal) */
+    --btn:#12b886;
     --btn-hover:#0fa77a;
   }
 
@@ -36,233 +36,98 @@
     overflow-x:hidden;
   }
 
-  /* fundo com linhas animadas */
-  @keyframes waveShift {
-    0%   { transform: translateX(0px) translateY(0px) }
-    50%  { transform: translateX(-16px) translateY(6px) }
-    100% { transform: translateX(0px) translateY(0px) }
-  }
-  .bg-waves { position:fixed; inset:0; z-index:-1; opacity:.38; pointer-events:none }
-  .bg-waves g { animation: waveShift 14s ease-in-out infinite; }
-  .bg-waves g:nth-of-type(2){ animation-duration: 18s; animation-delay: -3s; opacity:.55 }
-  .bg-waves g:nth-of-type(3){ animation-duration: 22s; animation-delay: -6s; opacity:.42 }
-
+  /* fundo com linhas mais fortes, estilo da logo */
+  .bg-waves{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
   /* contêiner principal */
-  .container{
-    width:min(1160px, 92vw);
-    margin: 28px auto 80px;
-  }
+  .container{ width:min(1160px, 92vw); margin:28px auto 80px; }
 
-  /* topo: logo + título */
-  .hero{
-    text-align:center;
-    margin-top: 12px;
-    margin-bottom: 18px;
-  }
-  .hero img{
-    width: 280px;
-    max-width: 60vw;
-    height:auto;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  }
-  .hero h1{
-    font-weight:800;
-    letter-spacing:.4px;
-    margin: 20px 0 6px;
-    font-size: clamp(28px, 5vw, 42px);
-  }
-  .hero p{
-    margin:0;
-    color:var(--muted);
-    font-size: clamp(14px, 2.4vw, 18px);
-  }
+  /* hero */
+  .hero{ text-align:center; margin-top:12px; margin-bottom:18px; }
+  .hero img{ width:280px; max-width:60vw; height:auto; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+  .hero h1{ font-weight:800; letter-spacing:.4px; margin:20px 0 6px; font-size:clamp(28px,5vw,42px); }
+  .hero p{ margin:0; color:var(--muted); font-size:clamp(14px,2.4vw,18px); }
 
-  /* card grande de afiliado */
+  /* painel afiliado */
   .panel{
-    margin-top: 28px;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: clamp(16px, 3.2vw, 28px);
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap: clamp(16px, 2.8vw, 28px);
-    backdrop-filter: blur(6px);
+    margin-top:28px; background:var(--card); border:1px solid var(--card-border); border-radius:20px;
+    padding:clamp(16px,3.2vw,28px); display:grid; grid-template-columns:1.1fr .9fr;
+    gap:clamp(16px,2.8vw,28px); backdrop-filter:blur(6px);
   }
-  @media (max-width: 920px){
-    .panel{ grid-template-columns:1fr }
-  }
-
-  .panel h3{
-    margin:0 0 12px;
-    font-size: clamp(18px, 3.2vw, 22px);
-  }
-  label{
-    font-weight:700;
-    display:block;
-    margin-bottom:8px;
-  }
-  .input{
-    display:flex; gap:10px; align-items:center;
-  }
+  @media (max-width:920px){ .panel{ grid-template-columns:1fr } }
+  .panel h3{ margin:0 0 12px; font-size:clamp(18px,3.2vw,22px); }
+  label{ font-weight:700; display:block; margin-bottom:8px; }
+  .input{ display:flex; gap:10px; align-items:center; }
   input[type="text"]{
-    flex:1;
-    height:50px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.18);
-    background: rgba(0,0,0,.25);
-    color:var(--text);
-    padding:0 14px;
-    outline:none;
-    font-size:16px;
+    flex:1; height:50px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+    background:rgba(0,0,0,.25); color:var(--text); padding:0 14px; font-size:16px; outline:none;
   }
   .btn{
-    height:50px;
-    min-width: 190px;
-    border:none;
-    border-radius:12px;
-    background: var(--btn);
-    color:#072016;
-    font-weight:800;
-    font-size:16px;
-    cursor:pointer;
-    box-shadow: 0 6px 18px rgba(18,184,134,.35);
-    transition: transform .06s ease, background .2s ease;
-    white-space:nowrap;
+    height:50px; min-width:190px; border:none; border-radius:12px; background:var(--btn);
+    color:#072016; font-weight:800; font-size:16px; cursor:pointer; box-shadow:0 6px 18px rgba(18,184,134,.35);
+    transition:background .2s ease, transform .06s ease;
   }
   .btn:hover{ background:var(--btn-hover) }
-  .btn:active{ transform: scale(.98) }
+  .btn:active{ transform:scale(.98) }
+  .muted{ color:var(--muted); font-size:14px; line-height:1.5; margin-top:12px; }
 
-  .muted{
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.5;
-    margin-top:12px;
-  }
+  .how{ background:rgba(0,0,0,.15); border:1px dashed rgba(255,255,255,.18); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px; }
+  .how .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .ghost{ height:50px; border-radius:12px; background:rgba(255,255,255,.06); color:#fff; border:1px solid rgba(255,255,255,.18); padding:0 16px; font-weight:700; cursor:pointer; }
+  .tiny{ font-size:12px; opacity:.85; }
 
-  .how{
-    background: rgba(0,0,0,.15);
-    border:1px dashed rgba(255,255,255,.18);
-    border-radius:14px;
-    padding:14px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    justify-content:space-between;
-  }
-  .how .row{
-    display:flex; gap:10px; align-items:center;
-    flex-wrap:wrap;
-  }
-  .ghost{
-    height:50px;
-    border-radius:12px;
-    background: rgba(255,255,255,.06);
-    color:#fff;
-    border:1px solid rgba(255,255,255,.18);
-    padding:0 16px;
-    font-weight:700;
-    cursor:pointer;
-  }
-  .tiny{
-    font-size:12px; opacity:.85;
-  }
-
-  /* seção de planos */
-  .plans{
-    margin-top: 22px;
-  }
-  .plans h2{
-    font-size: clamp(20px, 4vw, 28px);
-    margin: 0 0 14px;
-  }
-  .grid{
-    display:grid;
-    gap:14px;
-    grid-template-columns: repeat(12, 1fr);
-  }
-  .card{
-    grid-column: span 6;
-    background: var(--card);
-    border:1px solid var(--card-border);
-    border-radius:16px;
-    padding:18px;
-  }
-  @media (max-width: 820px){
-    .card{ grid-column: span 12 }
-  }
-  .card h4{ margin:0 0 8px; font-size:18px }
-  .price{
-    font-size: clamp(18px, 4vw, 26px);
-    font-weight:800;
-    margin: 2px 0 10px;
-  }
-  .cta{
-    display:flex; gap:10px; flex-wrap:wrap;
-  }
+  /* planos */
+  .plans{ margin-top:22px; }
+  .plans h2{ font-size:clamp(20px,4vw,28px); margin:0 0 14px; }
+  .grid{ display:grid; gap:14px; grid-template-columns:repeat(12,1fr); }
+  .card{ grid-column:span 6; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:18px; }
+  @media (max-width:820px){ .card{ grid-column:span 12 } }
+  .price{ font-size:clamp(18px,4vw,26px); font-weight:800; margin:2px 0 10px; }
+  .cta{ display:flex; gap:10px; flex-wrap:wrap; }
   .cta .wbtn{
-    flex:1 1 220px;
-    height:46px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.18);
-    background: linear-gradient(180deg, rgba(20,209,197,.15), rgba(122,60,255,.15));
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
+    flex:1 1 220px; height:46px; border-radius:12px; border:1px solid rgba(255,255,255,.18);
+    background:linear-gradient(180deg, rgba(20,209,197,.15), rgba(122,60,255,.15)); color:#fff; font-weight:700; cursor:pointer;
   }
 
-  /* rodapé pequeno */
-  footer{
-    text-align:center;
-    margin: 28px 0 8px;
-    color: var(--muted);
-    font-size:12px;
-  }
+  footer{ text-align:center; margin:28px 0 8px; color:var(--muted); font-size:12px; }
   footer a{ color:#a9f2ec; text-decoration:underline }
 </style>
 </head>
 <body>
 
-<!-- FUNDO ANIMADO COM LINHAS (estilo da sua logo) -->
+<!-- FUNDO ESTILO LOGO (linhas fortes com brilho roxo↔ciano) -->
 <svg class="bg-waves" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
   <defs>
-    <linearGradient id="strokeGrad2" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="#14d1c5" stop-opacity="0.55"/>
-      <stop offset="50%" stop-color="#7a3cff" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#14d1c5" stop-opacity="0.55"/>
+    <linearGradient id="strokeGrad3" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#14d1c5" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#7a3cff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#14d1c5" stop-opacity="0.9"/>
     </linearGradient>
-    <filter id="glow2">
-      <feGaussianBlur stdDeviation="2.2" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
-  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)">
-    <path d="M0,130 C220,90 320,210 520,170 C720,130 880,40 1120,120 C1260,170 1360,210 1440,200"/>
-    <path d="M0,210 C240,160 360,280 520,250 C740,210 900,110 1120,180 C1280,230 1370,300 1440,280" opacity=".85"/>
-    <path d="M0,310 C220,270 330,370 520,330 C720,290 900,210 1120,290 C1300,350 1380,380 1440,360" opacity=".6"/>
-  </g>
-
-  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)">
-    <path d="M0,420 C240,380 350,470 520,440 C720,400 900,330 1120,400 C1300,450 1400,500 1440,500" opacity=".52"/>
-    <path d="M0,540 C220,500 320,590 520,560 C720,530 900,490 1120,540 C1320,590 1400,620 1440,620" opacity=".45"/>
-  </g>
-
-  <g stroke="url(#strokeGrad2)" stroke-width="1.2" fill="none" filter="url(#glow2)" opacity=".36">
-    <path d="M0,640 C220,600 320,690 520,660 C720,630 900,590 1120,640 C1320,690 1400,720 1440,720"/>
+  <g stroke="url(#strokeGrad3)" stroke-width="1.6" fill="none" filter="url(#neonGlow)" opacity="0.8">
+    <path d="M0,60 C180,20 300,160 500,100 C700,40 900,0 1140,80 C1280,130 1400,200 1440,160"/>
+    <path d="M0,160 C200,120 320,260 520,200 C720,140 880,80 1120,160 C1300,210 1380,260 1440,240" opacity=".85"/>
+    <path d="M0,260 C180,220 330,320 520,280 C700,240 880,160 1120,220 C1300,280 1380,340 1440,320" opacity=".7"/>
+    <path d="M0,360 C200,320 360,400 520,360 C700,320 880,240 1120,300 C1300,360 1380,420 1440,400" opacity=".6"/>
+    <path d="M0,460 C220,420 380,480 520,440 C700,400 880,320 1120,380 C1300,440 1400,500 1440,480" opacity=".55"/>
+    <path d="M0,560 C220,520 360,600 520,560 C720,520 900,440 1120,500 C1300,560 1380,600 1440,580" opacity=".5"/>
   </g>
 </svg>
 
 <div class="container">
 
+  <!-- topo -->
   <section class="hero">
-    <!-- LOGO: pasta 'imagens' + quebra de cache -->
-    <img src="imagens/logo-conectplay.png?v=2" alt="ConectPlay logo">
+    <!-- LOGO (pasta 'imagens' + quebra de cache) -->
+    <img src="imagens/logo-conectplay.png?v=3" alt="ConectPlay logo">
     <h1>ConectPlay</h1>
     <p>Conectando você ao melhor do entretenimento!</p>
   </section>
 
+  <!-- afiliado -->
   <section class="panel">
     <div>
       <h3>Seu link de Afiliado</h3>
@@ -271,123 +136,39 @@
         <input id="apelido" type="text" placeholder="Ex: joaosilva">
         <button class="btn" id="btnGerar">Gerar meus links</button>
       </div>
-      <p class="muted tiny">Compartilhe o link do site com <code>?apelido=SEU_NOME</code> ou use o link direto do WhatsApp abaixo (os botões dos planos também pegam seu apelido).</p>
+      <p class="muted tiny">Compartilhe o link do site com <code>?apelido=SEU_NOME</code> ou use o link direto do WhatsApp; os botões dos planos também levam seu apelido se ele estiver na URL.</p>
       <div class="muted" id="meuLinkSite" style="margin-top:8px;"></div>
       <div class="muted" id="ultimoLink" style="margin-top:6px;"></div>
     </div>
 
     <div class="how">
       <h3>Como funciona?</h3>
-      <div class="row">
-        <span>• Quem entrar com seu <b>?apelido=</b> verá os botões de WhatsApp identificados com você.</span>
-      </div>
-      <div class="row">
-        <span>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido (se estiver na URL).</span>
-      </div>
-      <div class="row">
-        <button class="ghost" id="btnCopiar">Copiar último link gerado</button>
-        <span class="tiny" id="copyStatus"></span>
-      </div>
+      <div class="row"><span>• Quem entrar com seu <b>?apelido=</b> verá os botões de WhatsApp identificados com você.</span></div>
+      <div class="row"><span>• Os botões dos planos abrem o WhatsApp com o plano + seu apelido (se estiver na URL).</span></div>
+      <div class="row"><button class="ghost" id="btnCopiar">Copiar último link gerado</button><span class="tiny" id="copyStatus"></span></div>
     </div>
   </section>
 
+  <!-- planos -->
   <section class="plans">
     <h2>Planos ConectPlay</h2>
     <div class="grid">
-
-      <div class="card">
-        <h4>15 dias de uso</h4>
-        <div class="price">R$ 14,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="15 dias de uso - R$ 14,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Mensal (1 acesso)</h4>
-        <div class="price">R$ 20,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Mensal (2 acessos)</h4>
-        <div class="price">R$ 25,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Bimestral (1 acesso)</h4>
-        <div class="price">R$ 41,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Bimestral (1 acesso) - R$ 41,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Bimestral (2 acessos)</h4>
-        <div class="price">R$ 43,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Trimestral (1 acesso)</h4>
-        <div class="price">R$ 74,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Trimestral (1 acesso) - R$ 74,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Trimestral (2 acessos)</h4>
-        <div class="price">R$ 76,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Trimestral (2 acessos) - R$ 76,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Semestral (1 acesso)</h4>
-        <div class="price">R$ 149,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Semestral (1 acesso) - R$ 149,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Semestral (2 acessos)</h4>
-        <div class="price">R$ 153,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Semestral (2 acessos) - R$ 153,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Anual (1 acesso)</h4>
-        <div class="price">R$ 297,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h4>Anual (2 acessos)</h4>
-        <div class="price">R$ 299,99</div>
-        <div class="cta">
-          <button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Abrir no WhatsApp</button>
-        </div>
-      </div>
-
+      <div class="card"><h4>15 dias de uso</h4><div class="price">R$ 14,99</div><div class="cta"><button class="wbtn" data-plano="15 dias de uso - R$ 14,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Mensal (1 acesso)</h4><div class="price">R$ 20,99</div><div class="cta"><button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Mensal (2 acessos)</h4><div class="price">R$ 25,99</div><div class="cta"><button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Bimestral (1 acesso)</h4><div class="price">R$ 41,99</div><div class="cta"><button class="wbtn" data-plano="Bimestral (1 acesso) - R$ 41,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Bimestral (2 acessos)</h4><div class="price">R$ 43,99</div><div class="cta"><button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Trimestral (1 acesso)</h4><div class="price">R$ 74,99</div><div class="cta"><button class="wbtn" data-plano="Trimestral (1 acesso) - R$ 74,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Trimestral (2 acessos)</h4><div class="price">R$ 76,99</div><div class="cta"><button class="wbtn" data-plano="Trimestral (2 acessos) - R$ 76,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Semestral (1 acesso)</h4><div class="price">R$ 149,99</div><div class="cta"><button class="wbtn" data-plano="Semestral (1 acesso) - R$ 149,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Semestral (2 acessos)</h4><div class="price">R$ 153,99</div><div class="cta"><button class="wbtn" data-plano="Semestral (2 acessos) - R$ 153,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Anual (1 acesso)</h4><div class="price">R$ 297,99</div><div class="cta"><button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Abrir no WhatsApp</button></div></div>
+      <div class="card"><h4>Anual (2 acessos)</h4><div class="price">R$ 299,99</div><div class="cta"><button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Abrir no WhatsApp</button></div></div>
     </div>
   </section>
 
   <footer>
-    © ConectPlay — todos os direitos reservados •
+    © 2025 ConectPlay — todos os direitos reservados •
     <a href="./politica-de-privacidade.html">Política de Privacidade</a> •
     <a href="./termos-de-servico.html">Termos de Serviço</a>
   </footer>
@@ -413,16 +194,16 @@
   }
 
   // gera links quando clica
-  btnGerar.addEventListener("click", () => {
-    const ap = (inputApelido.value || "").trim();
-    if(!ap){ alert("Digite um apelido."); return; }
-    renderLinks(ap);
-    // atualiza o endereço do site com ?apelido
-    const newUrl = location.pathname + "?apelido=" + encodeURIComponent(ap);
-    history.replaceState(null, "", newUrl);
-  });
+  if(btnGerar){
+    btnGerar.addEventListener("click", () => {
+      const ap = (inputApelido.value || "").trim();
+      if(!ap){ alert("Digite um apelido."); return; }
+      renderLinks(ap);
+      history.replaceState(null, "", location.pathname + "?apelido=" + encodeURIComponent(ap));
+    });
+  }
 
-  // aplica em todos os botões de plano
+  // aplica nos botões de plano
   document.querySelectorAll(".wbtn").forEach(btn => {
     btn.addEventListener("click", () => {
       const ap = (inputApelido.value || "").trim();
@@ -433,36 +214,33 @@
     });
   });
 
-  // copiar último link gerado
-  btnCopiar.addEventListener("click", async () => {
-    const link = localStorage.getItem("ultimoLink");
-    if(!link){ copyStatus.textContent = "Nenhum link gerado ainda."; return; }
-    try{
-      await navigator.clipboard.writeText(link);
-      copyStatus.textContent = "Link copiado!";
-      setTimeout(()=> copyStatus.textContent = "", 2000);
-    }catch(e){
-      copyStatus.textContent = "Falha ao copiar.";
-    }
-  });
+  // copiar último link
+  if(btnCopiar){
+    btnCopiar.addEventListener("click", async () => {
+      const link = localStorage.getItem("ultimoLink");
+      if(!link){ copyStatus.textContent = "Nenhum link gerado ainda."; return; }
+      try{
+        await navigator.clipboard.writeText(link);
+        copyStatus.textContent = "Link copiado!";
+        setTimeout(()=> copyStatus.textContent = "", 2000);
+      }catch(e){ copyStatus.textContent = "Falha ao copiar."; }
+    });
+  }
 
   function renderLinks(ap){
     const siteLink = location.origin + location.pathname + "?apelido=" + encodeURIComponent(ap);
-    meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
-    // também gera um link direto (padrão) para salvar como "último"
+    if(meuLinkSite){
+      meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
+    }
     const url = buildWhats("Contato inicial", ap);
     localStorage.setItem("ultimoLink", url);
-    ultimoLink.innerHTML = `💬 <b>Último link de WhatsApp (padrão):</b> <a style="color:#a9f2ec" href="${url}" target="_blank">${url}</a>`;
+    if(ultimoLink){
+      ultimoLink.innerHTML = `💬 <b>Último link de WhatsApp (padrão):</b> <a style="color:#a9f2ec" href="${url}" target="_blank">${url}</a>`;
+    }
   }
-
   function buildWhats(plano, apelido){
-    const msg =
-`Olá! Tenho interesse no plano:
-• ${plano}
-Apelido do afiliado: ${apelido || "(não informado)"}
-Pode me orientar no cadastro?`;
-    const text = encodeURIComponent(msg);
-    return `https://wa.me/${WAPP_NUMBER}?text=${text}`;
+    const msg = `Olá! Tenho interesse no plano:\n• ${plano}\nApelido do afiliado: ${apelido || "(não informado)"}\nPode me orientar no cadastro?`;
+    return `https://wa.me/${WAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
   }
 </script>
 </body>
