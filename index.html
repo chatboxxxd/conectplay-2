@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ConectPlay – Conectando você ao melhor do entretenimento!</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg1:#3a0ca3; --bg2:#4361ee; --card:rgba(255,255,255,.08);
-    --text:#fff; --muted:rgba(255,255,255,.8); --accent:#22d3ee; --cta:#10b981;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--text);
-    background:linear-gradient(135deg,var(--bg1),var(--bg2)) fixed;
-  }
-  header{padding:24px 16px; text-align:center}
-  header img{max-width:160px; height:auto}
-  h1{margin:12px 0 6px; font-size:28px}
-  .slogan{margin:0; color:var(--muted)}
-  .container{max-width:1000px; margin:0 auto; padding:12px 16px 40px}
-  .section{background:var(--card); padding:18px; border-radius:16px; backdrop-filter:blur(6px); margin:14px 0}
-  .section h2{margin:0 0 12px; font-size:20px}
-  .row{display:grid; gap:12px}
-  @media(min-width:720px){ .row{grid-template-columns:repeat(2,1fr)} }
-  @media(min-width:980px){ .plans{grid-template-columns:repeat(3,1fr)} }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ConectPlay – Conectando você ao melhor do entretenimento!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#3a0ca3; --bg2:#4361ee; --card:rgba(255,255,255,.08);
+      --text:#fff; --muted:rgba(255,255,255,.8); --accent:#22d3ee; --cta:#10b981;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:linear-gradient(135deg,var(--bg1),var(--bg2)) fixed;
+    }
+    a{color:#fff}
+    header{padding:24px 16px; text-align:center}
+    header img{max-width:160px; height:auto}
+    h1{margin:12px 0 6px; font-size:28px}
+    .slogan{margin:0; color:var(--muted)}
+    .container{max-width:1000px; margin:0 auto; padding:12px 16px 40px}
+    .section{background:var(--card); padding:18px; border-radius:16px; backdrop-filter:blur(6px); margin:14px 0}
+    .section h2{margin:0 0 12px; font-size:20px}
+    .row{display:grid; gap:12px}
+    @media(min-width:720px){ .row{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:980px){ .plans{grid-template-columns:repeat(3,1fr)} }
 
-  /* AFILIADO */
-  .aff-box label{display:block; margin:8px 0 6px; font-weight:600}
-  .input, .btn{
-    width:100%; padding:12px 14px; border-radius:10px; border:0; font:inherit;
-  }
-  .input{background:#fff; color:#111; margin-bottom:10px}
-  .btn{cursor:pointer; font-weight:700}
-  .btn-primary{background:var(--cta); color:#083b2e}
-  .btn-outline{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.35)}
-  .mini{font-size:14px; color:var(--muted)}
-  .aff-result a{color:#fff; word-break:break-all}
+    /* AFILIADO */
+    .aff-box label{display:block; margin:8px 0 6px; font-weight:600}
+    .input, .btn{
+      width:100%; padding:12px 14px; border-radius:10px; border:0; font:inherit;
+    }
+    .input{background:#fff; color:#111; margin-bottom:10px}
+    .btn{cursor:pointer; font-weight:700}
+    .btn-primary{background:var(--cta); color:#083b2e}
+    .btn-outline{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.35)}
+    .mini{font-size:14px; color:var(--muted)}
+    .aff-result a{color:#fff; word-break:break-all}
+    .topbar{background:rgba(0,0,0,.25); padding:8px 12px; text-align:center; font-size:14px; border-radius:10px; margin-bottom:10px}
 
-  /* PLANS */
-  .plans{display:grid; gap:14px}
-  .plan{background:var(--card); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px}
-  .plan h3{margin:0 0 6px}
-  .price{font-size:22px; font-weight:700; margin:6px 0 10px}
-  .features{list-style:none; padding:0; margin:0 0 12px}
-  .features li{margin:6px 0; color:var(--muted)}
-  .plan .btn{margin-top:6px}
+    /* PLANS */
+    .plans{display:grid; gap:14px}
+    .plan{background:var(--card); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px}
+    .plan h3{margin:0 0 6px}
+    .price{font-size:22px; font-weight:700; margin:6px 0 10px}
+    .features{list-style:none; padding:0; margin:0 0 12px}
+    .features li{margin:6px 0; color:var(--muted)}
+    .plan .btn{margin-top:6px}
 
-  /* TABELA AFILIADOS */
-  table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
-  th,td{padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.16); text-align:left}
-  th{background:rgba(0,0,0,.25)}
-  tr:hover{background:rgba(255,255,255,.06)}
+    /* TABELA AFILIADOS */
+    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
+    th,td{padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.16); text-align:left}
+    th{background:rgba(0,0,0,.25)}
+    tr:hover{background:rgba(255,255,255,.06)}
 
-  footer{padding:24px 16px; text-align:center; color:var(--muted)}
-  footer a{color:#fff; text-decoration:underline}
-  .topbar{
-    background:rgba(0,0,0,.25); padding:8px 12px; text-align:center; font-size:14px; border-radius:10px; margin-bottom:10px
-  }
-</style>
+    footer{padding:24px 16px; text-align:center; color:var(--muted)}
+    footer a{text-decoration:underline}
+  </style>
 </head>
 <body>
   <header>
-    <!-- troque o src da logo se necessário -->
-    <img src="images/logo-conectplay.png" alt="ConectPlay">
+    <!-- A LOGO ESTÁ NA RAIZ DO REPOSITÓRIO -->
+    <img src="logo-conectplay.png" alt="ConectPlay">
     <h1>ConectPlay</h1>
     <p class="slogan">Conectando você ao melhor do entretenimento!</p>
   </header>
 
   <div class="container">
 
-    <!-- Aviso de afiliado ativo via ?apelido= -->
+    <!-- Mostra o afiliado ativo se acessar com ?apelido= -->
     <div id="affBar" class="topbar" style="display:none"></div>
 
     <!-- GERADOR DE LINK DO AFILIADO (PARTE DE CIMA) -->
@@ -82,15 +81,14 @@
           <label for="apelido">Apelido do afiliado</label>
           <input id="apelido" class="input" placeholder="Ex: joaosilva">
           <button class="btn btn-primary" onclick="gerarLinks()">Gerar meus links</button>
-          <p class="mini">Use para compartilhar seu link do site e o link direto para WhatsApp.</p>
+          <p class="mini">Compartilhe o link do site com <code>?apelido=SEU_NOME</code> ou o link direto do WhatsApp já com seu apelido.</p>
           <div id="linksOut" class="aff-result"></div>
         </div>
         <div class="aff-box">
           <label>Como funciona?</label>
           <p class="mini">
-            • Compartilhe o <b>link do site</b> com <code>?apelido=SEU_NOME</code> — assim os botões já
-            levam seu apelido na mensagem.<br>
-            • Ou envie o <b>link direto do WhatsApp</b> já com seu apelido no texto.
+            • O visitante que entrar com o seu <b>?apelido=</b> verá os botões de WhatsApp já identificados com você.<br>
+            • Use o botão dos planos para abrir o WhatsApp com o plano + seu apelido (se estiver na URL).
           </p>
           <button class="btn btn-outline" onclick="copiarUltimo()">Copiar último link gerado</button>
         </div>
@@ -101,7 +99,6 @@
     <section class="section">
       <h2>Planos ConectPlay</h2>
       <div class="plans">
-        <!-- 15 DIAS -->
         <div class="plan">
           <h3>15 dias de uso</h3>
           <div class="price">R$ 14,99</div>
@@ -112,7 +109,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Plano 15 dias - R$14,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- MENSAL 1 -->
         <div class="plan">
           <h3>Mensal (1 acesso)</h3>
           <div class="price">R$ 20,99</div>
@@ -123,7 +119,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Mensal 1 acesso - R$20,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- MENSAL 2 -->
         <div class="plan">
           <h3>Mensal (2 acessos)</h3>
           <div class="price">R$ 25,99</div>
@@ -134,7 +129,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Mensal 2 acessos - R$25,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- BIMESTRAL -->
         <div class="plan">
           <h3>Bimestral (1 acesso)</h3>
           <div class="price">R$ 41,99</div>
@@ -155,7 +149,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Bimestral 2 acessos - R$43,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- TRIMESTRAL -->
         <div class="plan">
           <h3>Trimestral (1 acesso)</h3>
           <div class="price">R$ 74,99</div>
@@ -176,7 +169,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Trimestral 2 acessos - R$76,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- SEMESTRAL -->
         <div class="plan">
           <h3>Semestral (1 acesso)</h3>
           <div class="price">R$ 149,99</div>
@@ -197,7 +189,6 @@
           <button class="btn btn-primary" onclick="abrirWhats('Semestral 2 acessos - R$153,99')">Falar no WhatsApp</button>
         </div>
 
-        <!-- ANUAL -->
         <div class="plan">
           <h3>Anual (1 acesso)</h3>
           <div class="price">R$ 297,99</div>
@@ -221,7 +212,7 @@
       <p class="mini" style="margin-top:10px">Todos os planos contam com <b>teste grátis</b>.</p>
     </section>
 
-    <!-- RANKING/ LISTA DE AFILIADOS (LENDO A PLANILHA) -->
+    <!-- LISTA DE AFILIADOS (Planilha: colunas Apelido, Quantidade) -->
     <section class="section">
       <h2>Afiliados</h2>
       <div class="mini">Lista carregada da sua planilha (Apelido e Quantidade).</div>
@@ -237,13 +228,13 @@
 
   <footer>
     <div>
-      <a href="./politica-de-privacidade.html">Política de Privacidade</a> •
-      <a href="./termos-de-servico.html">Termos de Serviço</a>
+      <a href="./política-de-privacidade.html">Política de Privacidade</a> •
+      <a href="./termos-de-serviço.html">Termos de Serviço</a>
     </div>
     <div style="margin-top:6px">&copy; 2025 ConectPlay. Todos os direitos reservados.</div>
   </footer>
 
-  <!-- PapaParse: tenta local; se falhar, carrega CDN -->
+  <!-- PapaParse local; se falhar, carrega CDN -->
   <script src="js/papaparse.min.js" onerror="
     var s=document.createElement('script');
     s.src='https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';
@@ -251,33 +242,33 @@
   "></script>
 
   <script>
-    const WHATS = '5577991986049'; // número E.164 (Brasil +55 77 99198-6049)
+    const WHATS = '5577991986049'; // +55 77 99198-6049
+    // CSV público da sua planilha (ajuste se tiver outro ID/aba):
     const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVxgmYQsCQMXj4hycv10FMS8vNm1CF3EXgbyz2yVE-_ljhsPMmv0HOppUlYnMUejkuVcErojpLchgF/pub?output=csv';
 
-    // Lê ?apelido= da URL
+    // Utilitário: ler parâmetro da URL
     function getParam(n){
       const u=new URL(location.href);
       return (u.searchParams.get(n)||'').trim();
     }
     const apelidoAtivo = getParam('apelido');
 
-    // Barra informando afiliado ativo
-    (function showAff(){
+    // Mostra barra com afiliado ativo e preenche input
+    (function(){
       if(!apelidoAtivo) return;
       const bar = document.getElementById('affBar');
       bar.textContent = `Você está com o afiliado: ${apelidoAtivo}`;
       bar.style.display = 'block';
-      // também preenche o input para facilitar gerar links
       const ipt = document.getElementById('apelido');
       if(ipt && !ipt.value) ipt.value = apelidoAtivo;
     })();
 
-    // Gera links do afiliado (site com ?apelido= e WhatsApp direto)
+    // GERAR LINKS DO AFILIADO
     let ultimoLink = '';
     function gerarLinks(){
       const ap = (document.getElementById('apelido').value||'').trim();
       const out = document.getElementById('linksOut');
-      if(!ap){ out.innerHTML = `<span class="mini" style="color:#fff">Digite um apelido.</span>`; return; }
+      if(!ap){ out.innerHTML = `<span class="mini">Digite um apelido.</span>`; return; }
 
       const linkSite = `${location.origin}${location.pathname}?apelido=${encodeURIComponent(ap)}`;
       const msg = `Ol%C3%A1%2C+vim+atrav%C3%A9s+do+afiliado+${encodeURIComponent(ap)}+e+quero+saber+os+planos+da+ConectPlay.%20Pode%20me%20ajudar%3F`;
@@ -294,7 +285,7 @@
       navigator.clipboard.writeText(ultimoLink).then(()=>alert('Link copiado!'));
     }
 
-    // Abre WhatsApp com texto + inclui afiliado se houver
+    // Abre WhatsApp com o plano clicado + afiliado (se houver)
     function abrirWhats(plano){
       const ap = apelidoAtivo || (document.getElementById('apelido').value||'').trim();
       const base = `Olá, quero saber mais sobre o plano: ${plano}.`;
@@ -304,11 +295,10 @@
       window.open(url, '_blank');
     }
 
-    // Carrega afiliados da planilha CSV (Apelido, Quantidade)
+    // Carrega afiliados da planilha CSV (colunas: Apelido, Quantidade)
     function carregarAfiliados(){
       if(!window.Papa){
-        // pequena espera se carregou via CDN
-        return setTimeout(carregarAfiliados, 400);
+        return setTimeout(carregarAfiliados, 400); // aguarda fallback
       }
       Papa.parse(CSV_URL, {
         download:true,
@@ -319,8 +309,7 @@
           const rows = (res.data||[])
             .filter(r => r.Apelido && r.Quantidade)
             .map(r => ({a:r.Apelido.trim(), q:Number(String(r.Quantidade).replace(',','.'))||0}));
-          // ordena por quantidade desc
-          rows.sort((x,y)=> y.q - x.q);
+          rows.sort((x,y)=> y.q - x.q); // ranking
           rows.forEach(r=>{
             const tr=document.createElement('tr');
             tr.innerHTML = `<td>${r.a}</td><td>${r.q}</td>`;
