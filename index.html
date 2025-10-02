@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+
+    }catch{ copyStatus.textContent = "Falha ao copiar."; }
+  });
+
+  function renderLinks(ap){
+    const siteLink = location.origin + location.pathname + "?apelido=" + encodeURIComponent(ap);
+    if (meuLinkSite) meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
@@ -102,16 +108,16 @@
     <h2>Planos ConectPlay</h2>
     <div class="grid">
       <div class="card"><h4>15 dias de uso</h4><div class="price">R$ 14,99</div><button class="wbtn" data-plano="15 dias de uso - R$ 14,99">Falar no WhatsApp</button></div>
-      <div class="card"><h4>Mensal (1 acesso)</h4><div class="price">R$ 20,99</div><button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Falar no WhatsApp</button></div>
-      <div class="card"><h4>Mensal (2 acessos)</h4><div class="price">R$ 25,99</div><button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Mensal (1 acesso)</h4><div class="price">R$ 24,99</div><button class="wbtn" data-plano="Mensal (1 acesso) - R$ 20,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Mensal (2 acessos)</h4><div class="price">R$ 29,99</div><button class="wbtn" data-plano="Mensal (2 acessos) - R$ 25,99">Falar no WhatsApp</button></div>
       <div class="card"><h4>Bimestral (1 acesso)</h4><div class="price">R$ 41,99</div><button class="wbtn" data-plano="Bimestral (1 acesso) - R$ 41,99">Falar no WhatsApp</button></div>
-      <div class="card"><h4>Bimestral (2 acessos)</h4><div class="price">R$ 43,99</div><button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Bimestral (2 acessos)</h4><div class="price">R$ 48,99</div><button class="wbtn" data-plano="Bimestral (2 acessos) - R$ 43,99">Falar no WhatsApp</button></div>
       <div class="card"><h4>Trimestral (1 acesso)</h4><div class="price">R$ 74,99</div><button class="wbtn" data-plano="Trimestral (1 acesso) - R$ 74,99">Falar no WhatsApp</button></div>
       <div class="card"><h4>Trimestral (2 acessos)</h4><div class="price">R$ 76,99</div><button class="wbtn" data-plano="Trimestral (2 acessos) - R$ 76,99">Falar no WhatsApp</button></div>
       <div class="card"><h4>Semestral (1 acesso)</h4><div class="price">R$ 149,99</div><button class="wbtn" data-plano="Semestral (1 acesso) - R$ 149,99">Falar no WhatsApp</button></div>
       <div class="card"><h4>Semestral (2 acessos)</h4><div class="price">R$ 153,99</div><button class="wbtn" data-plano="Semestral (2 acessos) - R$ 153,99">Falar no WhatsApp</button></div>
-      <div class="card"><h4>Anual (1 acesso)</h4><div class="price">R$ 297,99</div><button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Falar no WhatsApp</button></div>
-      <div class="card"><h4>Anual (2 acessos)</h4><div class="price">R$ 299,99</div><button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Anual (1 acesso)</h4><div class="price">R$ 199,99</div><button class="wbtn" data-plano="Anual (1 acesso) - R$ 297,99">Falar no WhatsApp</button></div>
+      <div class="card"><h4>Anual (2 acessos)</h4><div class="price">R$ 229,99</div><button class="wbtn" data-plano="Anual (2 acessos) - R$ 299,99">Falar no WhatsApp</button></div>
     </div>
   </section>
 </div>
@@ -169,13 +175,7 @@
     try{
       await navigator.clipboard.writeText(link);
       copyStatus.textContent = "Link copiado!";
-      setTimeout(()=> copyStatus.textContent = "", 2000);
-    }catch{ copyStatus.textContent = "Falha ao copiar."; }
-  });
-
-  function renderLinks(ap){
-    const siteLink = location.origin + location.pathname + "?apelido=" + encodeURIComponent(ap);
-    if (meuLinkSite) meuLinkSite.innerHTML = `🔗 <b>Seu link do site:</b> <a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
+      setTimeout(()=> copyStatus.textContent = "", 2000);a style="color:#a9f2ec" href="${siteLink}">${siteLink}</a>`;
     const url = buildWhats("Contato inicial", ap);
     localStorage.setItem("ultimoLink", url);
     if (ultimoLink) ultimoLink.innerHTML = `💬 <b>Último WhatsApp:</b> <a style="color:#a9f2ec" href="${url}" target="_blank">${url}</a>`;
@@ -192,4 +192,5 @@ Pode me orientar no cadastro?`;
 </script>
 </body>
 </html>
+
 
